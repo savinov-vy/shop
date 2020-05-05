@@ -1,15 +1,34 @@
 <!DOCTYPE html>
 <!--подключаем NameSpace шаблонизатора Thymeleaf-->
-<html xmlns:th="http://www.thymeleaf.org"
-      html lang="ru"/>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
 </head>
+
 <body>
-<h1>Shop</h1>
-<p>это певый параграф </p>
-<p>это второй параграф. во втором параграфе слово <strong> strong </strong> выделено как важное </p>
+<div class="container">
+    <h1>Shop</h1>
+    <span th:text="${prod.id + ' ' + prod.title + ' ' + prod.price}"/>
+</div>
+
+<p></p>
+<div class="container">
+    <p>это певый параграф </p>
+    <p>это второй параграф. во втором параграфе слово <strong> strong </strong> выделено как важное </p>
+</div>
+
+<style type="text/css">
+    .container { /*присвоили классу container ширину 300 пикселей задний фон синий точка это обращение к классу */
+        width: 300px; /*вместо класса можно обращатся к id. Классов может быть много на стронице а блок с id только один.*/
+        background-color: blue;
+    }
+</style>
 </body>
 </html>
