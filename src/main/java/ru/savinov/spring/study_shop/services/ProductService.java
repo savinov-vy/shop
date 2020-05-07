@@ -1,27 +1,32 @@
 package ru.savinov.spring.study_shop.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.savinov.spring.study_shop.entities.Product;
+import ru.savinov.spring.study_shop.repositories.ProductRepository;
 
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ProductService {
-    private List<Product> product;
-    public List<Product> getProduct() {
-        return product;
+    private ProductRepository productRepository;
+
+    @Autowired
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
-    @PostConstruct
-    public void init() {
-        product = new ArrayList<>();
-        product.add(new Product(1L, "Milk", 80));
-        product.add(new Product(2L, "Cheese", 320));
-        product.add(new Product(3L, "Ball", 200));
-
+    public List<Product> getAllProducts() {
+        return productRepository.getProducts();
     }
 
+    public Product getProductById(Long id) {
+        return productRepository.getProducts().get(id.intValue() - 1);
+    }
+
+
+    public void deleteProductById(Long id) {
+        productRepository.deleteById(id);
+    }
 
 }

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import ru.savinov.spring.study_shop.entities.Product;
 import ru.savinov.spring.study_shop.services.ProductService;
 
+import java.util.List;
+
 @Controller
 public class MainController {
     private ProductService productService;
@@ -24,17 +26,22 @@ public class MainController {
 
     @GetMapping("/shop")
     public String shopPage(Model model) {  //модель модель это ссылка на данные которые прокидываются в страницу HTML
-        Product product = new Product(1L, "Milk", 80);
-        model.addAttribute("prod", product); //добавили в модель атрибут и в этот атрибут добавили ссылку на объект
+        List<Product> allProducts = productService.getAllProducts();
+        model.addAttribute("products", allProducts);
         return "shop";
     }
 
     @GetMapping("/details/{id}")
     public String detailsPage(Model model, @PathVariable("id") Long id) {  //Аннотация говорит, что где то в пути содержится id и спринг приводит его к Long
-        Product selectedProduct = productService.getProduct().get(id.intValue() - 1);
+        Product selectedProduct = productService.getProductById(id);
         model.addAttribute("selectProduct", selectedProduct);
-
         return "details";
+    }
+
+    @GetMapping("/products/delete/{id}")
+    public String deleteProductById(@PathVariable("id") Long id) {
+        productService.deleteProductById(id);
+        return "redirect:/shop"; // перенаправляем по адресу shop/
     }
 
 }

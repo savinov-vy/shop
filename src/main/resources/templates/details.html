@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <!--подключаем NameSpace шаблонизатора Thymeleaf-->
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -15,7 +16,8 @@
 <body>
 <div class="container">
     <h1>Details</h1>
-    <span th:text="${selectProduct.id + ' ' + selectProduct.title + ' ' + selectProduct.price}"/>
+    <!--/*@thymesVar id="selectProduct" type=""*/-->
+    <span th:text="${selectProduct.id + ' ' + selectProduct.title + ' ' + selectProduct.price}"></span>
 </div>
 </body>
 </html>

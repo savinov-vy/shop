@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <!--подключаем NameSpace шаблонизатора Thymeleaf-->
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -15,19 +16,37 @@
 <body>
 <div class="container">
     <h1>Shop</h1>
-    <span th:text="${prod.id + ' ' + prod.title + ' ' + prod.price}"/>
+    <span th:if="${products.size() ==0}">Products List is empty</span>
+    <table th:if="${products.size() >0}" class="table table-hover"> <!--классы взяты из bootstrap  -->
+        <thead class="thead-dark"> <!--шапка таблицы-->
+        <tr>  <!--единственная строка шапки таблицы tr -table row-->
+            <td>ID</td>
+            <td>Title</td>
+            <td>Price</td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product:${products}"> <!--thymeleaf позволяет пользоваться циклами в том числе for each....-->
+            <td th:text="${product.id}"></td> <!--нюанс синтаксиса, на самом деле thymeleaf c помощью точки обращается не к полям а к геттерам. Т.е. если геттера не будет то достать переменную id будет нельзя.-->
+            <td th:text="${product.title}"></td>
+            <td th:text="${product.price}"></td>
+            <td><a class="btn btn-danger" th:href="@{'/details/' + ${product.id}}">Details</a>  </td>
+            <td><a class="btn btn-danger" th:href="@{'/products/delete/' + ${product.id}}">Delete</a>  </td>
+
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 <p></p>
 <div class="container">
-    <p>это певый параграф </p>
-    <p>это второй параграф. во втором параграфе слово <strong> strong </strong> выделено как важное </p>
 </div>
 
 <style type="text/css">
     .container { /*присвоили классу container ширину 300 пикселей задний фон синий точка это обращение к классу */
-        width: 300px; /*вместо класса можно обращатся к id. Классов может быть много на стронице а блок с id только один.*/
-        background-color: blue;
+        width: 500px; /*вместо класса можно обращатся к id. Классов может быть много на стронице а блок с id только один.*/
+        background-color: aqua;
     }
 </style>
 </body>
