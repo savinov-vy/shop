@@ -13,19 +13,22 @@ public class ProductService {
 
     @Autowired
     public ProductService(ProductRepository productRepository) {
+
         this.productRepository = productRepository;
     }
 
     public List<Product> getAllProducts() {
-        return productRepository.getProducts();
+
+        return productRepository.findAll();
     }
 
     public Product getProductById(Long id) {
-        return productRepository.getProducts().get(id.intValue() - 1);
+        return productRepository.getOne(id);
     }
 
 
     public void deleteProductById(Long id) {
+
         productRepository.deleteById(id);
     }
 
