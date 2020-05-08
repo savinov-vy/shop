@@ -32,8 +32,8 @@ public class MainController {
 
     @GetMapping("/details/{id}")
     public String detailsPage(Model model, @PathVariable("id") Long id) {  //Аннотация говорит, что где то в пути содержится id и спринг приводит его к Long
-        Product selectedProduct = productService.getProductById(id);
-        model.addAttribute("selectProduct", selectedProduct);
+        Product selectedProducts = productService.getProductById(id);
+        model.addAttribute("selectProduct", selectedProducts);
         return "details";
     }
 

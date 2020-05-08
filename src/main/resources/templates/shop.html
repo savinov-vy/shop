@@ -16,8 +16,8 @@
 <body>
 <div class="container">
     <h1>Shop</h1>
-    <span th:if="${products.size() ==0}">Products List is empty</span>
-    <table th:if="${products.size() >0}" class="table table-hover"> <!--классы взяты из bootstrap  -->
+    <span th:if="${product.size() ==0}">Products List is empty</span>
+    <table th:if="${product.size() >0}" class="table table-hover"> <!--классы взяты из bootstrap  -->
         <thead class="thead-dark"> <!--шапка таблицы-->
         <tr>  <!--единственная строка шапки таблицы tr -table row-->
             <td>ID</td>
