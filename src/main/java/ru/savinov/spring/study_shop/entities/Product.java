@@ -1,19 +1,20 @@
 package ru.savinov.spring.study_shop.entities;
 
 import javax.persistence.*;
+
 @Entity
-@Table(name = "products")
+@Table(name = "product")
 public class Product {
 
     @Id
-    @Column (name = "id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY) //запрашиваем генерацию Id у базы
     private Long id;
 
-    @Column (name = "title")
+    @Column(name = "title")
     private String title; //название
 
-    @Column (name = "price")
+    @Column(name = "price")
     private int price;
 
     public Product() {
@@ -53,5 +54,4 @@ public class Product {
     public String toString() {
         return String.format("Product: [id=%id, title = %s, price = %d]", id, title, price);
     }
-
 }

@@ -12,11 +12,14 @@ import java.util.List;
 public class ProductService {
     private ProductRepository productRepository;
 
+
+ /*   public void setProductRepository(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }*/
     @Autowired
-    public void setProductRepository(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
-
 
     public List<Product> getAllProducts() {
         return productRepository.findAll();
@@ -30,5 +33,6 @@ public class ProductService {
     public void deleteProductById(Long id) {
         productRepository.deleteById(id);
     }
+
 
 }
