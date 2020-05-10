@@ -13,9 +13,7 @@ public class ProductService {
     private ProductRepository productRepository;
 
 
- /*   public void setProductRepository(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }*/
+
     @Autowired
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
@@ -32,6 +30,11 @@ public class ProductService {
 
     public void deleteProductById(Long id) {
         productRepository.deleteById(id);
+    }
+
+    public void addProduct(String add_Title, String addPrice) {
+        int add_Price = Integer.parseInt(addPrice);
+        productRepository.save(new Product(add_Title,add_Price));
     }
 
 

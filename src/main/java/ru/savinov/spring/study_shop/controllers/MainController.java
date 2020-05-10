@@ -29,6 +29,14 @@ public class MainController {
         model.addAttribute("products", allProducts);
         return "shop";
     }
+    @PostMapping("/shop")
+    public String shopPageAddProduct(@RequestParam String addProduct, @RequestParam String addPrice, Model model) {  //модель модель это ссылка на данные которые прокидываются в страницу HTML
+      productService.addProduct(addProduct, addPrice);
+
+       List<Product> allProducts = productService.getAllProducts();
+        model.addAttribute("products", allProducts);
+        return "shop";
+    }
 
     @GetMapping("/details/{id}")
     public String detailsPage(Model model, @PathVariable("id") Long id) {  //Аннотация говорит, что где то в пути содержится id и спринг приводит его к Long
