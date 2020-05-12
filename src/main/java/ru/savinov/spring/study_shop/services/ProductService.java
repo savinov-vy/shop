@@ -3,6 +3,7 @@ package ru.savinov.spring.study_shop.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.springframework.transaction.annotation.Transactional;
 import ru.savinov.spring.study_shop.entities.Product;
 import ru.savinov.spring.study_shop.repositories.ProductRepository;
 
@@ -11,7 +12,6 @@ import java.util.List;
 @Service
 public class ProductService {
     private ProductRepository productRepository;
-
 
 
     @Autowired
@@ -32,10 +32,20 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public void addProduct(String add_Title, String addPrice) {
-        int add_Price = Integer.parseInt(addPrice);
-        productRepository.save(new Product(add_Title,add_Price));
+    @Transactional
+    public void addProduct(String addTitle, Integer addPrice) {
+        productRepository.save(new Product(addTitle, addPrice));
+
+    }
+
+    @Transactional
+    public void updateTitleById(Long idUpdate, String newTitle, Integer newPrice) {
+        productRepository.updateById(idUpdate, newTitle, newPrice);
+
     }
 
 
+
 }
+
+

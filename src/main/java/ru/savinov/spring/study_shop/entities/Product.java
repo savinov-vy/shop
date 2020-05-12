@@ -8,25 +8,25 @@ public class Product {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //запрашиваем генерацию Id у базы
+    @GeneratedValue(strategy = GenerationType.AUTO) //запрашиваем генерацию Id у базы
     private Long id;
 
     @Column(name = "title")
     private String title; //название
 
     @Column(name = "price")
-    private int price;
+    private Integer price;
 
     public Product() {
     }
 
-    public Product(Long id, String title, int price) {
+    public Product(Long id, String title, Integer price) {
         this.id = id;
         this.title = title;
         this.price = price;
     }
 
-    public Product(String title, int price) {
+    public Product(String title, Integer price) {
         this.title = title;
         this.price = price;
     }
@@ -47,11 +47,11 @@ public class Product {
         this.title = title;
     }
 
-    public int getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 

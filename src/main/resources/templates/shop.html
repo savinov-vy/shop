@@ -17,7 +17,9 @@
 <body>
 <div class="container">
     <h1>Shop</h1>
-    <span th:if="${products.size()==0}">Products List is empty</span>  <!--"&ndash;&gt;-->
+    <!--
+        <span th:if="${products.size()==0}">Products List is empty</span>  &lt;!&ndash;"&ndash;&gt;&ndash;&gt;
+    -->
     <table th:class="table"> <!--классы взяты из bootstrap  -->
         <thead class="thead-dark"> <!--шапка таблицы-->
         <tr>  <!--единственная строка шапки таблицы tr -table row-->
@@ -48,13 +50,34 @@
         </thead>
         <tbody>
         <tr>
-             <td>
-                <form method="post">
+            <td>
+                <form method="post" th:action="@{/products/add}">
                     <input type="text" name="addProduct" placeholder="Title">
-                    <input type="text" name="addPrice" placeholder="Price">
+                    <input type="number" name="addPrice" placeholder="Price">
                     <button type="submit">add</button>
                 </form>
-            </td></tr>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!--Таблица для изменения продуктов по ID-->
+<div class="container">
+    <table th:class="table">
+        <thead class="thead-dark">
+        <tr></tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <form method="post" th:action="@{/products/update}">
+                    <input type="text" name="idUpdate" placeholder="id">
+                    <input type="text" name="updateTitle" placeholder="Title">
+                    <input type="text" name="updatePrice" placeholder="Price">
+                    <button type="submit">update</button>
+                </form>
+            </td>
+        </tr>
         </tbody>
     </table>
 </div>
