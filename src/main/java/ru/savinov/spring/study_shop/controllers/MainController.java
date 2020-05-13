@@ -6,26 +6,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.savinov.spring.study_shop.entities.Product;
 import ru.savinov.spring.study_shop.services.ProductService;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Controller
 public class MainController {
     private ProductService productService;
-    @PersistenceContext
-    private EntityManager em;
 
     @Autowired
     public MainController(ProductService productService) {
         this.productService = productService;
     }
 
-    @GetMapping("/index")
-    public String homePage() {
-        return "index";
-    }
 
     @GetMapping("/shop")
     public String shopPage(Model model) {  //модель модель это ссылка на данные которые прокидываются в страницу HTML
@@ -50,12 +41,6 @@ public class MainController {
         return "shop";
     }
 
-    @GetMapping("/details/{id}")
-    public String detailsPage(Model model, @PathVariable("id") Long id) {  //Аннотация говорит, что где то в пути содержится id и спринг приводит его к Long
-        Product selectedProducts = productService.getProductById(id);
-        model.addAttribute("selectProduct", selectedProducts);
-        return "details";
-    }
 
     @GetMapping("/products/delete/{id}")
     public String deleteProductById(@PathVariable("id") Long id) {

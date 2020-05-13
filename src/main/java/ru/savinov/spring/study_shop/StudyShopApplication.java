@@ -5,9 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
-@EnableJpaRepositories
-@EnableTransactionManagement
+//@EnableTransactionManagement
+//@EnableJpaRepositories
 @SpringBootApplication
 public class StudyShopApplication extends SpringBootServletInitializer {
 

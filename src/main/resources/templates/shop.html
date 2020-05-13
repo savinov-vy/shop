@@ -10,17 +10,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-
-
 </head>
 
 <body>
 <div class="container">
     <h1>Shop</h1>
-    <!--
-        <span th:if="${products.size()==0}">Products List is empty</span>  &lt;!&ndash;"&ndash;&gt;&ndash;&gt;
-    -->
-    <table th:class="table"> <!--классы взяты из bootstrap  -->
+        <span th:if="${products.size()==0}">Products List is empty</span>
+    <table th:if="${products.size()>0}"class="table"> <!--классы взяты из bootstrap  -->
         <thead class="thead-dark"> <!--шапка таблицы-->
         <tr>  <!--единственная строка шапки таблицы tr -table row-->
             <td>ID</td>
@@ -36,6 +32,7 @@
             <td th:text="${products.title}"></td>
             <td th:text="${products.price}"></td>
             <td><a class="btn btn-danger" th:href="@{'/details/' + ${products.id}}">Details</a></td>
+            <td><a class="btn btn-success" th:href="@{'/cart/add/' + ${products.id}}">Add to cart</a></td>
             <td><a class="btn btn- danger" th:href="@{'/products/delete/' + ${products.id}}">Delete</a></td>
 
         </tr>
@@ -52,16 +49,16 @@
         <tr>
             <td>
                 <form method="post" th:action="@{/products/add}">
-                    <input type="text" name="addProduct" placeholder="Title">
+                    <input type="text" name  ="addProduct" placeholder="Title">
                     <input type="number" name="addPrice" placeholder="Price">
-                    <button type="submit">add</button>
+                    <button type="submit">add product</button>
                 </form>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
-<!--Таблица для изменения продуктов по ID-->
+<!--Таблица для изменения продуктов по ID доступна только для администратора-->
 <div class="container">
     <table th:class="table">
         <thead class="thead-dark">

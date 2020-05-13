@@ -24,7 +24,7 @@ public class ProductService {
     }
 
     public Product getProductById(Long id) {
-        return productRepository.getOne(id);
+        return productRepository.findById(id).get();
     }
 
 
@@ -32,15 +32,17 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    @Transactional
+  ///  @Transactional
     public void addProduct(String addTitle, Integer addPrice) {
         productRepository.save(new Product(addTitle, addPrice));
 
     }
 
-    @Transactional
+    @Transactional //<- необходимо для работы через sql запросы
     public void updateTitleById(Long idUpdate, String newTitle, Integer newPrice) {
-        productRepository.updateById(idUpdate, newTitle, newPrice);
+        productRepository.updateById(idUpdate, newTitle, newPrice); // при ошибке в id действия не будет
+
+      //  productRepository.saveAndFlush(new Product(idUpdate, newTitle, newPrice)); <- при ошибке в id создаст новый объект
 
     }
 
