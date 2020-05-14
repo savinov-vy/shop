@@ -15,9 +15,10 @@
 <body>
 <div class="container">
     <h1>Shop</h1>
-        <span th:if="${products.size()==0}">Products List is empty</span>
-    <table th:if="${products.size()>0}"class="table"> <!--классы взяты из bootstrap  -->
+    <span th:if="${products.size()==0}">Products List is empty</span>
+    <table th:if="${products.size()>0}" class="table"> <!--классы взяты из bootstrap  -->
         <thead class="thead-dark"> <!--шапка таблицы-->
+
         <tr>  <!--единственная строка шапки таблицы tr -table row-->
             <td>ID</td>
             <td>Title</td>
@@ -34,7 +35,14 @@
             <td><a class="btn btn-danger" th:href="@{'/details/' + ${products.id}}">Details</a></td>
             <td><a class="btn btn-success" th:href="@{'/cart/add/' + ${products.id}}">Add to cart</a></td>
             <td><a class="btn btn- danger" th:href="@{'/products/delete/' + ${products.id}}">Delete</a></td>
-
+            <!--переход в корзину доступен User-->
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><a class="btn-info" th:href="@{/cart}">Go to shopping cart</a></td>
         </tr>
         </tbody>
     </table>
@@ -49,7 +57,7 @@
         <tr>
             <td>
                 <form method="post" th:action="@{/products/add}">
-                    <input type="text" name  ="addProduct" placeholder="Title">
+                    <input type="text" name="addProduct" placeholder="Title">
                     <input type="number" name="addPrice" placeholder="Price">
                     <button type="submit">add product</button>
                 </form>

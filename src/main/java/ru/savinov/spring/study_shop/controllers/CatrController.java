@@ -21,7 +21,7 @@ public class CatrController {
     public CatrController() {
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public String showCart(Model model) {
 
         model.addAttribute("products", shoppingCart.getProducts());
@@ -33,5 +33,11 @@ public class CatrController {
     public String addProductToCart(Model model, @PathVariable ("Id") Long id) {
         shoppingCart.addProductById(id);
         return "redirect:/shop";
+    }
+    @GetMapping("/remove/{count}")
+    public String removeProductToCart(Model model, @PathVariable ("count") Long count) {
+        model.addAttribute("count", Integer.valueOf(ShoppingCart.getCountProduct()));
+        shoppingCart.removeProductByCount(count);
+        return "cart";
     }
 }

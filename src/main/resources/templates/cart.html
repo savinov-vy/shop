@@ -15,9 +15,9 @@
 <body>
 <div class="container">
     <h1>Shopping Cart</h1>
-    <span th:if="${products.size()==0}">Cart is empty</span>
-    <table th:if="${products.size()>0}"class="table"> <!--классы взяты из bootstrap  -->
-        <thead class="thead-dark"> <!--шапка таблицы-->
+<!--    <span th:if="${products.size()==0}">Cart is empty</span>-->
+    <table  class="table">
+        <thead class="thead-dark">
         <tr>
             <td>ID</td>
             <td>Title</td>
@@ -29,10 +29,19 @@
             <td th:text="${products.id}"></td>
             <td th:text="${products.title}"></td>
             <td th:text="${products.price}"></td>
+            <td th:text="${count}"></td>
 <!--            <td><a class="btn btn-danger" th:href="@{'/details/' + ${products.id}}">Details</a></td>-->
-<!--            <td><a class="btn btn- danger" th:href="@{'/products/delete/' + ${products.id}}">Delete</a></td>-->
+            <td><a class="btn btn- danger" th:href="@{'/cart/remove/' + ${count}}">Delete</a></td>
 
         </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><a class="btn-info" th:href="@{/shop}">Go to shop</a></td>
+        </tr>
+
         </tbody>
     </table>
 </div>

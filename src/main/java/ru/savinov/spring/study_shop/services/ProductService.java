@@ -32,7 +32,7 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-  ///  @Transactional
+  //  @Transactional
     public void addProduct(String addTitle, Integer addPrice) {
         productRepository.save(new Product(addTitle, addPrice));
 

@@ -13,23 +13,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS) //для каждой сессии своя корзина
+@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
+//для каждой сессии своя корзина
 
 
 public class ShoppingCart {
     private List<Product> products;
     private ProductService productService;
+    private static Integer countProduct;
 
-   // @Autowired
+    public static Integer getCountProduct() {
+        return countProduct;
+    }
+
+
+    // @Autowired
     public ShoppingCart(List<Product> products) {
         this.products = products;
     }
+
     @Autowired
     public ShoppingCart(ProductService productService) {
         this.productService = productService;
     }
 
-        public ShoppingCart() {
+    public ShoppingCart() {
     }
 
     public List<Product> getProducts() {
@@ -43,9 +51,11 @@ public class ShoppingCart {
 
     public void addProductById(Long id) {
         products.add(productService.getProductById(id));
-
+        countProduct++;
     }
 
-
+    public void removeProductByCount(Long count) {
+        products.remove(count);
+    }
 
 }
