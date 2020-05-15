@@ -25,19 +25,22 @@ public class CatrController {
     public String showCart(Model model) {
 
         model.addAttribute("products", shoppingCart.getProducts());
+        model.addAttribute("count", ShoppingCart.getCountProduct());
+
 
         return "cart";
     }
 
     @GetMapping("/add/{Id}")
-    public String addProductToCart(Model model, @PathVariable ("Id") Long id) {
+    public String addProductToCart(Model model, @PathVariable("Id") Long id) {
         shoppingCart.addProductById(id);
         return "redirect:/shop";
     }
+
     @GetMapping("/remove/{count}")
-    public String removeProductToCart(Model model, @PathVariable ("count") Long count) {
-        model.addAttribute("count", Integer.valueOf(ShoppingCart.getCountProduct()));
-        shoppingCart.removeProductByCount(count);
+    public String removeProductToCart(Model model, @PathVariable("count") String count) {
+        model.addAttribute("count", ShoppingCart.getCountProduct());
+        shoppingCart.removeProductByCount(Long.parseLong(count));
         return "cart";
     }
 }

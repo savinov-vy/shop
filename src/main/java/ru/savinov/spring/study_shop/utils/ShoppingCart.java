@@ -15,14 +15,13 @@ import java.util.List;
 @Component
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 //для каждой сессии своя корзина
-
-
 public class ShoppingCart {
+
+    private static int countProduct = 0;
     private List<Product> products;
     private ProductService productService;
-    private static Integer countProduct;
 
-    public static Integer getCountProduct() {
+    public static int getCountProduct() {
         return countProduct;
     }
 

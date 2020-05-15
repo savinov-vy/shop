@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <title>Login Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width, initial-scale-1, shrink-to-fit-no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div>
+    <div id="loginbox" style="..." class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title">Sign In</div>
+            </div>
+            <div style="..." class="panel-body">
+                <form th:action="@{/authenticateTheUser}" method="POST" class="form-gorizontal">
+                    <div style="..." class="panel-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input type="text" name="username"> placeholder="username" class="form-control">
+                    </div>
+                    <div style="..." class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input type="text" name="password" placeholder="password" class="form-control">
+                    </div>
+                    <div style="..." class="form-group">
+                        <div class="col-sm-6 controls">
+                            <button type="submit" class="btn badge-success">Login</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
