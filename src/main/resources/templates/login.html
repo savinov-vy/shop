@@ -13,23 +13,24 @@
 </head>
 
 <body>
+
 <div>
-    <div id="loginbox" style="..." class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
+    <div id="loginbox" class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
         <div class="panel panel-info">
             <div class="panel-heading">
                 <div class="panel-title">Sign In</div>
             </div>
             <div style="..." class="panel-body">
-                <form th:action="@{/authenticateTheUser}" method="POST" class="form-gorizontal">
+                <form th:action="@{/authenticateTheUser}" method="POST" class="form-">
                     <div style="..." class="panel-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input type="text" name="username"> placeholder="username" class="form-control">
+                        <span class="input-group-addon"><i class="form-control-lg"></i></span>
+                        <input type="text" name="username" placeholder="username" class="form-control">
                     </div>
                     <div style="..." class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input type="text" name="password" placeholder="password" class="form-control">
+                        <span class="input-group-addon"><i class="form-control-range"></i></span>
+                        <input type="password" name="password" placeholder="password" class="form-control">
                     </div>
-                    <div style="..." class="form-group">
+                    <div class="form-group">
                         <div class="col-sm-6 controls">
                             <button type="submit" class="btn badge-success">Login</button>
                         </div>
@@ -39,5 +40,25 @@
         </div>
     </div>
 </div>
+
+
+<a class="btn-info" th:href="@{/shop}">Go to shop</a>
+
+
+<style type="text/css">
+    #loginbox{
+        width: 300px;
+        background-color: aqua;
+        margin-left: 70px;
+        margin-top: 70px;
+    }
+    .form-group controls{
+        background-color: chartreuse;
+        width: 210px;
+    }
+    .btn-info {
+        margin-left: 280px;
+    }
+</style>
 </body>
 </html>

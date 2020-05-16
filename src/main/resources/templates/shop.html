@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--подключаем NameSpace шаблонизатора Thymeleaf-->
 <html xmlns:th="http://www.thymeleaf.org"
-      lang="en">
+       xmlns:sec="http://www.thymeleaf.org/extras/spring/security" lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -48,7 +48,7 @@
     </table>
 </div>
 <!--Таблица для добавления в продуктов в базу данных должна быть доступна только для администратора-->
-<div class="container">
+<div class="container" sec:authorize="hasRole('ADMIN')">
     <table th:class="table">
         <thead class="thead-dark">
         <tr></tr>
@@ -67,7 +67,8 @@
     </table>
 </div>
 <!--Таблица для изменения продуктов по ID доступна только для администратора-->
-<div class="container">
+<!--<div class="container" sec:authorize="isAuthenticated()">-->
+<div class="container" sec:authorize="hasRole('ADMIN')">
     <table th:class="table">
         <thead class="thead-dark">
         <tr></tr>

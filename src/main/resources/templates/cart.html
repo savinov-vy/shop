@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--подключаем NameSpace шаблонизатора Thymeleaf-->
-<html xmlns:th="http://www.thymeleaf.org"
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring/security"
       lang="en">
 
 <head>
@@ -13,7 +13,7 @@
 </head>
 
 <body>
-<div class="container">
+<div class="container" sec:authorize="hasRole('USER')">
     <h1>Shopping Cart</h1>
     <!--    <span th:if="${products.size()==0}">Cart is empty</span>-->
     <table class="table">
