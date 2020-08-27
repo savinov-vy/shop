@@ -1,0 +1,42 @@
+h1 {
+    color: #ff0000;
+    font-family: "Times New Roman", sans-serif;
+    border-bottom: 1px solid black;
+}
+div#tableContainer{
+    display: table;
+}
+div#tableRow{
+    display: table-row;
+}
+div#main{
+    display: table-cell;
+    background: top left;
+}
+div#sidebar{
+    display: table-cell;
+    background: bottom right;
+}
+#header {
+    background-color: #68c0cb;
+    margin: 10px 10px 1px 10px;
+    height: 108px;
+}
+
+#footer {
+    background-color: #675c47;
+    color: #efe5d0;
+    text-align: center;
+    padding: 15px;
+    margin: 1px 10px 10px 10px;
+    font-size: 90%;
+}
+div#headerSlogan{
+    color: white;
+    text-align: left;
+    font-size: 35px;
+    font-family: fantasy;
+    font-style: italic;
+    float: right;
+    width: 900px;
+}

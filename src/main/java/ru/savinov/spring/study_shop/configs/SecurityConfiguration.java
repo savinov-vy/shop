@@ -12,12 +12,12 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    // Здесь указываются что пользователей необходимо брать из базы данных
-    // и какие пользователи куда могут обращаться
-    // необходимо здесь указать к какой базе данных подключаться и где брать пользователей
-    // в spring за подключение отвечает бин dataSource
-    // сам бин dataSource сконфигурирован в application.properties
-    // сюда мы его инжектим
+    /** Здесь указываются что пользователей необходимо брать из базы данных
+     и какие пользователи куда могут обращаться
+     необходимо здесь указать к какой базе данных подключаться и где брать пользователей
+     в spring за подключение отвечает бин dataSource
+     сам бин dataSource сконфигурирован в application.properties
+     сюда мы его инжектим*/
 
     private DataSource dataSource;
 
@@ -26,9 +26,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         this.dataSource = dataSource;
     }
 
-    // теперь нужно сконфигурировать способ аутентификации
-    // аутентификацию будем производить через базу данных
-    // а само подключение к базе берем через ссылку на источник данных dataSource
+    /** теперь нужно сконфигурировать способ аутентификации
+        аутентификацию будем производить через базу данных
+     а само подключение к базе берем через ссылку на источник данных dataSource*/
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource);

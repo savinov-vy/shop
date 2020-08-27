@@ -14,6 +14,7 @@ public class DetailsController {
 
     @Autowired
     public DetailsController(ProductService productService) {
+
         this.productService = productService;
     }
 

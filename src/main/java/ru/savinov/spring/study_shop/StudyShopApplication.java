@@ -10,9 +10,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 public class StudyShopApplication extends SpringBootServletInitializer {
 
+
 	public static void main(String[] args) {
 
 		SpringApplication.run(StudyShopApplication.class, args);
+
 	}
 
 }

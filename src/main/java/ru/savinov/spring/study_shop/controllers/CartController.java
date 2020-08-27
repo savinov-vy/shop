@@ -10,15 +10,15 @@ import ru.savinov.spring.study_shop.utils.ShoppingCart;
 
 @Controller
 @RequestMapping("/cart")
-public class CatrController {
+public class CartController {
     private ShoppingCart shoppingCart;
 
     @Autowired
-    public CatrController(ShoppingCart shoppingCart) {
+    public CartController(ShoppingCart shoppingCart) {
         this.shoppingCart = shoppingCart;
     }
 
-    public CatrController() {
+    public CartController() {
     }
 
     @GetMapping("")
