@@ -1,36 +1,21 @@
 h1 {
-    color: #ff0000;
+    color: #000000;
     font-family: "Times New Roman", sans-serif;
     border-bottom: 1px solid black;
 }
-div#tableContainer{
-    display: table;
+body{
+    background-color: #93d27c;
 }
-div#tableRow{
-    display: table-row;
+article{
+    margin: 10px 5px;
 }
-div#main{
-    display: table-cell;
-    background: top left;
-}
-div#sidebar{
-    display: table-cell;
-    background: bottom right;
-}
+
 #header {
-    background-color: #68c0cb;
-    margin: 10px 10px 1px 10px;
+    background-color: #bcd8dc;
+    margin: 1px 1px 1px 1px;
     height: 108px;
 }
 
-#footer {
-    background-color: #675c47;
-    color: #efe5d0;
-    text-align: center;
-    padding: 15px;
-    margin: 1px 10px 10px 10px;
-    font-size: 90%;
-}
 div#headerSlogan{
     color: white;
     text-align: left;
@@ -39,4 +24,41 @@ div#headerSlogan{
     font-style: italic;
     float: right;
     width: 900px;
+}
+
+div#tableContainer{
+    display: table;
+    width: 100%;
+}
+
+div#tableRow{
+    display: table-cell;
+
+}
+
+div#storeReviews{
+    display: table-cell;
+    background: top right;
+    margin: 10px 10px 10px 10px;
+    width: 20%;
+}
+div#main{
+    display: table-cell;
+    background: top left;
+    margin: 10px 10px 10px 10px;
+}
+div#sidebar{
+    display: table-cell;
+    background: bottom right;
+    margin: 10px 10px 10px 10px;
+    width: 20%;
+}
+
+#footer {
+    background-color: #675c47;
+    color: #efe5d0;
+    text-align: center;
+    padding: 15px;
+    margin: 10px 10px 10px 10px;
+    font-size: 90%;
 }
