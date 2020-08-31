@@ -2,6 +2,7 @@ h1 {
     color: #000000;
     font-family: "Times New Roman", sans-serif;
     border-bottom: 1px solid black;
+    text-align: center;
 }
 body{
     background-color: #93d27c;
@@ -14,6 +15,7 @@ article{
     background-color: #bcd8dc;
     margin: 1px 1px 1px 1px;
     height: 108px;
+
 }
 
 div#headerSlogan{
@@ -46,12 +48,13 @@ div#main{
     display: table-cell;
     background: top left;
     margin: 10px 10px 10px 10px;
+
 }
 div#sidebar{
     display: table-cell;
     background: bottom right;
     margin: 10px 10px 10px 10px;
-    width: 20%;
+    width: 30%;
 }
 
 #footer {
