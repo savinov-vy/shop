@@ -1,23 +1,41 @@
 package ru.savinov.spring.study_shop.configs;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder(){
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        return encoder;
+    }
+
+    @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
     /** Здесь указываются что пользователей необходимо брать из базы данных
      и какие пользователи куда могут обращаться
      необходимо здесь указать к какой базе данных подключаться и где брать пользователей
      в spring за подключение отвечает бин dataSource
      сам бин dataSource сконфигурирован в application.properties
      сюда мы его инжектим*/
+
 
     private DataSource dataSource;
 
@@ -44,4 +62,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and().formLogin().loginPage("/login").permitAll() // для логина мы используем форму логина для этого нужно постучаться на /login  для формы логина даем доступ всем
                 .loginProcessingUrl("/authenticateTheUser");  // для проверки корректности мы используем специальный URL
     }
+
+
 }

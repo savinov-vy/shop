@@ -1,4 +1,4 @@
-CREATE TABLE users
+/*CREATE TABLE users
 (
     id       SERIAL       NOT NULL PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
@@ -27,3 +27,4 @@ INSERT INTO roles VALUES (2, 'ROLE_ADMIN');
 
 INSERT INTO user_roles VALUES (1,2);
 
+*/
