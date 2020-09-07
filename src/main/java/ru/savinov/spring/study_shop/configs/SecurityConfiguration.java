@@ -18,23 +18,6 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder(){
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        return encoder;
-    }
-
-    @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
-    /** Здесь указываются что пользователей необходимо брать из базы данных
-     и какие пользователи куда могут обращаться
-     необходимо здесь указать к какой базе данных подключаться и где брать пользователей
-     в spring за подключение отвечает бин dataSource
-     сам бин dataSource сконфигурирован в application.properties
-     сюда мы его инжектим*/
 
 
     private DataSource dataSource;
@@ -44,9 +27,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         this.dataSource = dataSource;
     }
 
-    /** теперь нужно сконфигурировать способ аутентификации
-        аутентификацию будем производить через базу данных
-     а само подключение к базе берем через ссылку на источник данных dataSource*/
+
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource);

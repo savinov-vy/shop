@@ -26,8 +26,6 @@ public class CartController {
 
         model.addAttribute("products", shoppingCart.getProducts());
         model.addAttribute("count", ShoppingCart.getCountProduct());
-
-
         return "cart";
     }
 
