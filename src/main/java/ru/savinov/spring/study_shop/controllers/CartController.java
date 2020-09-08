@@ -38,6 +38,6 @@ public class CartController {
     public String removeProductToCart(Model model, @PathVariable("IdBuy") Long idBuy) {
         model.addAttribute("sumProd", ShoppingCart.getCountProduct());
         shoppingCart.removeProductByCount(idBuy);
-        return "cart";
+        return "redirect:/cart";
     }
 }
