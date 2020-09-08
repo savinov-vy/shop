@@ -5,14 +5,11 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import ru.savinov.spring.study_shop.entities.Product;
+import ru.savinov.spring.study_shop.entities.User;
 
 
 @Repository
-public interface ProductInCart extends JpaRepository<Product, Long> {
-
-    @Modifying
-    @Query("update Product p set p.id = ?1, p.title = ?2, p.price = ?3 where p.id = ?1")
-    void updateById( Long id, String title, Integer price);
+public interface UserRepository extends JpaRepository<User, Long> {
+    User findByUsername(String username);
 
 }
-
