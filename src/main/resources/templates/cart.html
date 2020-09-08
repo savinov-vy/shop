@@ -31,7 +31,7 @@
             <td th:text="${products.price}"></td>
             <td></td>
             <!--            <td><a class="btn btn-danger" th:href="@{'/details/' + ${products.id}}">Details</a></td>-->
-            <td><a class="btn btn- danger" th:href="@{'/cart/remove/' + ${count}}">delete</a></td>
+            <td><a class="btn btn- danger" th:href="@{'/cart/remove/' + ${products.id}}">delete</a></td>
 
         </tr>
 

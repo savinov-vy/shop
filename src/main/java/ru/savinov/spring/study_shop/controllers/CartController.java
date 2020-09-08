@@ -23,7 +23,6 @@ public class CartController {
 
     @GetMapping("")
     public String showCart(Model model) {
-
         model.addAttribute("products", shoppingCart.getProducts());
         model.addAttribute("count", ShoppingCart.getCountProduct());
         return "cart";
@@ -35,10 +34,10 @@ public class CartController {
         return "redirect:/shop";
     }
 
-    @GetMapping("/remove/{count}")
-    public String removeProductToCart(Model model, @PathVariable("count") String count) {
-        model.addAttribute("count", ShoppingCart.getCountProduct());
-        shoppingCart.removeProductByCount(Long.parseLong(count));
+    @GetMapping("/remove/{IdBuy}")
+    public String removeProductToCart(Model model, @PathVariable("IdBuy") Long idBuy) {
+        model.addAttribute("sumProd", ShoppingCart.getCountProduct());
+        shoppingCart.removeProductByCount(idBuy);
         return "cart";
     }
 }

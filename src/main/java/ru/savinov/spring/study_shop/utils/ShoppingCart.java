@@ -9,8 +9,7 @@ import ru.savinov.spring.study_shop.entities.Product;
 import ru.savinov.spring.study_shop.services.ProductService;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Component
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
@@ -20,6 +19,7 @@ public class ShoppingCart {
     private static int countProduct = 0;
     private List<Product> products;
     private ProductService productService;
+    private Product foundProduct;
 
     public static int getCountProduct() {
         return countProduct;
@@ -46,15 +46,28 @@ public class ShoppingCart {
     @PostConstruct
     public void init() {
         products = new ArrayList<>();
+
     }
 
     public void addProductById(Long id) {
-        products.add(productService.getProductById(id));
+        Product addProduct = productService.getProductById(id);
+        products.add(addProduct);
+        //      mapIdexAndIdProducts.put(id, products.indexOf(addProduct));
         countProduct++;
     }
 
-    public void removeProductByCount(Long count) {
-        products.remove(count);
+    public void removeProductByCount(Long idBuy) {
+        products.remove(foundProduct(idBuy));
+        countProduct--;
     }
+
+    private Product foundProduct(Long idBuy) {
+
+        for (Product product : products) {
+            if (idBuy == product.getId()) foundProduct = product;
+        }
+        return foundProduct;
+    }
+
 
 }
