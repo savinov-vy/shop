@@ -12,4 +12,10 @@ import ru.savinov.spring.study_shop.entities.User;
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByUsername(String username);
 
+//    @Modifying
+//    @Query(value = "insert into users (username, password, enabled) values (username = ?1, password = ?2, enabled = true")
+//    void createNewUser( String newUserName, String password);
+
+ //   INSERT INTO users (username,password,enabled) values ('U' , '{noop}a', true);
+
 }

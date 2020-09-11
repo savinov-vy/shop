@@ -1,5 +1,7 @@
 package ru.savinov.spring.study_shop.entities;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -50,4 +52,6 @@ public class Role {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
+
+
 }

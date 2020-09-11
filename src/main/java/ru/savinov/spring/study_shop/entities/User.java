@@ -22,8 +22,8 @@ public class User {
     private Boolean enabled;
 
     @ManyToMany
-    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
-                             inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "id"),
+                             inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id"))
     private Set<Role> roles;
 
     public Set<Role> getRoles() {
@@ -37,10 +37,32 @@ public class User {
     public User() {
     }
 
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public User(String username, String password, Boolean enabled, Set<Role> roles) {
+
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.roles = roles;
+    }
+
     public User(Long id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
+    }
+
+    public User(String username, String password, Boolean enabled) {
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
     }
 
     public Long getId() {

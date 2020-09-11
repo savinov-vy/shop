@@ -22,7 +22,7 @@ public class DetailsController {
     }
 
     @GetMapping("/details/{id}")
-    public String detailsPage(Model model, @PathVariable("id") Long id) {  //Аннотация говорит, что где то в пути содержится id и спринг приводит его к Long
+    public String detailsPage(Model model, @PathVariable("id") Long id) {
         Product selectedProducts = productService.getProductById(id);
         model.addAttribute("selectProduct", selectedProducts);
         return "details";
