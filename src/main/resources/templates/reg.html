@@ -3,11 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link th:href="@{/css/index.css}" rel="stylesheet"/>
 </head>
 <body>
 
 <form id="create-form" th:action="@{/registration/form}" th:object="${user}" th:method="post" accept-charset="UTF-8">
     <h1> Registration </h1>
+    <nav>
+        <ul>
+            <li><a th:href="@{/index}">Home Page</a></li>
+            <li><a th:href="@{/login}">Login</a></li>
+            <li class="selected"><a th:href="@{/registration}">Registration</a></li>
+            <li><a th:href="@{/shop}">Shop</a></li>
+            <li><a th:href="@{/cart}">Cart</a></li>
+        </ul>
+    </nav>
     <div>
         <label>Login</label>
         <input type="text" name="username" th:value="${user.username}" placeholder="username">

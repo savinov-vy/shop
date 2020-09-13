@@ -25,9 +25,20 @@
             margin-left: 280px;
         }
     </style>
+    <link th:href="@{/css/index.css}" rel="stylesheet"/>
 </head>
 
 <body>
+<h1>Login Page</h1>
+<nav>
+    <ul>
+        <li><a th:href="@{/index}">Home Page</a></li>
+        <li class="selected"><a th:href="@{/login}">Login</a></li>
+        <li><a th:href="@{/registration}">Registration</a></li>
+        <li><a th:href="@{/shop}">Shop</a></li>
+        <li><a th:href="@{/cart}">Cart</a></li>
+    </ul>
+</nav>
 
 <div>
     <div id="loginbox" class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">

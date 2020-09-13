@@ -11,6 +11,7 @@
     <meta name="keywords" content="html, spring, Lessons">
     <link th:href="@{/css/index.css}" rel="stylesheet"/>
 
+
 </head>
 <body>
 <div id="header">
@@ -19,6 +20,15 @@
     <div id="headerSlogan">
         <p> Далеко, далеко убежала в поле молодая лошадь...</p></div>
 </div>
+<nav>
+    <ul>
+        <li class="selected"><a th:href="@{/index}">Home Page</a></li>
+        <li><a th:href="@{/login}">Login</a></li>
+        <li><a th:href="@{/registration}">Registration</a></li>
+        <li><a th:href="@{/shop}">Shop</a></li>
+        <li><a th:href="@{/cart}">Cart</a></li>
+    </ul>
+</nav>
 <div id="tableContainer"> <!--529-->
     <div id="tableRow">
         <div id="storeReviews">
