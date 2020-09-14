@@ -1,24 +1,23 @@
 package ru.savinov.spring.study_shop;
 
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import ru.savinov.spring.study_shop.controllers.LoginController;
 
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 class StudyShopApplicationTest {
+    @Autowired
+    private LoginController loginController;
 
-//	@MockBean
-//	private LoginController controller;
 
-	@Test
-	void contextLoads() {
-	//	assertThat(controller).isNotNull();
+    @Test
+    void contextLoads() throws Exception {
+        assertThat(loginController).isNotNull();
 
-	}
+    }
 
 }
