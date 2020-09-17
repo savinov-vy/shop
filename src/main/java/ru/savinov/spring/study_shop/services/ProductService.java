@@ -32,7 +32,6 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-  //  @Transactional
     public void addProduct(String addTitle, Integer addPrice) {
         productRepository.save(new Product(addTitle, addPrice));
 
@@ -41,8 +40,6 @@ public class ProductService {
     @Transactional //<- необходимо для работы через sql запросы
     public void updateTitleById(Long idUpdate, String newTitle, Integer newPrice) {
         productRepository.updateById(idUpdate, newTitle, newPrice); // при ошибке в id действия не будет
-
-      //  productRepository.saveAndFlush(new Product(idUpdate, newTitle, newPrice)); <- при ошибке в id создаст новый объект
 
     }
 

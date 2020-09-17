@@ -1,6 +1,5 @@
 package ru.savinov.spring.study_shop.entities;
 
-import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.Set;

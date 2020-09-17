@@ -1,8 +1,6 @@
 package ru.savinov.spring.study_shop.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 import ru.savinov.spring.study_shop.entities.Role;
 import ru.savinov.spring.study_shop.entities.User;

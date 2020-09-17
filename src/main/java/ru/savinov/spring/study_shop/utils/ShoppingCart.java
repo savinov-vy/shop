@@ -26,7 +26,6 @@ public class ShoppingCart {
     }
 
 
-    // @Autowired
     public ShoppingCart(List<Product> products) {
         this.products = products;
     }
@@ -52,7 +51,6 @@ public class ShoppingCart {
     public void addProductById(Long id) {
         Product addProduct = productService.getProductById(id);
         products.add(addProduct);
-        //      mapIdexAndIdProducts.put(id, products.indexOf(addProduct));
         countProduct++;
     }
 
