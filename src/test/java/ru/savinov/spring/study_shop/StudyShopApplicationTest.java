@@ -8,15 +8,11 @@ import ru.savinov.spring.study_shop.controllers.LoginController;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE) //контекст не поднимаем
 class StudyShopApplicationTest {
-    @Autowired
-    private LoginController loginController;
-
 
     @Test
     void contextLoads() throws Exception {
-        assertThat(loginController).isNotNull();
 
     }
 
