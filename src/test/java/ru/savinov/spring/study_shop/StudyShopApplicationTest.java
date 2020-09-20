@@ -8,10 +8,8 @@ import ru.savinov.spring.study_shop.controllers.LoginController;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE) //контекст не поднимаем
 class StudyShopApplicationTest {
 
-    @Test
     void contextLoads() throws Exception {
 
     }

@@ -2,11 +2,10 @@ package ru.savinov.spring.study_shop.controllers;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoSession;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import ru.savinov.spring.study_shop.entities.Product;
@@ -18,7 +17,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 class DetailsControllerTest {
 
     @Mock
@@ -27,13 +26,9 @@ class DetailsControllerTest {
     private MockMvc mvc;
     private DetailsController subject;
     private Product product;
-    private MockitoSession mockitoSession;
 
     @BeforeEach
     void beforeEach() {
-        mockitoSession = Mockito.mockitoSession()
-                .initMocks(this)
-                .startMocking();
         subject = new DetailsController(productService);
         product = new Product(1L, "Ball", 50);
         mvc = MockMvcBuilders
