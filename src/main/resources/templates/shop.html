@@ -77,8 +77,6 @@
         </tbody>
     </table>
 </div>
-<!--Таблица для изменения продуктов по ID доступна только для администратора-->
-<!--<div class="container" sec:authorize="isAuthenticated()">-->
 <div class="container" sec:authorize="hasRole('ADMIN')">
     <table th:class="table">
         <thead class="thead-dark">
