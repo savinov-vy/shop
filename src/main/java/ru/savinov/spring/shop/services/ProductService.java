@@ -19,19 +19,22 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+    @Transactional (readOnly = true)
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
+    @Transactional(readOnly = true) // <- readOnly=true не создает точку восстановления перед транзакцией и не нужно убивать после => ускоряет операцию
     public Product getProductById(Long id) {
         return productRepository.findById(id).get();
     }
 
-
+    @Transactional
     public void deleteProductById(Long id) {
         productRepository.deleteById(id);
     }
 
+    @Transactional
     public void addProduct(String addTitle, Integer addPrice) {
         productRepository.save(new Product(addTitle, addPrice));
 
@@ -39,7 +42,7 @@ public class ProductService {
 
     @Transactional //<- необходимо для работы через sql запросы
     public void updateTitleById(Long idUpdate, String newTitle, Integer newPrice) {
-        productRepository.updateById(idUpdate, newTitle, newPrice); // при ошибке в id действия не будет
+        productRepository.updateById(idUpdate, newTitle, newPrice);
 
     }
 

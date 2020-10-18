@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--подключаем NameSpace шаблонизатора Thymeleaf-->
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring/security"
       lang="en">
 
@@ -27,7 +26,6 @@
 </nav>
 <div class="container" sec:authorize="hasRole('USER')">
 
-    <!--    <span th:if="${products.size()==0}">Cart is empty</span>-->
     <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -42,7 +40,6 @@
             <td th:text="${products.title}"></td>
             <td th:text="${products.price}"></td>
             <td></td>
-            <!--            <td><a class="btn btn-danger" th:href="@{'/details/' + ${products.id}}">Details</a></td>-->
             <td><a class="btn btn- danger" th:href="@{'/cart/remove/' + ${products.id}}">delete</a></td>
 
         </tr>

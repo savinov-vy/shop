@@ -11,9 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.savinov.spring.shop.entities.Role;
 import ru.savinov.spring.shop.entities.User;
 import ru.savinov.spring.shop.repositories.UserRepository;
-
 import java.util.HashSet;
 import java.util.Set;
+
+
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
@@ -21,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 
     @Override
-    @Transactional
+    @Transactional (readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();

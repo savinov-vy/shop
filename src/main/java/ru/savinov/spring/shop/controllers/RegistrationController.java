@@ -27,7 +27,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration/form")
-    public String addUser(@ModelAttribute("user") @Valid User userForm /*,BindingResult bindingResult, Model model*/) {
+    public String addUser(@ModelAttribute("user") @Valid User userForm) {
 
 
         userService.save(userForm);

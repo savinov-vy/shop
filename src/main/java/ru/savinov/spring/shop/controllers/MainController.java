@@ -19,7 +19,7 @@ public class MainController {
 
 
     @GetMapping("/shop")
-    public String shopPage(Model model) {  //модель модель это ссылка на данные которые прокидываются в страницу HTML
+    public String shopPage(Model model) {
         List<Product> allProducts = productService.getAllProducts();
         model.addAttribute("products", allProducts);
         return "shop";
@@ -50,7 +50,7 @@ public class MainController {
 
     // вытащить несколько параметров из запроса
     @GetMapping("/data")
-    @ResponseBody // ответом на запрос будет обычная строка
+    @ResponseBody
     public String dataExample(@RequestParam(value = "serial", required = false) Long serial, @RequestParam("number") Long number) {  //equired = false - параметр не является обязательным
         return "S/N: " + serial + "/" + number;
     }
