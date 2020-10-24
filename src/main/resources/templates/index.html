@@ -13,8 +13,7 @@
     <script type="text/javascript" th:href="@{/js/JavaScript.js}"></script>
 
 
-</head>
-<body>
+</head><body>
 <div id="header">
     <img id="headerLogo" width="77"
          th:src="@{/images/horse.gif}" alt="horse">
@@ -61,8 +60,11 @@
 </div>
 <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 <script type="text/javascript">
-document.write("Hello World!");
-document.write("<br>Hello World!");
+var person;
+if(confirm("Are you sure?")){
+person = prompt("Hi, what's your name?");
+alert("Привет, " + person + "!");}
+else alert("Person not sure");
 
 </script>
 
