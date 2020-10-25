@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<script type="text/javascript">
+
+function buttonClick (button){
+alert ("вы нажали на кнопку");
+}
+
+var count = 0;
+function counter (element){
+count++;
+element.innerHTML = "На этот текст было наведено " + count + " раз";
+}
+
+</script>
+
+</head>
+<body onload="alert('Cтраница загружена')">
+<input type="button" name="b" value="Click me" onclick="buttonClick (this)">
+
+<span onmouseover="counter (this)">На этот текст было наведено 0 раз. Этот текст заменится текстом функции counter.
+При автоматическом переводе страницы на русский ведёт себя не корректно</span>
+</body>
+</html>

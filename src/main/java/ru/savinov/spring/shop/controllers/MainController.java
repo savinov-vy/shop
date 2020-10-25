@@ -17,6 +17,12 @@ public class MainController {
         this.productService = productService;
     }
 
+    @GetMapping("/js")
+    public String jsStudy() {
+
+        return "js_study";
+    }
+
 
     @GetMapping("/shop")
     public String shopPage(Model model) {
