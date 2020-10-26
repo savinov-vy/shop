@@ -20,7 +20,7 @@ public class MainController {
     @GetMapping("/js")
     public String jsStudy() {
 
-        return "js_study";
+        return "jsTest";
     }
 
 
