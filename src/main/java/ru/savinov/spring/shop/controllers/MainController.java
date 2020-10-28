@@ -17,13 +17,6 @@ public class MainController {
         this.productService = productService;
     }
 
-    @GetMapping("/js")
-    public String jsStudy() {
-
-        return "jsTest";
-    }
-
-
     @GetMapping("/shop")
     public String shopPage(Model model) {
         List<Product> allProducts = productService.getAllProducts();
