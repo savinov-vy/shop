@@ -4,11 +4,56 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+function funcBefore (){
+$("#information").text("Ожидание данных...");
+}
+
+function funcSuccess (data){
+$("#information").text(data);
+}
+
+$(document).ready (function(){
+
+$("#load").bind("click", function(){
+var admin = "Admin";
+$.ajax({
+url: "content.php",
+type: "POST",
+data:({name: admin, number:5}),
+dataType:"html",
+beforeSend: funcBefore,
+success:funcSuccess
+});
+});
+
+$("#done").bind("click", function(){
+$.ajax({
+url: "content.php",
+type: "GET",
+data:({name: $("#name").val()}), number:5}),
+dataType:"html",
+beforeSend: function() {
+$("#information").text("Ожидание данных...");
+},
+
+success:function (data) {
+if (data == "fail")
+alert("Имя занято");
+else
+$("#information").text(data);}
+});
+});
+});
+
+
+    </script>
 </head>
 <body>
 
-<div id="test" onclick="$('#test').hide()">Test</div>
-
-<!--$( ".target" ).hide();-->
+<input type="text" id="name" placeholder="Введите имя"/>
+<input type="button" id="done" value="Готово"/>
+<p id = "load" style="cursor:pointer">Загрузить данные</p>
+<div id="information"></div>
 </body>
 </html>
