@@ -2,29 +2,52 @@
 <html>
 
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!--<script type="text/javascript" th:href="@{/js/main.js}"></script>-->
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
+
+<body>
+<div class="container">
+    <h1>Обратная связь</h1>
+    <form>
+       <input type="email" id="email" name="email" placeholder="Email" class="form-control"><br>
+        <input type="text" id="name" name="name" placeholder="Введите имя" class="form-control"><br>
+         <input type="phone" id="phone" name="phone" placeholder="Телефон" class="form-control"><br>
+         <textarea name="message" id="message" placeholder="Email" class="form-control"></textarea><br>
+        <button type="button" id="sendMail" class="btn btn-success"> Отправить</button>
+    </form>
+</div>
+<div id="errorMess"></div>
+<!--<div id="test" onclick="$('#test').hide()">Test</div>-->
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <script type="text/javascript">
 
- $(document).ready(function(){
+$("#sendMail").bind("click", function () {
 
- $.get('/a/get_product', function(data){
+var email = $("#email").val().trim();
+var name = $("#name").val().trim();
+var phone = $("#phone").val().trim();
+var message = $("#message").val().trim();
 
- console.log(data);
- let table = "<table>" +
- "<tr><td>"+ data.title+ "</td></tr>"+
- "</table>";
- $("#test_product").html(table);
-})
+if (email == "") {
+
+$("#errorMess").text("Введите email");
+return false;
+} else if (name == "") {
+$("#errorMess").text("Введите имя");
+return false;
+} else if (phone == "") {
+$("#errorMess").text("Введите телефон");
+return false;
+} else if (message.length<5) {
+$("#errorMess").text("Введите сообщение не менее 5 символов");
+return false;
+}
+$("#errorMess").text("");
+    /*alert("hello");*/
 });
-
 </script>
-<body>
-<div id="test_product">
-
-</div>
-
 </body>
 </html>
