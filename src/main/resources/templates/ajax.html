@@ -9,45 +9,70 @@
 <div class="container">
     <h1>Обратная связь</h1>
     <form>
-       <input type="email" id="email" name="email" placeholder="Email" class="form-control"><br>
-        <input type="text" id="name" name="name" placeholder="Введите имя" class="form-control"><br>
-         <input type="phone" id="phone" name="phone" placeholder="Телефон" class="form-control"><br>
-         <textarea name="message" id="message" placeholder="Email" class="form-control"></textarea><br>
+
+        <input type="text" id="title" name="title" placeholder="Title" class="form-control"><br>
+        <input type="text" id="price" name="price" placeholder="Price" class="form-control"><br>
         <button type="button" id="sendMail" class="btn btn-success"> Отправить</button>
     </form>
 </div>
 <div id="errorMess"></div>
-<!--<div id="test" onclick="$('#test').hide()">Test</div>-->
+<div id="test_prod">test prod</div>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <script type="text/javascript">
+    $("#test_prod").on("click", function () {
+        $.get('/app/a1', function (data) {
+            console.log(data);
+            var table = "<table>" +
+                "<tr><td>"+data.id+"</td><td>"+data.title+"</td><td>"+data.price+"</td></tr>" +
+                "</table>"
+            $("#test_prod").html(table);
+        });
+    });
 
-$("#sendMail").bind("click", function () {
+    $("#sendMail").on("click", function () {
 
-var email = $("#email").val().trim();
-var name = $("#name").val().trim();
-var phone = $("#phone").val().trim();
-var message = $("#message").val().trim();
+        var title = $("#title").val().trim();
+        var price = $("#price").val().trim();
 
-if (email == "") {
+         if (title == "") {
+            $("#errorMess").text("Введите title");
+            return false;
+        } else if (price == "") {
+            $("#errorMess").text("Введите price");
+            return false;
+          }
+        $("#errorMess").text("");
 
-$("#errorMess").text("Введите email");
-return false;
-} else if (name == "") {
-$("#errorMess").text("Введите имя");
-return false;
-} else if (phone == "") {
-$("#errorMess").text("Введите телефон");
-return false;
-} else if (message.length<5) {
-$("#errorMess").text("Введите сообщение не менее 5 символов");
-return false;
-}
-$("#errorMess").text("");
-    /*alert("hello");*/
-});
+
+        $.ajax({
+            /*    Обязательные параметры*/
+            url: "/add",
+            dataType: 'json',
+            type: 'POST',
+            cache: false,
+            contentType: 'applicatoin/json',
+            data: JSON.stringify({
+
+                title: $("#name").val(),
+                price: $("#phone").val(),
+            }),
+
+            /*    необязательные параметры*/
+            beforeSend: function () {
+                $("#sendMail").prop("disable", true);
+            },
+            success: function (data) {
+                alert(data);
+                $("#sendMail").prop("disabled", false);
+            }
+
+        });
+
+    });
+
 </script>
 </body>
 </html>
