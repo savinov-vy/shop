@@ -8,11 +8,11 @@ public class Product {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "title")
-    private String title; //название
+    private String title;
 
     @Column(name = "price")
     private Integer price;
