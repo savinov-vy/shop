@@ -15,6 +15,7 @@
 
 <body>
 <div class="container">
+<div>
     <h1>Shop</h1>
     <nav>
         <ul>
@@ -59,7 +60,7 @@
     </table>
 </div>
 <!--Таблица для добавления в продуктов в базу данных должна быть доступна только для администратора-->
-<div class="container" sec:authorize="hasRole('ADMIN')">
+<div sec:authorize="hasRole('ADMIN')">
     <table th:class="table">
         <thead class="thead-dark">
         <tr></tr>
@@ -77,7 +78,7 @@
         </tbody>
     </table>
 </div>
-<div class="container" sec:authorize="hasRole('ADMIN')">
+<div sec:authorize="hasRole('ADMIN')">
     <table th:class="table">
         <thead class="thead-dark">
         <tr></tr>
@@ -96,7 +97,6 @@
         </tbody>
     </table>
 </div>
-
-
+</div>
 </body>
 </html>
