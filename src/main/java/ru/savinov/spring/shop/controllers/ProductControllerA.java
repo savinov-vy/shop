@@ -15,9 +15,12 @@ public class ProductControllerA {
     return (productService.getProductById(1L));
 }
 
-    @PostMapping("/add")
+    @PostMapping("/add1")
     public void addTest(@RequestBody Product product) {
-        System.out.println(product);
+
+        productService.addProduct(product.getTitle(), product.getPrice());
+
+
         }
 
 }
