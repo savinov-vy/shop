@@ -6,9 +6,7 @@ DROP TABLE IF EXISTS shop.users;
 
 DROP SEQUENCE IF EXISTS shop.product_id_seq;
 DROP SEQUENCE IF EXISTS shop.roles_id_seq;
-DROP SEQUENCE IF EXISTS shop.objects_id_seq;
-DROP SEQUENCE IF EXISTS shop.peoples_id_seq;
-DROP SEQUENCE IF EXISTS shop.hibernate_sequence;
+DROP SEQUENCE IF EXISTS shop.users_id_seq;
 
 CREATE SCHEMA shop;
 
