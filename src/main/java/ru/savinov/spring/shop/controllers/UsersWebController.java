@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class UsersWebController {
 
-    @GetMapping("/users")
+    @GetMapping("/users_control")
     public String users() {
-        return "users";
+        return "users_control";
     }
 
 }

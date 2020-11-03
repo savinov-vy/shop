@@ -15,18 +15,20 @@ public class UsersRestController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    UserRepository userRepository;
+//    @Autowired
+//    UserRepository userRepository;
 
 
     @GetMapping("/user")
-    public @ResponseBody List<UserWithRoles> getTestUser() {
-        return userService.getAllUsersWithRoles();
+    public List<UserWithRoles> getTestUser() {
+        List<UserWithRoles> list = userService.getAllUsersWithRoles();
+        System.out.println(list);
+        return list;
     }
 
-    @PostMapping("/add_user")
-    public @ResponseBody User addUser(@RequestBody User user) {
-        userRepository.save(user);
-        return user;
-    }
+//    @PostMapping("/add_user")
+//    public @ResponseBody User addUser(@RequestBody User user) {
+//        userRepository.save(user);
+//        return user;
+//    }
 }

@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link th:href="@{/css/index.css}" rel="stylesheet"/>
 </head>
 <style>
     td {
@@ -13,22 +16,17 @@
 </style>
 <script type="text/javascript">
     function showUsers() {
-        alert("showUsers")
         $.get('/shop/user', function (data) {
-            alert("таблицу в студию")
             console.log(data);
 
-            let table = "<table border='1'><tr><th>ИД</th><th>Cтатус</th><th>Логин</th><th>Пароль</th><th>Роли</th></tr>";
+            let table = "<table border='1' class=\"table\"><tr><th>ИД</th><th>Cтатус</th><th>Логин</th><th>Пароль</th><th>Роли</th></tr>";
 
             for (var i = 0; i < data.length; i++) {
-                let set = data[i].role;
-                table = table + "<tr><td>" + data[i].id + "</td><td>" + data[i].enabled + "</td><td>" + data[i].username + "</td><td>" + data[i].password + "</td><td>" + data[i].role + "</td></tr>";
+                table = table + "<tr><td>" + data[i].id + "</td><td>" + data[i].enabled + "</td><td>" + data[i].username + "</td><td>" + data[i].password + "</td><td>" + data[i].roleName + "</td></tr>";
             }
-    //        for (let value of set) alert(value);
             table = table + "</table>";
 
             $("#test_user").html(table);
-
         });
     }
 
@@ -44,8 +42,6 @@
             type: 'POST',
             cache: false,
             contentType: 'application/json',
-
-
             data: JSON.stringify({
                 enabled: $("#user_status").val(),
                 username: $("#user_name").val(),
@@ -62,6 +58,7 @@
     }
 </script>
 <body>
+<div class="container">
 <div id="test_user">
     привет!!
 </div>
@@ -71,5 +68,6 @@
     <input type="text" id="user_password" placeholder="Пароль"/> <br/>
     <input type="button" onclick="send_user()" value="Сохранить"/> <br/>
 </form>
+</div>
 </body>
 </html>

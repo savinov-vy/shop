@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -52,21 +51,26 @@ public class UserService {
 
     public List<UserWithRoles> getAllUsersWithRoles() {
         List<UserWithRoles> userWithRolesList = new ArrayList<>();
-        UserWithRoles userWithRoles = new UserWithRoles();
         List<User> userList = new ArrayList<>();
-        userList.addAll(userRepository.findAll());
+        userList = userRepository.findAll();
 
         for (User user : userList) {
+            UserWithRoles userWithRoles = new UserWithRoles();
             userWithRoles.setEnabled(user.getEnabled());
             userWithRoles.setId(user.getId());
             userWithRoles.setPassword(user.getPassword());
             userWithRoles.setUsername(user.getUsername());
-            userWithRoles.setRoles(user.getRoles().stream().map(r -> r.getName().join("/n")).toString());
+            Set<Role> setRoleUser = user.getRoles();
+            String strAllRoleUser = "";
+            for (Role role : setRoleUser) {
+                strAllRoleUser += role.getName();
+            }
+            userWithRoles.setRoleName(strAllRoleUser);
+
             userWithRolesList.add(userWithRoles);
         }
         return userWithRolesList;
     }
-
 
 
 }

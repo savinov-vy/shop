@@ -2,9 +2,12 @@ package ru.savinov.spring.shop.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+
 import java.util.List;
 @Getter
 @Setter
+@ToString
 public class UserWithRoles {
     private Long id;
 
@@ -14,5 +17,5 @@ public class UserWithRoles {
 
     private Boolean enabled;
 
-    private String roles;
+    private String roleName;
 }

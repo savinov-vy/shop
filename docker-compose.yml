@@ -33,7 +33,7 @@ services:
       - POSTGRES_PASSWORD=postgres
     restart: unless-stopped
     depends_on:
-      - study_shop_postgresы
+      - study_shop_postgres
     networks:
       - network1
     entrypoint: sh -c "java -jar /home/service/study_shop-0.0.1-SNAPSHOT.jar"
