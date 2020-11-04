@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring/security" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -20,7 +20,7 @@
                 <li><a th:href="@{/login}">Login</a></li>
                 <li class="selected"><a th:href="@{/registration}">Registration</a></li>
                 <li><a th:href="@{/shop}">Shop</a></li>
-                <li><a th:href="@{/cart}">Cart</a></li>
+                <li><a th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
             </ul>
         </nav>
   <!--      <div class="form-group row">
@@ -28,13 +28,13 @@
             <input type="text" name="username" th:value="${user.username}" placeholder="username">
         </div>-->
 
-        <div class="form-group row">
+        <div class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
             <label for="inputEmail3" class="col-sm-2 col-form-label">Login</label>
             <div class="col-sm-10">
                 <input type="text" name="username" class="form-control" id="inputEmail3" th:value="${user.username}" placeholder="username">
             </div>
         </div>
-        <div class="form-group row">
+        <div class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
             <label for="inputEmail3" class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-10">
                 <input type="text" name="password" class="form-control" id="inputPassword3" th:value="${user.password}" placeholder="password">

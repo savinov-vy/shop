@@ -21,7 +21,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/"); // отключать цепочку фильтров для данного URL
+        web.ignoring().antMatchers("/users_control"); // отключить цепочку фильтров для данного URL
+        web.ignoring().antMatchers("/delete_user");
+        web.ignoring().antMatchers("/add_user");
     }
 
     @Autowired

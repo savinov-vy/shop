@@ -2,11 +2,9 @@ package ru.savinov.spring.shop.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import org.springframework.transaction.annotation.Transactional;
 import ru.savinov.spring.shop.entities.Product;
 import ru.savinov.spring.shop.repositories.ProductRepository;
-
 import java.util.List;
 
 @Service
@@ -45,9 +43,6 @@ public class ProductService {
         productRepository.updateById(idUpdate, newTitle, newPrice);
 
     }
-
-
-
 }
 
 

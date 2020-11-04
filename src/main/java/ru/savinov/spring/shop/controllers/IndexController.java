@@ -6,6 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class IndexController {
+
     @GetMapping("/index")
     public ModelAndView homePage() {
         ModelAndView mav = new ModelAndView("index.html");

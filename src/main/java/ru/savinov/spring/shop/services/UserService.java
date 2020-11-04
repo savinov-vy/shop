@@ -7,9 +7,7 @@ import ru.savinov.spring.shop.entities.Role;
 import ru.savinov.spring.shop.entities.User;
 import ru.savinov.spring.shop.repositories.RoleRepository;
 import ru.savinov.spring.shop.repositories.UserRepository;
-
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -43,10 +41,12 @@ public class UserService {
     public void createNewUser(User user) {
         String username = user.getUsername();
         String password = "{noop}" + user.getPassword();
-        Boolean enabled = true;
+        Boolean enabled = user.getEnabled();
         Set<Role> roles = new HashSet<>();
         roles.add(roleRepository.getOne(1L));
-
+        userRepository.save(new User(
+                username, password, enabled, roles
+        ));
     }
 
     public List<UserWithRoles> getAllUsersWithRoles() {
@@ -71,8 +71,11 @@ public class UserService {
         }
         return userWithRolesList;
     }
+    public void deleteUserById(Long id){
 
+        userRepository.deleteById(id);
 
+    }
 }
 
 

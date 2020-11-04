@@ -8,7 +8,7 @@ public class UsersWebController {
 
     @GetMapping("/users_control")
     public String users() {
+
         return "users_control";
     }
-
 }

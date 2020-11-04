@@ -23,7 +23,7 @@
             <li><a th:href="@{/login}">Login</a></li>
             <li><a th:href="@{/registration}">Registration</a></li>
             <li class="selected"><a th:href="@{/shop}">Shop</a></li>
-            <li><a th:href="@{/cart}">Cart</a></li>
+            <li><a th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
         </ul>
     </nav>
     <span th:if="${products.size()==0}">Products List is empty</span>
@@ -45,7 +45,7 @@
             <td th:text="${products.price}"></td>
             <td><a class="btn btn-danger" th:href="@{'/details/' + ${products.id}}">Details</a></td>
             <td><a class="btn btn-success" th:href="@{'/cart/add/' + ${products.id}}">Add to cart</a></td>
-            <td sec:authorize="hasRole('ADMIN')"><a class="btn btn- danger"
+            <td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger"
                                                     th:href="@{'/products/delete/' + ${products.id}}">Delete</a></td>
             <!--переход в корзину доступен User-->
         </tr>

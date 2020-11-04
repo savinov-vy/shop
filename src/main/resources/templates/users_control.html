@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -22,8 +23,13 @@
             let table = "<table border='1' class=\"table\"><tr><th>ИД</th><th>Cтатус</th><th>Логин</th><th>Пароль</th><th>Роли</th></tr>";
 
             for (var i = 0; i < data.length; i++) {
-                table = table + "<tr><td>" + data[i].id + "</td><td>" + data[i].enabled + "</td><td>" + data[i].username + "</td><td>" + data[i].password + "</td><td>" + data[i].roleName + "</td></tr>";
-            }
+                table = table + "<tr>" +
+                    "<td>" + data[i].id + "</td>" +
+                    "<td>" + data[i].enabled + "</td>" +
+                    "<td>" + data[i].username + "</td>" +
+                    "<td>" + data[i].password + "</td>" +
+                    "<td>" + data[i].roleName + "</td><td>" + "<button onclick='deleteUser("+data[i].id+");' class='btn btn-sm btn-danger'>Delete</button>";
+            }                                                                                                                                                                                        //   <a href="#" id="5" onclick="del(this.id);return false;">delete</a>
             table = table + "</table>";
 
             $("#test_user").html(table);
@@ -34,11 +40,11 @@
         showUsers();
     });
 
+
     function send_user() {
         $.ajax({
             url: '/shop/add_user',
             dataType: 'json',
-
             type: 'POST',
             cache: false,
             contentType: 'application/json',
@@ -47,27 +53,46 @@
                 username: $("#user_name").val(),
                 password: $("#user_password").val()
             }),
-            /*            error: function (xhr, status) {
+                        error: function (xhr, status) {
                             alert(status);
-                        },*/
+                        },
             success: function () {
                 showUsers();
             }
 
         })
     }
+    function deleteUser(idUser) {
+        $.ajax({
+            url: "/shop/delete_user",
+            dataType: 'json',
+            type: 'POST',
+            cache: false,
+            contentType: 'application/json',
+            data: JSON.stringify({
+                id: idUser,
+            }),
+            error: function (xhr, status) {
+                alert(status);
+            },
+            success: function () {
+                showUsers();
+            },
+
+        });
+    }
 </script>
 <body>
 <div class="container">
-<div id="test_user">
-    привет!!
-</div>
-<form>
-    <input type="text" id="user_status" placeholder="Статус"/> <br/>
-    <input type="text" id="user_name" placeholder="Логин"/> <br/>
-    <input type="text" id="user_password" placeholder="Пароль"/> <br/>
-    <input type="button" onclick="send_user()" value="Сохранить"/> <br/>
-</form>
+    <div id="test_user">
+        привет!!
+    </div>
+    <form>
+        <input type="text" id="user_status" placeholder="Статус"/> <br/>
+        <input type="text" id="user_name" placeholder="Логин"/> <br/>
+        <input type="text" id="user_password" placeholder="Пароль"/> <br/>
+        <input type="button" onclick="send_user()" value="Сохранить"/> <br/>
+    </form>
 </div>
 </body>
 </html>

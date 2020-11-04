@@ -25,7 +25,7 @@ public class MainController {
     }
 
     @PostMapping("/products/add")
-    public String shopPageAddProduct(@RequestParam String addProduct, @RequestParam Integer addPrice, Model model) {  //модель модель это ссылка на данные которые прокидываются в страницу HTML
+    public String shopPageAddProduct(@RequestParam String addProduct, @RequestParam Integer addPrice, Model model) {
         productService.addProduct(addProduct, addPrice);
         List<Product> allProducts = productService.getAllProducts();
         model.addAttribute("products", allProducts);
@@ -44,10 +44,10 @@ public class MainController {
     @GetMapping("/products/delete/{id}")
     public String deleteProductById(@PathVariable("id") Long id) {
         productService.deleteProductById(id);
-        return "redirect:/shop"; // перенаправляем по адресу shop/
+        return "redirect:/shop";
     }
 
-    // вытащить несколько параметров из запроса
+
     @GetMapping("/data")
     @ResponseBody
     public String dataExample(@RequestParam(value = "serial", required = false) Long serial, @RequestParam("number") Long number) {  //equired = false - параметр не является обязательным

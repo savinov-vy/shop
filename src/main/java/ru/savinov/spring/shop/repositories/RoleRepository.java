@@ -6,4 +6,5 @@ import ru.savinov.spring.shop.entities.Role;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {
+
 }

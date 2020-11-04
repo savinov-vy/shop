@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--подключаем NameSpace шаблонизатора Thymeleaf-->
-<html xmlns:th="http://www.thymeleaf.org"
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring/security"
       lang="en">
 <head>
     <meta charset="UTF-8">
@@ -32,7 +32,7 @@
             <li><a th:href="@{/login}">Login</a></li>
             <li><a th:href="@{/registration}">Registration</a></li>
             <li><a th:href="@{/shop}">Shop</a></li>
-            <li><a th:href="@{/cart}">Cart</a></li>
+            <li><a th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
         </ul>
     </nav>
     <div id="tableContainer"> <!--529-->
