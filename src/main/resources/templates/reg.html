@@ -10,7 +10,6 @@
 </head>
 <body>
 <div class="container">
-
     <form class="ui-icon-circle-zoomin" id="create-form" th:action="@{/registration/form}" th:object="${user}" th:method="post"
           accept-charset="UTF-8">
         <h1> Registration </h1>
@@ -21,13 +20,9 @@
                 <li class="selected"><a th:href="@{/registration}">Registration</a></li>
                 <li><a th:href="@{/shop}">Shop</a></li>
                 <li><a th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
+                <li><a th:href="@{/users_control}" sec:authorize="hasRole('ADMIN')">Users Control</a></li>
             </ul>
         </nav>
-  <!--      <div class="form-group row">
-            <label>Login</label>
-            <input type="text" name="username" th:value="${user.username}" placeholder="username">
-        </div>-->
-
         <div class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
             <label for="inputEmail3" class="col-sm-2 col-form-label">Login</label>
             <div class="col-sm-10">
@@ -40,10 +35,6 @@
                 <input type="text" name="password" class="form-control" id="inputPassword3" th:value="${user.password}" placeholder="password">
             </div>
         </div>
-<!--        <div class="form-group row">
-            <label>password</label>
-            <input type="text" name="password" th:value="${user.password}" placeholder="password">
-        </div>-->
         <button class="btn btn-primary" type="submit">Check In</button>
     </form>
 </div>

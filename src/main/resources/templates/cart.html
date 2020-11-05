@@ -23,6 +23,7 @@
         <li><a th:href="@{/registration}">Registration</a></li>
         <li><a th:href="@{/shop}">Shop</a></li>
         <li class="selected"><a th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
+        <li><a th:href="@{/users_control}" sec:authorize="hasRole('ADMIN')">Users Control</a></li>
     </ul>
 </nav>
 <div class="container" sec:authorize="hasRole('USER')">

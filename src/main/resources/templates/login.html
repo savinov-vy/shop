@@ -6,7 +6,6 @@
     <title>Login Page</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width-device-width, initial-scale-1, shrink-to-fit-no">
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
@@ -29,7 +28,6 @@
     </style>
     <link th:href="@{/css/index.css}" rel="stylesheet"/>
 </head>
-
 <body>
 <div class="container">
     <h1>Login Page</h1>
@@ -40,9 +38,9 @@
             <li><a th:href="@{/registration}">Registration</a></li>
             <li><a th:href="@{/shop}">Shop</a></li>
             <li><a th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
+            <li><a th:href="@{/users_control}" sec:authorize="hasRole('ADMIN')">Users Control</a></li>
         </ul>
     </nav>
-
     <div>
         <div id="loginbox" class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
             <div class="panel panel-info">
@@ -69,9 +67,7 @@
             </div>
         </div>
     </div>
-
     <a class="btn-info" th:href="@{/shop}">Go to shop</a>
-
 </div>
 </body>
 </html>

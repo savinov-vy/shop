@@ -6,13 +6,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Shop</title>
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link th:href="@{/css/index.css}" rel="stylesheet"/>
 </head>
-
 <body>
 <div class="container">
 <div>
@@ -24,13 +22,13 @@
             <li><a th:href="@{/registration}">Registration</a></li>
             <li class="selected"><a th:href="@{/shop}">Shop</a></li>
             <li><a th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
+            <li><a th:href="@{/users_control}" sec:authorize="hasRole('ADMIN')">Users Control</a></li>
         </ul>
     </nav>
     <span th:if="${products.size()==0}">Products List is empty</span>
-    <table th:if="${products.size()>0}" class="table"> <!--классы взяты из bootstrap  -->
-        <thead class="thead-dark"> <!--шапка таблицы-->
-
-        <tr>  <!--единственная строка шапки таблицы tr -table row-->
+    <table th:if="${products.size()>0}" class="table">
+        <thead class="thead-dark">
+        <tr>
             <td>ID</td>
             <td>Title</td>
             <td>Price</td>
@@ -38,16 +36,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="products:${products}"> <!--thymeleaf позволяет пользоваться циклами в том числе for each....-->
+        <tr th:each="products:${products}">
             <td th:text="${products.id}"></td>
-            <!--нюанс синтаксиса, на самом деле thymeleaf c помощью точки обращается не к полям а к геттерам. Т.е. если геттера не будет то достать переменную id будет нельзя.-->
             <td th:text="${products.title}"></td>
             <td th:text="${products.price}"></td>
             <td><a class="btn btn-danger" th:href="@{'/details/' + ${products.id}}">Details</a></td>
             <td><a class="btn btn-success" th:href="@{'/cart/add/' + ${products.id}}">Add to cart</a></td>
             <td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger"
                                                     th:href="@{'/products/delete/' + ${products.id}}">Delete</a></td>
-            <!--переход в корзину доступен User-->
         </tr>
         <tr>
             <td></td>
@@ -59,7 +55,6 @@
         </tbody>
     </table>
 </div>
-<!--Таблица для добавления в продуктов в базу данных должна быть доступна только для администратора-->
 <div sec:authorize="hasRole('ADMIN')">
     <table th:class="table">
         <thead class="thead-dark">

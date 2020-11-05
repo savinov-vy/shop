@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--подключаем NameSpace шаблонизатора Thymeleaf-->
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
       lang="en">
 
@@ -23,6 +22,7 @@
         <li><a th:href="@{/registration}">Registration</a></li>
         <li><a th:href="@{/shop}">Shop</a></li>
         <li><a th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
+        <li><a th:href="@{/users_control}" sec:authorize="hasRole('ADMIN')">Users Control</a></li>
     </ul>
 </nav>
 <div class="container">
