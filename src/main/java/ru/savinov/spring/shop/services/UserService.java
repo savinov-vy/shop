@@ -53,7 +53,6 @@ public class UserService {
         List<UserWithRoles> userWithRolesList = new ArrayList<>();
         List<User> userList = new ArrayList<>();
         userList = userRepository.findAll();
-
         for (User user : userList) {
             UserWithRoles userWithRoles = new UserWithRoles();
             userWithRoles.setEnabled(user.getEnabled());
@@ -71,10 +70,20 @@ public class UserService {
         }
         return userWithRolesList;
     }
-    public void deleteUserById(Long id){
 
+    public void deleteUserById(Long id) {
         userRepository.deleteById(id);
 
+    }
+
+    @Transactional
+    public void desableUser(Long id) {
+        userRepository.desableUserById(id, false);
+    }
+
+    @Transactional
+    public void enableUserById(Long id) {
+        userRepository.enableUserById(id, true);
     }
 }
 

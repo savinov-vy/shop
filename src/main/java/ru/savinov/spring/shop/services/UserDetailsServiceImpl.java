@@ -14,7 +14,6 @@ import ru.savinov.spring.shop.repositories.UserRepository;
 import java.util.HashSet;
 import java.util.Set;
 
-
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired

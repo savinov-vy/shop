@@ -6,12 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.savinov.spring.shop.entities.User;
 import ru.savinov.spring.shop.services.UserService;
-
 import javax.validation.Valid;
 
 @Controller
 public class RegistrationController {
-
 
     private UserService userService;
 
@@ -28,7 +26,6 @@ public class RegistrationController {
 
     @PostMapping("/registration/form")
     public String addUser(@ModelAttribute("user") @Valid User userForm) {
-
 
         userService.save(userForm);
 

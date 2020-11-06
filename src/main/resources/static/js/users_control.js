@@ -20,11 +20,21 @@ function showUsers() {
                 "<td>" + data[i].password + "</td>" +
                 "<td>" + data[i].roleName + "</td>" +
                 "<td>" + "<button onclick='deleteUser(" + data[i].id + ");' class='btn btn-sm btn-danger'>Delete<br>user</button>" +
-                "<button onclick='deleteUser(" + data[i].id + ");' class='btn btn-sm btn-primary' >Desable<br>user</button></td>";
+                "<button onclick='onClick(" + data[i].id + ");' class='btn btn-sm btn-primary' >Desable<br>user</button></td>";
         }                                                                                                                                                                                        //   <a href="#" id="5" onclick="del(this.id);return false;">delete</a>
         table = table + "</tr></table>";
         $("#add_table").html(table);
     });
+}
+
+
+/***********Функция триггер включеного-отключенного положения пользователя***********/
+function onClick(idUser) {
+    if (this.secondT^=1) {
+        desableUser(idUser);
+    } else {
+        enableUser(idUser);
+    }
 }
 /**********************Добавить нового польователя**********************/
 
@@ -68,3 +78,42 @@ function deleteUser(idUser) {
     });
 }
 
+/********************** Отключить пользователя **********************/
+function desableUser(idUser) {
+    $.ajax({
+        url: "/shop/desable_user",
+        dataType: 'json',
+        type: 'POST',
+        cache: false,
+        contentType: 'application/json',
+        data: JSON.stringify({
+            id: idUser,
+        }),
+        error: function (xhr, status) {
+            alert(status);
+        },
+        success: function () {
+            showUsers();
+        },
+    });
+}
+
+/********************** Включить пользователя **********************/
+function enableUser(idUser) {
+    $.ajax({
+        url: "/shop/enable_user",
+        dataType: 'json',
+        type: 'POST',
+        cache: false,
+        contentType: 'application/json',
+        data: JSON.stringify({
+            id: idUser,
+        }),
+        error: function (xhr, status) {
+            alert(status);
+        },
+        success: function () {
+            showUsers();
+        },
+    });
+}

@@ -1,4 +1,5 @@
 package ru.savinov.spring.shop.utils;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.savinov.spring.shop.entities.User;
 

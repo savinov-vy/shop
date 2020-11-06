@@ -40,18 +40,15 @@ public class MainController {
         return "shop";
     }
 
-
     @GetMapping("/products/delete/{id}")
     public String deleteProductById(@PathVariable("id") Long id) {
         productService.deleteProductById(id);
         return "redirect:/shop";
     }
 
-
     @GetMapping("/data")
     @ResponseBody
     public String dataExample(@RequestParam(value = "serial", required = false) Long serial, @RequestParam("number") Long number) {  //equired = false - параметр не является обязательным
         return "S/N: " + serial + "/" + number;
     }
-
 }

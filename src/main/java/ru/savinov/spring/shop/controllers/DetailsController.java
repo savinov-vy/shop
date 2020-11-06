@@ -27,5 +27,4 @@ public class DetailsController {
         ModelAndView mav = new ModelAndView("details.html");
         return mav;
     }
-
 }

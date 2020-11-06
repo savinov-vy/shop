@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 import ru.savinov.spring.shop.entities.Product;
 import ru.savinov.spring.shop.services.ProductService;
-
 import javax.annotation.PostConstruct;
 import java.util.*;
 
@@ -24,7 +23,6 @@ public class ShoppingCart {
     public static int getCountProduct() {
         return countProduct;
     }
-
 
     public ShoppingCart(List<Product> products) {
         this.products = products;
@@ -45,7 +43,6 @@ public class ShoppingCart {
     @PostConstruct
     public void init() {
         products = new ArrayList<>();
-
     }
 
     public void addProductById(Long id) {
@@ -66,6 +63,4 @@ public class ShoppingCart {
         }
         return foundProduct;
     }
-
-
 }

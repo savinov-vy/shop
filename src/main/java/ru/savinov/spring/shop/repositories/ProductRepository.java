@@ -11,7 +11,7 @@ import ru.savinov.spring.shop.entities.Product;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Modifying
-    @Query("update Product p set p.id = ?1, p.title = ?2, p.price = ?3 where p.id = ?1")
+    @Query("update Product p set p.title = ?2, p.price = ?3 where p.id = ?1")
     void updateById( Long id, String title, Integer price);
 
 }

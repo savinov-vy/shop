@@ -23,6 +23,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers("/delete_user");// отключить фильтры
         web.ignoring().antMatchers("/add_user");
+        web.ignoring().antMatchers("/desable_user");
+        web.ignoring().antMatchers("/enable_user");
     }
 
     @Autowired
