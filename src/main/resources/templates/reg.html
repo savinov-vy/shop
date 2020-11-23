@@ -7,6 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <link th:href="@{/css/index.css}" rel="stylesheet"/>
+    <script src="js/reg.js"></script>
 </head>
 <body>
 <div class="container">
@@ -24,18 +25,20 @@
             </ul>
         </nav>
         <div class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Login</label>
+            <label for="name" class="col-sm-2 col-form-label">Login</label>
             <div class="col-sm-10">
-                <input type="text" name="username" class="form-control" id="inputEmail3" th:value="${user.username}" placeholder="username">
+                <input type="text" name="username" class="form-control" id="name" th:value="${user.username}" placeholder="username">
             </div>
         </div>
         <div class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Password</label>
+            <label for="name" class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-10">
-                <input type="text" name="password" class="form-control" id="inputPassword3" th:value="${user.password}" placeholder="password">
+                <input type="password" name="password" class="form-control" id="password" th:value="${user.password}" placeholder="password">
+                <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" th:value="${user.password}" placeholder="Confirm password">
             </div>
+            <div id="messageShow"></div>
         </div>
-        <button class="btn btn-primary" type="submit">Check In</button>
+        <button class="btn btn-primary" type="submit" id="btnChekIn" >Check In</button>
     </form>
 </div>
 </body>

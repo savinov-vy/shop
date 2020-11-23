@@ -47,7 +47,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/details/**").hasAnyRole("ADMIN") // но по ссылке детали и дальше по маске ** может ходить только пользователь имеющий роль АДМИН причем здесь нужно указать без префикса ROL_ как в базе данных.
-                .anyRequest().permitAll()  //сначала мы даём разрешение чтобы ходили все везде
+                .antMatchers("/users_control/**").hasAnyRole("ADMIN")
+                .anyRequest().permitAll()  // даём разрешение чтобы ходили все везде
                 .and()
                 .formLogin().failureUrl("/shop").loginPage("/login").permitAll() // для логина мы используем форму логина для этого нужно постучаться на /login  для формы логина даем доступ всем .failureUrl("/index") - в случае ошибки ввода login пароля переход на эту страницу
                 .loginProcessingUrl("/authenticateTheUser"); // для проверки корректности мы используем специальный URL
