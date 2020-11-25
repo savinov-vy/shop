@@ -34,7 +34,8 @@ public class RegistrationController {
     public String addUser(@ModelAttribute("user") @Valid User userForm, BindingResult bindingResult, Model model) {
         userValidator.validate(userForm, bindingResult);
 
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errorDescribtion", userValidator.getErrorDescribtion());
             return "reg";
         }
 
