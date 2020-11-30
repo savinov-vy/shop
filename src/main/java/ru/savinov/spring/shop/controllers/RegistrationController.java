@@ -40,7 +40,6 @@ public class RegistrationController {
         }
 
         userService.save(userForm);
-
         return "redirect:/";
     }
 }

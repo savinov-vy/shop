@@ -53,17 +53,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin().failureUrl("/shop").loginPage("/login").permitAll() // для логина мы используем форму логина для этого нужно постучаться на /login  для формы логина даем доступ всем .failureUrl("/index") - в случае ошибки ввода login пароля переход на эту страницу
                 .loginProcessingUrl("/authenticateTheUser"); // для проверки корректности мы используем специальный URL
 
-//                .and()
-//                .rememberMe()
-//                .key("qwerty")
-//                .tokenValiditySeconds(600)
-//
-//                .and()
-//                .logout()
-//                .logoutUrl("/logout")
-
-
     }
-
-
 }
