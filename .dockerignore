@@ -4,6 +4,12 @@ target/
 !**/src/main/**
 !**/src/test/**
 
+.git
+.settings
+.idea
+
+
+
 ### STS ###
 .apt_generated
 .classpath

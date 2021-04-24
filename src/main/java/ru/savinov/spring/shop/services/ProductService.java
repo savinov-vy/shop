@@ -21,7 +21,7 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    @Transactional(readOnly = true) // <- readOnly=true не создает точку восстановления перед транзакцией и не нужно убивать после => ускоряет операцию
+    @Transactional(readOnly = true)
     public Product getProductById(Long id) {
         return productRepository.findById(id).get();
     }
@@ -37,10 +37,13 @@ public class ProductService {
 
     }
 
-    @Transactional //<- необходимо для работы через sql запросы
+    @Transactional
     public void updateTitleById(Long idUpdate, String newTitle, Integer newPrice) {
-        productRepository.updateById(idUpdate, newTitle, newPrice);
+        Product product = getProductById(idUpdate);
+        product.setTitle(newTitle);
+        product.setPrice(newPrice);
 
+      //  productRepository.updateById(idUpdate, newTitle, newPrice);
     }
 }
 

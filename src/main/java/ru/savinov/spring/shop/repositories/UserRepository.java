@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import ru.savinov.spring.shop.entities.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 

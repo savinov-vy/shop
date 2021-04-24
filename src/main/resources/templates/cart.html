@@ -33,24 +33,25 @@
         <tr>
             <td>ID</td>
             <td>Title</td>
+            <td></td>
             <td>Price</td>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="products:${products}">
-            <td th:text="${products.id}"></td>
-            <td th:text="${products.title}"></td>
-            <td th:text="${products.price}"></td>
+        <tr th:each="prod:${products}">
+            <td th:text="${prod.numberOfProduct}"></td>
+            <td th:text="${prod.title}"></td>
             <td></td>
-            <td><a class="btn btn- danger" th:href="@{'/cart/remove/' + ${products.id}}">delete</a></td>
+            <td th:text="${prod.price}"></td>
+            <td><a class="btn btn- danger" th:href="@{'/cart/remove/' + ${prod.numberOfProduct}}">delete</a></td>
 
         </tr>
 
         <tr>
+            <td>Total:</td>
             <td></td>
-            <td th:text="'total number of positions:  ' + ${count}"></td>
             <td></td>
-            <td></td>
+            <td th:text="${totalPrice}"></td>
             <td><a class="btn-info" th:href="@{/shop}">Go to shop</a></td>
         </tr>
 

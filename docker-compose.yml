@@ -30,7 +30,7 @@ services:
       - 8080:8189
     environment:
       - POSTGRES_URL=study_shop_postgres:5432
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PASSWORD=root
     restart: unless-stopped
     depends_on:
       - study_shop_postgres

@@ -37,19 +37,18 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="products:${products}">
-            <td th:text="${products.id}"></td>
+        <tr th:each="products:${products}" th:each="count:${count}">
+            <td th:text="${count}"></td>
             <td th:text="${products.title}"></td>
             <td th:text="${products.price}"></td>
             <td></td>
-            <!--            <td><a class="btn btn-danger" th:href="@{'/details/' + ${products.id}}">Details</a></td>-->
             <td><a class="btn btn- danger" th:href="@{'/cart/remove/' + ${products.id}}">delete</a></td>
 
         </tr>
 
         <tr>
             <td></td>
-            <td th:text="'total number of positions:  ' + ${count}"></td>
+            <td th:text="'total number of positions:  ' + ${count.size()+1}"></td>
             <td></td>
             <td></td>
             <td><a class="btn-info" th:href="@{/shop}">Go to shop</a></td>
