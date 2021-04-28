@@ -1,24 +1,42 @@
 package ru.savinov.spring.shop.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.savinov.spring.shop.entities.Product;
+import ru.savinov.spring.shop.repositories.specifications.ProductsSpecs;
 import ru.savinov.spring.shop.services.ProductService;
+
+import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
-public class MainController {
+public class ShopController {
     private ProductService productService;
 
     @Autowired
-    public MainController(ProductService productService) {
+    public ShopController(ProductService productService) {
         this.productService = productService;
     }
 
     @GetMapping("/shop")
-    public String shopPage(Model model) {
+    public String shopPage(Model model,
+                            @RequestParam(value = "word", required = false) String word,
+                            @RequestParam(value = "minPrice", required = false) BigDecimal minPrice,
+                            @RequestParam(value = "maxPrice", required = false) BigDecimal maxPrice
+    ) {
+        Specification<Product> specification = Specification.where(null);
+        if (word != null) {
+            specification = specification.and(ProductsSpecs.titleContains(word));
+        }
+        if (minPrice != null) {
+            specification = specification.and(ProductsSpecs.priceGreaterThanOrEq(minPrice));
+        }
+        if (maxPrice != null) {
+            specification = specification.and(ProductsSpecs.priceLesserThanOrEq(maxPrice));
+        }
         List<Product> allProducts = productService.getAllProducts();
         model.addAttribute("products", allProducts);
         return "shop";
