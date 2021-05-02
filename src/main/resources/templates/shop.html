@@ -19,7 +19,7 @@
             <ul class="nav nav-tabs">
                 <li class="nav-item"><a th:href="@{/index}">Home Page</a></li>
                 <li class="nav-item" sec:authorize="isAnonymous()"><a th:href="@{/login}">Login</a></li>
-                <li class="nav-item"><a th:href="@{/registration}">Registration</a></li>
+                <li class="nav-item" sec:authorize="isAnonymous()"><a th:href="@{/registration}">Registration</a></li>
                 <li class="nav-item"><a class="nav-link active" th:href="@{/shop}">Shop</a></li>
                 <li class="nav-item"><a th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
                 <li class="nav-item"><a th:href="@{/users_control}" sec:authorize="hasRole('ADMIN')">Users Control</a>
@@ -46,8 +46,8 @@
                 <td th:text="${products.id}"></td>
                 <td th:text="${products.title}"></td>
                 <td th:text="${products.price}"></td>
-                <td><a class="btn btn-danger" th:href="@{'/details/' + ${products.id}}">Details</a></td>
-                <td><a class="btn btn-success" th:href="@{'/cart/add/' + ${products.id}}">Add to cart</a></td>
+                <td sec:authorize="hasRole('ADMIN')"><a class="btn-group-lg" th:href="@{'/details/' + ${products.id}}">Details</a></td>
+                <td sec:authorize="hasRole('USER')"><a class="btn btn-success" th:href="@{'/cart/add/' + ${products.id}}">Add to cart</a></td>
                 <td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger"
                                                         th:href="@{'/products/delete/' + ${products.id}}">Delete</a>
                 </td>
@@ -66,6 +66,16 @@
         <div style="..." class="input-group">
             <span class="input-group-append"><i class="list-group-horizontal"></i></span>
             <input th:value="${word != null ? word : ''}" name="word" placeholder="Отфильтровать по названию продукта"
+                   class="form-control"/>
+        </div>
+        <div style="..." class="input-group">
+            <span class="input-group-append"><i class="list-group-horizontal"></i></span>
+            <input th:value="${minPrice != null ? minPrice : ''}" name="minPrice" placeholder="цена от"
+                   class="form-control"/>
+        </div>
+        <div style="..." class="input-group">
+            <span class="input-group-append"><i class="list-group-horizontal"></i></span>
+            <input th:value="${maxPrice != null ? maxPrice : ''}" name="maxPrice" placeholder="цена до"
                    class="form-control"/>
         </div>
         <div style="..." class="form-group">

@@ -14,24 +14,26 @@
 </head>
 
 <body>
-<h1>Details</h1>
-<nav>
-    <ul>
-        <li><a th:href="@{/index}">Home Page</a></li>
-        <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Login</a></li>
-        <li><a th:href="@{/registration}">Registration</a></li>
-        <li><a th:href="@{/shop}">Shop</a></li>
-        <li><a th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
-        <li><a th:href="@{/users_control}" sec:authorize="hasRole('ADMIN')">Users Control</a></li>
-        <li sec:authorize="isAuthenticated()">
-            <form th:action="@{/logout}" method="post">
-                <input type="submit" class="btn-danger" value="Logout"/>
-            </form>
-        </li>
-    </ul>
-</nav>
 <div class="container">
-    <span th:text="${selectProduct.id + ' ' + selectProduct.title + ' ' + selectProduct.price}"></span>
+    <h1>Details</h1>
+    <nav>
+        <ul class="nav nav-tabs">
+            <li class="nav-item"><a th:href="@{/index}">Home Page</a></li>
+            <li class="nav-item" sec:authorize="isAnonymous()"><a th:href="@{/login}">Login</a></li>
+            <li class="nav-item" sec:authorize="isAnonymous()"><a th:href="@{/registration}">Registration</a></li>
+            <li class="nav-item"><a th:href="@{/shop}">Shop</a></li>
+            <li class="nav-item"><a th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
+            <li class="nav-item"><a th:href="@{/users_control}" sec:authorize="hasRole('ADMIN')">Users Control</a></li>
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" class="btn-danger" value="Logout"/>
+                </form>
+            </li>
+        </ul>
+    </nav>
+    <div class="container">
+        <span th:text="${selectProduct.id + ' ' + selectProduct.title + ' ' + selectProduct.price}"></span>
+    </div>
 </div>
 </body>
 </html>
