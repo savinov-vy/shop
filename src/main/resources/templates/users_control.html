@@ -14,14 +14,14 @@
 <div class="container">
     <h1>Shop</h1>
     <nav>
-        <ul>
-            <li><a th:href="@{/index}">Home Page</a></li>
-            <li><a th:href="@{/login}">Login</a></li>
-            <li><a th:href="@{/registration}">Registration</a></li>
-            <li><a th:href="@{/shop}">Shop</a></li>
-            <li><a th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
-            <li class="selected"><a th:href="@{/users_control}" sec:authorize="hasRole('ADMIN')">Users Control</a></li>
-            <li sec:authorize="isAuthenticated()">
+        <ul class="nav nav-tabs">
+            <li class="nav-item"><a th:href="@{/index}">Home Page</a></li>
+            <li class="nav-item" sec:authorize="isAnonymous()"><a th:href="@{/login}">Login</a></li>
+            <li class="nav-item"><a th:href="@{/registration}">Registration</a></li>
+            <li class="nav-item"><a th:href="@{/shop}">Shop</a></li>
+            <li class="nav-item"><a th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
+            <li class="nav-item"><a class="nav-link active" th:href="@{/users_control}" sec:authorize="hasRole('ADMIN')">Users Control</a></li>
+            <li class="nav-item" sec:authorize="isAuthenticated()">
                 <form th:action="@{/logout}" method="post">
                     <input type="submit" class="btn-danger" value="Logout"/>
                 </form>

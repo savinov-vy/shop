@@ -13,10 +13,60 @@
 </head>
 <body>
 <div class="container">
+    <div>
+        <h1>Shop</h1>
+        <nav>
+            <ul class="nav nav-tabs">
+                <li class="nav-item"><a th:href="@{/index}">Home Page</a></li>
+                <li class="nav-item" sec:authorize="isAnonymous()"><a th:href="@{/login}">Login</a></li>
+                <li class="nav-item"><a th:href="@{/registration}">Registration</a></li>
+                <li class="nav-item"><a class="nav-link active" th:href="@{/shop}">Shop</a></li>
+                <li class="nav-item"><a th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
+                <li class="nav-item"><a th:href="@{/users_control}" sec:authorize="hasRole('ADMIN')">Users Control</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <form th:action="@{/logout}" method="post">
+                        <input type="submit" class="btn-danger" value="Logout"/>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+        <span th:if="${products.size()==0}">Products List is empty</span>
+        <table th:if="${products.size()>0}" class="table">
+            <thead class="thead-dark">
+            <tr>
+                <td>ID</td>
+                <td>Title</td>
+                <td>Price</td>
+                <td></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="products:${products}">
+                <td th:text="${products.id}"></td>
+                <td th:text="${products.title}"></td>
+                <td th:text="${products.price}"></td>
+                <td><a class="btn btn-danger" th:href="@{'/details/' + ${products.id}}">Details</a></td>
+                <td><a class="btn btn-success" th:href="@{'/cart/add/' + ${products.id}}">Add to cart</a></td>
+                <td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger"
+                                                        th:href="@{'/products/delete/' + ${products.id}}">Delete</a>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><a class="btn-info" th:href="@{/cart}">Go to shopping cart</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
     <form th:action="@{/shop}" method="get" class="form-horizontal">
         <div style="..." class="input-group">
             <span class="input-group-append"><i class="list-group-horizontal"></i></span>
-            <input th:value="${word != null ? word : ''}" name="word" placeholder="Отфильтровать по названию продукта" class="form-control"/>
+            <input th:value="${word != null ? word : ''}" name="word" placeholder="Отфильтровать по названию продукта"
+                   class="form-control"/>
         </div>
         <div style="..." class="form-group">
             <div class="col-sm-5 form-control-sm">
@@ -24,90 +74,43 @@
             </div>
         </div>
     </form>
-<div>
-    <h1>Shop</h1>
-    <nav>
-        <ul>
-            <li><a th:href="@{/index}">Home Page</a></li>
-            <li><a th:href="@{/login}">Login</a></li>
-            <li><a th:href="@{/registration}">Registration</a></li>
-            <li class="selected"><a th:href="@{/shop}">Shop</a></li>
-            <li><a th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
-            <li><a th:href="@{/users_control}" sec:authorize="hasRole('ADMIN')">Users Control</a></li>
-            <li sec:authorize="isAuthenticated()">
-                <form th:action="@{/logout}" method="post">
-                    <input type="submit" class="btn-danger" value="Logout"/>
-                </form>
-            </li>
-        </ul>
-    </nav>
-    <span th:if="${products.size()==0}">Products List is empty</span>
-    <table th:if="${products.size()>0}" class="table">
-        <thead class="thead-dark">
-        <tr>
-            <td>ID</td>
-            <td>Title</td>
-            <td>Price</td>
-            <td></td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="products:${products}">
-            <td th:text="${products.id}"></td>
-            <td th:text="${products.title}"></td>
-            <td th:text="${products.price}"></td>
-            <td><a class="btn btn-danger" th:href="@{'/details/' + ${products.id}}">Details</a></td>
-            <td><a class="btn btn-success" th:href="@{'/cart/add/' + ${products.id}}">Add to cart</a></td>
-            <td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger"
-                                                    th:href="@{'/products/delete/' + ${products.id}}">Delete</a></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><a class="btn-info" th:href="@{/cart}">Go to shopping cart</a></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-<div sec:authorize="hasRole('ADMIN')">
-    <table th:class="table">
-        <thead class="thead-dark">
-        <tr></tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>
-                <form method="post" th:action="@{/products/add}">
-                    <input type="text" name="addProduct" placeholder="Title">
-                    <input type="number" name="addPrice" placeholder="Price">
-                    <button type="submit">add product</button>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-<div sec:authorize="hasRole('ADMIN')">
-    <table th:class="table">
-        <thead class="thead-dark">
-        <tr></tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>
-                <form method="post" th:action="@{/products/update}">
-                    <input type="text" name="idUpdate" placeholder="id">
-                    <input type="text" name="updateTitle" placeholder="Title">
-                    <input type="text" name="updatePrice" placeholder="Price">
-                    <button type="submit">update</button>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+    <div sec:authorize="hasRole('ADMIN')">
+        <table th:class="table">
+            <thead class="thead-dark">
+            <tr></tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <form method="post" th:action="@{/products/add}">
+                        <input type="text" name="addProduct" placeholder="Title">
+                        <input type="number" name="addPrice" placeholder="Price">
+                        <button type="submit">add product</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div sec:authorize="hasRole('ADMIN')">
+        <table th:class="table">
+            <thead class="thead-dark">
+            <tr></tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <form method="post" th:action="@{/products/update}">
+                        <input type="text" name="idUpdate" placeholder="id">
+                        <input type="text" name="updateTitle" placeholder="Title">
+                        <input type="text" name="updatePrice" placeholder="Price">
+                        <button type="submit">update</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 </body>
 </html>

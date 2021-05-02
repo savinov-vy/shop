@@ -17,8 +17,8 @@
 <h1>Details</h1>
 <nav>
     <ul>
-        <li class="selected"><a th:href="@{/index}">Home Page</a></li>
-        <li><a th:href="@{/login}">Login</a></li>
+        <li><a th:href="@{/index}">Home Page</a></li>
+        <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Login</a></li>
         <li><a th:href="@{/registration}">Registration</a></li>
         <li><a th:href="@{/shop}">Shop</a></li>
         <li><a th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
