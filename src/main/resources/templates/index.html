@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--подключаем NameSpace шаблонизатора Thymeleaf-->
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring/security"
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,9 +9,9 @@
     <meta name="description" content="Уроки HTML и Spring">
     <!--    keywords - ключевые слова - то на что будет дополнительно опираться поисковик-->
     <meta name="keywords" content="html, spring, Lessons">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link th:href="@{/css/index.css}" rel="stylesheet"/>
     <script type="text/javascript" th:href="@{/js/JavaScript.js}"></script>
 
@@ -29,11 +29,16 @@
     <nav>
         <ul>
             <li class="selected"><a th:href="@{/index}">Home Page</a></li>
-            <li><a th:href="@{/login}">Login</a></li>
+            <li sec:authorize="isAnonymous()" class="nav"><a th:href="@{/login}">Login</a></li>
             <li><a th:href="@{/registration}">Registration</a></li>
             <li><a th:href="@{/shop}">Shop</a></li>
             <li><a th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
             <li><a th:href="@{/users_control}" sec:authorize="hasRole('ADMIN')">Users Control</a></li>
+            <li sec:authorize="isAuthenticated()" class="nav">
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" class="btn-danger" value="Logout"/>
+                </form>
+            </li>
         </ul>
     </nav>
     <div id="tableContainer"> <!--529-->

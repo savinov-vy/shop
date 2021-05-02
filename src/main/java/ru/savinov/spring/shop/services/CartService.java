@@ -3,6 +3,7 @@ package ru.savinov.spring.shop.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 import ru.savinov.spring.shop.dto.ProductDTO;
@@ -38,6 +39,7 @@ public class CartService {
         productsDTO = new ArrayList<>();
     }
 
+    @Secured(value = "USER") //<- это дополнительное ограничение на выполнение метода включается
     public void addProductById(Long id) {
         Product addProduct = productService.getProductById(id);
         ProductDTO productDTO = new ProductDTO(addProduct, productsDTO.size() + 1);

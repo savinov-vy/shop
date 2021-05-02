@@ -6,18 +6,21 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import ru.savinov.spring.shop.services.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true) // <- включить запрещающие аннотации на методы
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserDetailsServiceImpl userDetailsService;
 
     @Override
     public void configure(WebSecurity web) {
@@ -49,8 +52,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/users_control/**").hasAnyRole("ADMIN")
                 .anyRequest().permitAll()  // даём разрешение чтобы ходили все везде
                 .and()
-                .formLogin().failureUrl("/shop").loginPage("/login").permitAll() // для логина мы используем форму логина для этого нужно постучаться на /login  для формы логина даем доступ всем .failureUrl("/index") - в случае ошибки ввода login пароля переход на эту страницу
-                .loginProcessingUrl("/authenticateTheUser"); // для проверки корректности мы используем специальный URL
+                .formLogin()                // <- объявляем форму логина
+//                .failureUrl("/shop")
+                .loginPage("/login")            // <- вместо базовой формы логина используем свою и прописываем путь к ней
+                .permitAll() // для логина мы используем форму логина для этого нужно постучаться на /login  для формы логина даем доступ всем .failureUrl("/index") - в случае ошибки ввода login пароля переход на эту страницу
+                .loginProcessingUrl("/authenticateTheUser"); // <- пост запрос из формы логина должен отправится по этому адрессу
 
     }
 }

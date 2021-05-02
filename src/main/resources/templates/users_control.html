@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring/security" lang="en">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -21,6 +21,11 @@
             <li><a th:href="@{/shop}">Shop</a></li>
             <li><a th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
             <li class="selected"><a th:href="@{/users_control}" sec:authorize="hasRole('ADMIN')">Users Control</a></li>
+            <li sec:authorize="isAuthenticated()">
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" class="btn-danger" value="Logout"/>
+                </form>
+            </li>
         </ul>
     </nav>
     <div id="add_table">

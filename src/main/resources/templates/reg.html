@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring/security" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link th:href="@{/css/index.css}" rel="stylesheet"/>
     <script src="js/reg.js"></script>
 </head>
@@ -22,24 +22,32 @@
                 <li><a th:href="@{/shop}">Shop</a></li>
                 <li><a th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
                 <li><a th:href="@{/users_control}" sec:authorize="hasRole('ADMIN')">Users Control</a></li>
+                <li sec:authorize="isAuthenticated()">
+                    <form th:action="@{/logout}" method="post">
+                        <input type="submit" class="btn-danger" value="Logout"/>
+                    </form>
+                </li>
             </ul>
         </nav>
         <div class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
             <label for="name" class="col-sm-2 col-form-label">Login</label>
             <div class="col-sm-10">
-                <input type="text" name="username" class="form-control" id="name" th:value="${user.username}" placeholder="username">
+                <input type="text" name="username" class="form-control" id="name" th:value="${user.username}"
+                       placeholder="username">
             </div>
         </div>
         <div class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
             <label for="name" class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-10">
-                <input type="password" name="password" class="form-control" id="password" th:value="${user.password}" placeholder="password">
-                <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" th:value="${user.password}" placeholder="Confirm password">
+                <input type="password" name="password" class="form-control" id="password" th:value="${user.password}"
+                       placeholder="password">
+                <input type="password" name="confirmPassword" class="form-control" id="confirmPassword"
+                       th:value="${user.password}" placeholder="Confirm password">
             </div>
             <div id="messageShow"></div>
         </div>
         <div th:text="${errorDescribtion}"></div>
-        <button class="btn btn-primary" type="submit" id="btnChekIn" >Check In</button>
+        <button class="btn btn-primary" type="submit" id="btnChekIn">Check In</button>
     </form>
 </div>
 </body>

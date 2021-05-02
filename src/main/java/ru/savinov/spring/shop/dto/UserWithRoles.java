@@ -5,7 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Getter
-@Setter
+@Setter   //<- чтобы idea не ругалась кроме библиотеки ломбок нужно подключить плагин ломбок к IDE
 @ToString
 public class UserWithRoles {
     private Long id;

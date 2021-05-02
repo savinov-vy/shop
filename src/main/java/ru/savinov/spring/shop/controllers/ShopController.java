@@ -39,6 +39,7 @@ public class ShopController {
         }
         List<Product> allProducts = productService.getAllProducts();
         model.addAttribute("products", allProducts);
+        model.addAttribute("word", word);
         return "shop";
     }
 
