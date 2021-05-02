@@ -1,6 +1,9 @@
 package ru.savinov.spring.shop.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.savinov.spring.shop.entities.Product;
@@ -17,8 +20,8 @@ public class ProductService {
     }
 
     @Transactional (readOnly = true)
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public Page<Product> getProductsWithPagingAndFiltering(int pageNumber, int pageSize, Specification<Product> productsSpecs) {
+        return productRepository.findAll(productsSpecs, PageRequest.of(pageNumber, pageSize));
     }
 
     @Transactional(readOnly = true)

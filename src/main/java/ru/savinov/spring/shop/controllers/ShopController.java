@@ -1,6 +1,8 @@
 package ru.savinov.spring.shop.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,8 @@ import java.util.List;
 @Controller
 public class ShopController {
     private ProductService productService;
+    private static final int PAGE_SIZE = 10;
+    private static final int INITIAL_PAGE = 0;
 
     @Autowired
     public ShopController(ProductService productService) {
@@ -23,40 +27,48 @@ public class ShopController {
 
     @GetMapping("/shop")
     public String shopPage(Model model,
-                            @RequestParam(value = "word", required = false) String word,
-                            @RequestParam(value = "minPrice", required = false) BigDecimal minPrice,
-                            @RequestParam(value = "maxPrice", required = false) BigDecimal maxPrice
+                           @RequestParam(value = "word", required = false) String word,
+                           @RequestParam(value = "minPrice", required = false) BigDecimal minPrice,
+                           @RequestParam(value = "maxPrice", required = false) BigDecimal maxPrice
     ) {
-        Specification<Product> specification = Specification.where(null);
+//        final int currentPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+        Specification<Product> spec = Specification.where(null);
+        StringBuilder filters = new StringBuilder();
         if (word != null) {
-            specification = specification.and(ProductsSpecs.titleContains(word));
+            spec = spec.and(ProductsSpecs.titleContains(word));
+            filters.append("&word=" + word);
         }
         if (minPrice != null) {
-            specification = specification.and(ProductsSpecs.priceGreaterThanOrEq(minPrice));
+            spec = spec.and(ProductsSpecs.priceGreaterThanOrEq(minPrice));
+            filters.append("&minPrice=" + minPrice);
         }
         if (maxPrice != null) {
-            specification = specification.and(ProductsSpecs.priceLesserThanOrEq(maxPrice));
+            spec = spec.and(ProductsSpecs.priceLesserThanOrEq(maxPrice));
+            filters.append("&maxPrice=" + maxPrice);
         }
-        List<Product> allProducts = productService.getAllProducts();
-        model.addAttribute("products", allProducts);
+        Page<Product> productsPages = productService.getProductsWithPagingAndFiltering(INITIAL_PAGE, PAGE_SIZE, spec);
+        List<Product> allProducts = productsPages.getContent();
+        model.addAttribute("products", productsPages.getContent());
+        model.addAttribute("page", INITIAL_PAGE);
+        model.addAttribute("totalPage", productsPages.getTotalElements());
+        model.addAttribute("filters", filters.toString());
+        model.addAttribute("minPrice", minPrice);
+        model.addAttribute("maxPrice", maxPrice);
         model.addAttribute("word", word);
+        model.addAttribute("products", allProducts);
         return "shop";
     }
 
     @PostMapping("/products/add")
-    public String shopPageAddProduct(@RequestParam String addProduct, @RequestParam Integer addPrice, Model model) {
+    public String shopPageAddProduct(@RequestParam String addProduct, @RequestParam Integer addPrice) {
         productService.addProduct(addProduct, addPrice);
-        List<Product> allProducts = productService.getAllProducts();
-        model.addAttribute("products", allProducts);
-        return "shop";
+        return "redirect:/shop";
     }
 
     @PostMapping("/products/update")
-    public String shopPageUpdateTitle(@RequestParam Long idUpdate, @RequestParam String updateTitle, @RequestParam Integer updatePrice, Model model) {
+    public String shopPageUpdateTitle(@RequestParam Long idUpdate, @RequestParam String updateTitle, @RequestParam Integer updatePrice) {
         productService.updateTitleById(idUpdate, updateTitle, updatePrice);
-        List<Product> allProducts = productService.getAllProducts();
-        model.addAttribute("products", allProducts);
-        return "shop";
+        return "redirect:/shop";
     }
 
     @GetMapping("/products/delete/{id}")
