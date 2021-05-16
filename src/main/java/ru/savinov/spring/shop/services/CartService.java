@@ -38,7 +38,7 @@ public class CartService {
     @Secured(value = "USER") //<- это дополнительное ограничение на выполнение метода включается
     public void addProductById(Long id) {
         Product addProduct = productService.getProductById(id);
-        ProductDTO productDTO = new ProductDTO(addProduct, productsDTO.size() + 1);
+        ProductDTO productDTO = new ProductDTO(addProduct, getProductsDTO().size() + 1);
         productsDTO.add(productDTO);
     }
 

@@ -35,20 +35,20 @@ class ProductServiceTest {
         testListProducts.add(new Product(3L, "Fish", 77));
     }
 
-    @Test
-    void testGetAllProduct() {
-        List<Product> falseList = new ArrayList<>();
-        falseList.addAll(testListProducts);
-        falseList.set(2, new Product(3L, "Finish", 77));
-        System.out.println(falseList);
-
-        when(productRepository.findAll()).thenReturn(testListProducts);
+//    @Test
+//    void testGetAllProduct() {
+//        List<Product> falseList = new ArrayList<>();
+//        falseList.addAll(testListProducts);
+//        falseList.set(2, new Product(3L, "Finish", 77));
+//        System.out.println(falseList);
+//
+//        when(productRepository.findAll()).thenReturn(testListProducts);
 
 //        List<Product> acceptList = productService.getAllProducts();
 
 //        Assert.assertNotEquals(falseList, acceptList);
 //        Assert.assertEquals(testListProducts, acceptList);
-    }
+//    }
 
     @Test
     void testGetProductById() {

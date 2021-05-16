@@ -1,6 +1,7 @@
 package ru.savinov.spring.shop.entities;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "product")
@@ -58,5 +59,20 @@ public class Product {
     @Override
     public String toString() {
         return "Product: " + this.id +" " +  this.title +" " +this.price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product)) return false;
+        Product product = (Product) o;
+        return Objects.equals(getId(), product.getId()) &&
+                Objects.equals(getTitle(), product.getTitle()) &&
+                Objects.equals(getPrice(), product.getPrice());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getTitle(), getPrice());
     }
 }

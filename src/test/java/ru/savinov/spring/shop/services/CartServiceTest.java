@@ -8,8 +8,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import ru.savinov.spring.shop.dto.ProductDTO;
 import ru.savinov.spring.shop.entities.Product;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
@@ -29,35 +32,46 @@ class CartServiceTest {
     @BeforeEach
     void setUp() {
         subject = new CartService(productService);
-    }
-
-    @Test
-    void testGetSumPrice() {
-        apple = new Product(1L,"apple", 10);
-        orange = new Product(2L,"orange", 20);
+        apple = new Product(1L, "apple", 10);
+        orange = new Product(2L, "orange", 20);
         banana = new Product(3L, "banana", 30);
+        productsDTO = new ArrayList<>(Arrays.asList(
+                new ProductDTO(apple, 1),
+                new ProductDTO(orange, 2),
+                new ProductDTO(banana, 3)
+        ));
         when(productService.getProductById(1L)).thenReturn(apple);
         when(productService.getProductById(2L)).thenReturn(orange);
         when(productService.getProductById(3L)).thenReturn(banana);
         subject.addProductById(1L);
         subject.addProductById(2L);
         subject.addProductById(3L);
+
+    }
+
+    @Test
+    void testGetSumPrice() {
         assertEquals(60, subject.getSumPrice());
     }
 
     @Test
-    void getProductsDTO() {
+    void testGetProductsDTO() {
+        assertIterableEquals(productsDTO, subject.getProductsDTO());
     }
 
     @Test
-    void init() {
+    void testAddProductById() {
+        Product butter = new Product(4L, "Butter", 50);
+        when(productService.getProductById(4L)).thenReturn(butter);
+        subject.addProductById(4L);
+        assertThat(subject.getProductsDTO()
+                .contains(new ProductDTO(butter, 4)));
     }
 
     @Test
-    void addProductById() {
-    }
-
-    @Test
-    void removeProductByCount() {
+    void testRemoveProductByCount() {
+        subject.removeProductByCount(1);
+        assertThat(!subject.getProductsDTO().contains(apple));
+        assertThat(subject.getProductsDTO().size() == 2);
     }
 }

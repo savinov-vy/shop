@@ -2,6 +2,8 @@ package ru.savinov.spring.shop.dto;
 
 import ru.savinov.spring.shop.entities.Product;
 
+import java.util.Objects;
+
 public class ProductDTO {
         private Long id;
 
@@ -51,7 +53,28 @@ public class ProductDTO {
     }
 
     @Override
-        public String toString() {
-            return "Product: " + this.id +" " +  this.title +" " +this.price;
-        }
+    public String toString() {
+        return "ProductDTO{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", price=" + price +
+                ", numberOfProduct=" + numberOfProduct +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ProductDTO)) return false;
+        ProductDTO that = (ProductDTO) o;
+        return Objects.equals(getId(), that.getId()) &&
+                Objects.equals(getTitle(), that.getTitle()) &&
+                Objects.equals(getPrice(), that.getPrice()) &&
+                Objects.equals(getNumberOfProduct(), that.getNumberOfProduct());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getTitle(), getPrice(), getNumberOfProduct());
+    }
 }
