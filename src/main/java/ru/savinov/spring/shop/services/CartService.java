@@ -22,6 +22,7 @@ public class CartService {
     @Autowired
     public CartService(ProductService productService) {
         this.productService = productService;
+        productsDTO = new ArrayList<>();
     }
 
     public int getSumPrice() {
@@ -32,11 +33,6 @@ public class CartService {
 
     public List<ProductDTO> getProductsDTO() {
         return productsDTO;
-    }
-
-    @PostConstruct
-    public void init() {
-        productsDTO = new ArrayList<>();
     }
 
     @Secured(value = "USER") //<- это дополнительное ограничение на выполнение метода включается

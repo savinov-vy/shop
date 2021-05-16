@@ -2,7 +2,7 @@ package ru.savinov.spring.shop.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.savinov.spring.shop.dto.UserWithRoles;
+import ru.savinov.spring.shop.dto.UserWithRolesDTO;
 import ru.savinov.spring.shop.entities.Role;
 import ru.savinov.spring.shop.entities.User;
 import ru.savinov.spring.shop.repositories.RoleRepository;
@@ -15,11 +15,15 @@ import java.util.Set;
 
 @Service
 public class UserService {
-    @Autowired
+
     private RoleRepository roleRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    public UserService(RoleRepository roleRepository, UserRepository userRepository) {
+        this.roleRepository = roleRepository;
+        this.userRepository = userRepository;
+    }
 
     @Transactional
     public void save(User user) {
@@ -49,26 +53,26 @@ public class UserService {
         ));
     }
 
-    public List<UserWithRoles> getAllUsersWithRoles() {
-        List<UserWithRoles> userWithRolesList = new ArrayList<>();
+    public List<UserWithRolesDTO> getAllUsersWithRoles() {
+        List<UserWithRolesDTO> userWithRolesDTOList = new ArrayList<>();
         List<User> userList = new ArrayList<>();
         userList = userRepository.findAll();
         for (User user : userList) {
-            UserWithRoles userWithRoles = new UserWithRoles();
-            userWithRoles.setEnabled(user.getEnabled());
-            userWithRoles.setId(user.getId());
-            userWithRoles.setPassword(user.getPassword());
-            userWithRoles.setUsername(user.getUsername());
+            UserWithRolesDTO userWithRolesDTO = new UserWithRolesDTO();
+            userWithRolesDTO.setEnabled(user.getEnabled());
+            userWithRolesDTO.setId(user.getId());
+            userWithRolesDTO.setPassword(user.getPassword());
+            userWithRolesDTO.setUsername(user.getUsername());
             Set<Role> setRoleUser = user.getRoles();
             String strAllRoleUser = "";
             for (Role role : setRoleUser) {
                 strAllRoleUser += role.getName();
             }
-            userWithRoles.setRoleName(strAllRoleUser);
+            userWithRolesDTO.setRoleName(strAllRoleUser);
 
-            userWithRolesList.add(userWithRoles);
+            userWithRolesDTOList.add(userWithRolesDTO);
         }
-        return userWithRolesList;
+        return userWithRolesDTOList;
     }
 
     public void deleteUserById(Long id) {

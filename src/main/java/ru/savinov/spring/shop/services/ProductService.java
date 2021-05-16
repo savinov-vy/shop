@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.savinov.spring.shop.entities.Product;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @Service
 public class ProductService {
+
     private ProductRepository productRepository;
 
     @Autowired
@@ -30,17 +32,20 @@ public class ProductService {
     }
 
     @Transactional
+    @Secured(value = "ROLE_ADMIN")
     public void deleteProductById(Long id) {
         productRepository.deleteById(id);
     }
 
     @Transactional
+    @Secured(value = "ROLE_ADMIN")
     public void addProduct(String addTitle, Integer addPrice) {
         productRepository.save(new Product(addTitle, addPrice));
 
     }
 
     @Transactional
+    @Secured(value = "ROLE_ADMIN")
     public void updateTitleById(Long idUpdate, String newTitle, Integer newPrice) {
         Product product = getProductById(idUpdate);
         product.setTitle(newTitle);

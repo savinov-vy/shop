@@ -2,7 +2,7 @@ package ru.savinov.spring.shop.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ru.savinov.spring.shop.dto.UserWithRoles;
+import ru.savinov.spring.shop.dto.UserWithRolesDTO;
 import ru.savinov.spring.shop.entities.User;
 import ru.savinov.spring.shop.services.UserService;
 import java.util.List;
@@ -14,8 +14,8 @@ public class UsersRestController {
     private UserService userService;
 
     @GetMapping("/user")
-    public List<UserWithRoles> getTestUser() {
-        List<UserWithRoles> list = userService.getAllUsersWithRoles();
+    public List<UserWithRolesDTO> getTestUser() {
+        List<UserWithRolesDTO> list = userService.getAllUsersWithRoles();
         System.out.println(list);
         return list;
     }

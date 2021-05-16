@@ -34,7 +34,8 @@
     <nav>
         <ul class="nav nav-tabs">
             <li class="nav-item"><a th:href="@{/index}">Home Page</a></li>
-            <li class="nav-item" sec:authorize="isAnonymous()"><a class="nav-link active" th:href="@{/login}">Login</a></li>
+            <li class="nav-item" sec:authorize="isAnonymous()"><a class="nav-link active" th:href="@{/login}">Login</a>
+            </li>
             <li class="nav-item" sec:authorize="isAnonymous()"><a th:href="@{/registration}">Registration</a></li>
             <li class="nav-item"><a th:href="@{/shop}">Shop</a></li>
             <li class="nav-item"><a th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
@@ -57,10 +58,11 @@
                             <span class="input-group-addon"><i class="form-control-range"></i></span>
                             <input type="password" name="password" placeholder="password" class="form-control">
                         </div>
-                        <div class="form-group">
-                            <div class="col-sm-6 controls">
-                                <button type="submit" class="btn badge-success">Login</button>
-                            </div>
+                        <div style="..." class="input-group">
+                            <input type="checkbox" name="remember-me">
+                        </div>
+                        <div class="col-sm-6 controls">
+                            <button type="submit" class="btn badge-success">Login</button>
                         </div>
                     </form>
                 </div>

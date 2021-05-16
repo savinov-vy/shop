@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import ru.savinov.spring.shop.services.UserDetailsServiceImpl;
 
 @Configuration
@@ -53,7 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll()  // даём разрешение чтобы ходили все везде
                 .and()
                 .formLogin()                // <- объявляем форму логина
-//                .failureUrl("/shop")
+                .failureUrl("/shop")            // <- на какую страницу перенаправить при ошибке логина или пароля
                 .loginPage("/login")            // <- вместо базовой формы логина используем свою и прописываем путь к ней
                 .permitAll() // для логина мы используем форму логина для этого нужно постучаться на /login  для формы логина даем доступ всем .failureUrl("/index") - в случае ошибки ввода login пароля переход на эту страницу
                 .loginProcessingUrl("/authenticateTheUser"); // <- пост запрос из формы логина должен отправится по этому адрессу

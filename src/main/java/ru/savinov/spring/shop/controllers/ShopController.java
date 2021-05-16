@@ -27,31 +27,36 @@ public class ShopController {
 
     @GetMapping("/shop")
     public String shopPage(Model model,
+                           @RequestParam(value = "page", required = false) Integer currentPage,
                            @RequestParam(value = "word", required = false) String word,
                            @RequestParam(value = "minPrice", required = false) BigDecimal minPrice,
                            @RequestParam(value = "maxPrice", required = false) BigDecimal maxPrice
     ) {
-//        final int currentPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+
+        if (currentPage == null) {
+            currentPage = INITIAL_PAGE;
+        }
         Specification<Product> spec = Specification.where(null);
-        StringBuilder filters = new StringBuilder();
+//        StringBuilder filters = new StringBuilder();
         if (word != null) {
             spec = spec.and(ProductsSpecs.titleContains(word));
-            filters.append("&word=" + word);
+//            filters.append("&word=" + word);
         }
         if (minPrice != null) {
             spec = spec.and(ProductsSpecs.priceGreaterThanOrEq(minPrice));
-            filters.append("&minPrice=" + minPrice);
+//            filters.append("&minPrice=" + minPrice);
         }
         if (maxPrice != null) {
             spec = spec.and(ProductsSpecs.priceLesserThanOrEq(maxPrice));
-            filters.append("&maxPrice=" + maxPrice);
+//            filters.append("&maxPrice=" + maxPrice);
         }
-        Page<Product> productsPages = productService.getProductsWithPagingAndFiltering(INITIAL_PAGE, PAGE_SIZE, spec);
+        Page<Product> productsPages = productService.getProductsWithPagingAndFiltering(currentPage, PAGE_SIZE, spec);
         List<Product> allProducts = productsPages.getContent();
+
         model.addAttribute("products", productsPages.getContent());
         model.addAttribute("page", INITIAL_PAGE);
         model.addAttribute("totalPage", productsPages.getTotalElements());
-        model.addAttribute("filters", filters.toString());
+//        model.addAttribute("filters", filters.toString()); <- сделать для разбивки по страницам с фильтрами
         model.addAttribute("minPrice", minPrice);
         model.addAttribute("maxPrice", maxPrice);
         model.addAttribute("word", word);

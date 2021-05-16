@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter   //<- чтобы idea не ругалась кроме библиотеки ломбок нужно подключить плагин ломбок к IDE
 @ToString
-public class UserWithRoles {
+public class UserWithRolesDTO {
     private Long id;
 
     private String username;
