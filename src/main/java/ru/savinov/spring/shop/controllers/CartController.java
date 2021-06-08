@@ -11,14 +11,12 @@ import ru.savinov.spring.shop.services.CartService;
 @Controller
 @RequestMapping("/cart")
 public class CartController {
+
     private CartService cartService;
 
     @Autowired
     public CartController(CartService cartService) {
         this.cartService = cartService;
-    }
-
-    public CartController() {
     }
 
     @GetMapping("")
