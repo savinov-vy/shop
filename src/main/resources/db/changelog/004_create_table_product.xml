@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="create table product" author="savinov_vu">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="product"/>
+            </not>
+        </preConditions>
+        <sql>
+            CREATE TABLE IF NOT EXISTS shop.product (
+            id bigint NOT NULL DEFAULT nextval('shop.product_id_seq'::regclass),
+            price integer NOT NULL,
+            title VARCHAR (255) NOT NULL,
+            CONSTRAINT product_pkey PRIMARY KEY (id)
+            );
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

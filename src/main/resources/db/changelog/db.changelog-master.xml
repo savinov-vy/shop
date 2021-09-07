@@ -5,28 +5,9 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
 http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
-    <changeSet id="create house table" author="Savinov Viktor">
-        <createTable tableName="house">
-            <column name="id" type="bigint">
-                <constraints primaryKey="true" primaryKeyName="house_id_pk" />
-            </column>
-            <column name="owner" type="varchar(250)">
-                <constraints unique="true" uniqueConstraintName="house_owner_unq" />
-            </column>
-            <column name="fully_paid" type="boolean" defaultValueBoolean="false"></column>
-        </createTable>
-        <createTable tableName="item">
-            <column name="id" type="bigint">
-                <constraints primaryKey="true" primaryKeyName="item_id_pk" />
-            </column>
-            <column name="name" type="varchar(250)" />
-            <column name="house_id" type="bigint">
-                <constraints nullable="false" notNullConstraintName="item_house_id_nn" />
-            </column>
-        </createTable>
-        <addAutoIncrement tableName="house" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />
-        <addAutoIncrement tableName="item" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />
-        <createSequence sequenceName="hibernate_sequence" incrementBy="1" startValue="1" />
-        <addForeignKeyConstraint baseTableName="item" baseColumnNames="house_id" constraintName="item_house_id_fk" referencedTableName="house" referencedColumnNames="id" />
-    </changeSet>
+    <include file="001_create_sequence_product_id_seq.xml" relativeToChangelogFile="true"/>
+    <include file="002_create_sequence_roles_id_seq.xml" relativeToChangelogFile="true"/>
+    <include file="003_create_sequence_users_id_seq.xml" relativeToChangelogFile="true"/>
+    <include file="004_create_table_product.xml" relativeToChangelogFile="true"/>
+    <include file="005_create_table_users.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
