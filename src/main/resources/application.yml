@@ -8,6 +8,8 @@ spring:
     show-sql: false
     properties.hibernate.dialect: org.hibernate.dialect.PostgreSQL94Dialect
     generate-ddl: true
+    hibernate:
+      ddl-auto: none
   thymeleaf:
     prefix: file:///${user.dir}/src/main/resources/templates/
     cache: false
@@ -15,8 +17,12 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://${POSTGRES_URL:localhost:5432}/postgres?currentSchema=shop
+    url: jdbc:postgresql://${POSTGRES_URL:localhost:5432}/shop?currentSchema=shop
     username: postgres
     password: ${POSTGRES_PASSWORD:root}
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+
 
 
