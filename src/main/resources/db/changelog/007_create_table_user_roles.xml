@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="create table roles" author="savinov_vu">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="roles"/>
+            </not>
+        </preConditions>
+        <sql>
+            CREATE TABLE IF NOT EXISTS shop.user_roles(
+            user_id bigint NOT NULL,
+            role_id bigint NOT NULL,
+            FOREIGN KEY (user_id) REFERENCES shop.users (id),
+            FOREIGN KEY (role_id) REFERENCES shop.roles (id),
+            UNIQUE (user_id, role_id)
+            );
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

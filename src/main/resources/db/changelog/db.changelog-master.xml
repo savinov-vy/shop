@@ -10,4 +10,7 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
     <include file="003_create_sequence_users_id_seq.xml" relativeToChangelogFile="true"/>
     <include file="004_create_table_product.xml" relativeToChangelogFile="true"/>
     <include file="005_create_table_users.xml" relativeToChangelogFile="true"/>
+    <include file="006_create_table_roles.xml" relativeToChangelogFile="true"/>
+    <include file="007_create_table_user_roles.xml" relativeToChangelogFile="true"/>
+    <include file="008_fill_default_values.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

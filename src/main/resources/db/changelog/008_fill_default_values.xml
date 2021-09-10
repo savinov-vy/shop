@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="fill default values" author="savinov_vu">
+        <sql>
+            INSERT INTO shop.roles (id, name)
+            VALUES (DEFAULT, 'ROLE_USER'),
+            (DEFAULT, 'ROLE_ADMIN');
+
+            INSERT INTO shop.users (id, enabled, password, username)
+            VALUES (DEFAULT, DEFAULT,'{noop}admin', 'admin'),
+            (DEFAULT, DEFAULT,'{noop}user', 'user');
+
+            INSERT INTO shop.user_roles (user_id, role_id)
+            VALUES (1, 2),
+            (2, 1);
+
+            INSERT INTO shop.product (id, price, title)
+            VALUES (DEFAULT, 10, 'Product1'),
+            (DEFAULT, 20, 'Product2'),
+            (DEFAULT, 30, 'Product3');
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
