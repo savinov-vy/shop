@@ -5,26 +5,44 @@
 <head>
     <title>Login Page</title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link th:href="@{/css/index.css}" rel="stylesheet"/>
 </head>
 <body>
-<h1>Логин</h1>
-<form th:action="@{/authenticateTheUser}" method="POST">
-    <p >
-        <label for="user-login">Логин</label>
-        <input id="user-login" type="text" name="username" placeholder="Login">
-    </p>
-    <p>
-        <label for="user-password">Пароль</label>
-        <input id="user-password" type="password" name="password" placeholder="Password" class="form-control">
-    </p>
-    <p>
-        <label>
-        <input type="checkbox" name="remember-me">
-        </label>
-    </p>
-    <button type="submit">Come in</button>
-</form>
+<div class="container">
+    <h1>Логин</h1>
+    <nav>
+        <a class="nav-item" th:href="@{/index}">Home Page</a>
+        <a class="nav-item-active" sec:authorize="isAnonymous()" th:href="@{/login}">Login</a></li>
+        <a class="nav-item" sec:authorize="isAnonymous()" th:href="@{/registration}">Registration</a></li>
+        <a class="nav-item" th:href="@{/shop}">Shop</a></li>
+        <a class="nav-item" th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
+        <a class="nav-item" th:href="@{/users_control}" sec:authorize="hasRole('ADMIN')">Users Control</a>
+        <form class="nav-item" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+            <input type="submit" class="nav-item-logout" value="Logout"/>
+        </form>
+    </nav>
+
+    <form th:action="@{/authenticateTheUser}" method="POST" class="login-form col-md-4">
+        <div style="display: flex; justify-content: space-between; align-items: center">
+            <label for="user-login" class="col-md-2">Логин</label>
+            <input id="user-login" type="text" name="username" placeholder="Login" class="form-control col-md-8">
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center">
+            <label for="user-password" class="col-md-2">Пароль</label>
+            <input style="display: block" id="user-password" type="password" name="password" placeholder="Password"
+                   class="form-control col-md-8">
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center">
+            <label>
+                <input type="checkbox" name="remember-me">
+                remember me
+            </label>
+            <button class="btn btn-primary" type="submit">Come in</button>
+        </div>
+    </form>
 </div>
 </body>
 </html>

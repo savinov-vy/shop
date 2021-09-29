@@ -11,23 +11,19 @@
 </head>
 <body>
 <div class="container">
-    <form class="ui-icon-circle-zoomin" id="create-form" th:action="@{/registration/form}" th:object="${user}" th:method="post"
+    <a class="ui-icon-circle-zoomin" id="create-form" th:action="@{/registration/form}" th:object="${user}" th:method="post"
           accept-charset="UTF-8">
         <h1> Registration </h1>
         <nav>
-            <ul class="nav nav-tabs">
-                <li class="nav-item"><a th:href="@{/index}">Home Page</a></li>
-                <li class="nav-item" sec:authorize="isAnonymous()"><a th:href="@{/login}">Login</a></li>
-                <li class="nav-item" sec:authorize="isAnonymous()"><a class="nav-link active" th:href="@{/registration}">Registration</a></li>
-                <li class="nav-item"><a th:href="@{/shop}">Shop</a></li>
-                <li class="nav-item"><a th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
-                <li class="nav-item"><a th:href="@{/users_control}" sec:authorize="hasRole('ADMIN')">Users Control</a></li>
-                <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <form th:action="@{/logout}" method="post">
-                        <input type="submit" class="btn-danger" value="Logout"/>
-                    </form>
-                </li>
-            </ul>
+            <a class="nav-item" th:href="@{/index}">Home Page</a>
+            <a class="nav-item" sec:authorize="isAnonymous()" th:href="@{/login}">Login</a></li>
+            <a class="nav-item-active" sec:authorize="isAnonymous()" th:href="@{/registration}">Registration</a></li>
+            <a class="nav-item" th:href="@{/shop}">Shop</a></li>
+            <a class="nav-item" th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
+            <a class="nav-item" th:href="@{/users_control}" sec:authorize="hasRole('ADMIN')">Users Control</a>
+            <form class="nav-item" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                <input type="submit" class="nav-item-logout" value="Logout"/>
+            </form>
         </nav>
         <div class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
             <label for="name" class="col-sm-2 col-form-label">Login</label>
@@ -47,7 +43,7 @@
             <div id="messageShow"></div>
         </div>
         <div th:text="${errorDescribtion}" class="col-sm-6 controls"></div>
-        <button class="btn btn-primary" type="submit" id="btnChekIn">Check In</button>
+        <button class="btn btn-primary" type="submit" id="btnChekIn" style="margin-left: 30px; margin-top: 20px">Check In</button>
     </form>
 </div>
 </body>

@@ -5,84 +5,70 @@ h1 {
     text-align: center;
 }
 body {
-    background-color: #93d27c;
+    background-color: #7ccbd2;
 }
 article{
     margin: 10px 5px;
 }
-
-#header {
-    background-color: #bcd8dc;
-    margin: 1px 1px 1px 1px;
-    height: 108px;
-}
-
 div#headerSlogan{
+    background: #62becd;
     color: white;
-    text-align: left;
-    font-size: 35px;
+    text-align: center;
+    font-size: 25px;
     font-family: fantasy;
     font-style: italic;
-    float: right;
     width: 900px;
 }
 
-div#tableContainer{
-    display: table;
+#home-page-body{
+    display: flex;
     width: 100%;
 }
 
-div#tableRow{
-    display: table-cell;
-
-}
-
-div#storeReviews{
-    display: table-cell;
-    background: top right;
-    margin: 10px 10px 10px 10px;
-    width: 20%;
-}
-div#main{
-    display: table-cell;
-    background: top left;
-    margin: 10px 10px 10px 10px;
-
-}
-div#sidebar{
-    display: table-cell;
-    background: bottom right;
-    margin: 10px 10px 10px 10px;
-    width: 30%;
-}
-
-#footer {
-    background-color: #675c47;
-    color: #efe5d0;
-    text-align: center;
-    padding: 15px;
-    margin: 10px 10px 10px 10px;
-    font-size: 90%;
-}
 nav {
-    background-color: #efe5d0;
-    margin: 10px 10px 0px 10px;
+display: flex;
+    margin-top: 1px;
 }
-nav ul {
-    background-color: #efe5d0;
-    margin: 10px 10px 0px 10px;
-    list-style-type: none;
-    padding: 5px 0px 5px 0px;
+.nav-item,
+.nav-item-active{
+    padding: 0px;
+    width: 25%;
+    background: blue;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border: none;
 }
-nav ul li {
-    display: inline;
-    padding: 5px 10px 5px 10px;
+.nav-item-active {
+    background:darkblue;
 }
-nav ul li a:link, ul li a:visited {;
-    color: #954b4b;
-    border-bottom: none;
-    font-weight: bold;
+
+/*hover - наведение мышью, focus - с клавиатуры*/
+.nav-item:hover,
+.nav-item:focus,
+.nav-item-logout:hover,
+.nav-item-logout:focus
+{
+    background: #00b7ff;
+    text-decoration: none;
 }
-nav ul li.selected {
-    background-color: #c8b99c;
+.nav-item:focus{
+    outline: none;
 }
+.nav-item-logout {
+    width: 100%;
+    background: blue;
+    border: none;
+    color: white;
+}
+.login-form {
+    display: block;
+}
+
+.login-form {
+    margin: 50px;
+    align-content: flex-end;
+    background: #62becd;
+}
+
+

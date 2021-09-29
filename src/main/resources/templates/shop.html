@@ -16,20 +16,15 @@
     <div>
         <h1>Shop</h1>
         <nav>
-            <ul class="nav nav-tabs">
-                <li class="nav-item"><a th:href="@{/index}">Home Page</a></li>
-                <li class="nav-item" sec:authorize="isAnonymous()"><a th:href="@{/login}">Login</a></li>
-                <li class="nav-item" sec:authorize="isAnonymous()"><a th:href="@{/registration}">Registration</a></li>
-                <li class="nav-item"><a class="nav-link active" th:href="@{/shop}">Shop</a></li>
-                <li class="nav-item"><a th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
-                <li class="nav-item"><a th:href="@{/users_control}" sec:authorize="hasRole('ADMIN')">Users Control</a>
-                </li>
-                <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <form th:action="@{/logout}" method="post">
-                        <input type="submit" class="btn-danger" value="Logout"/>
-                    </form>
-                </li>
-            </ul>
+            <a class="nav-item" th:href="@{/index}">Home Page</a>
+            <a class="nav-item" sec:authorize="isAnonymous()" th:href="@{/login}">Login</a>
+            <a class="nav-item" sec:authorize="isAnonymous()" th:href="@{/registration}">Registration</a>
+            <a class="nav-item-active" th:href="@{/shop}">Shop</a>
+            <a class="nav-item" th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a>
+            <a class="nav-item" th:href="@{/users_control}" sec:authorize="hasRole('ADMIN')">Users Control</a>
+            <form class="nav-item" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                <input type="submit" class="nav-item-logout" value="Logout"/>
+            </form>
         </nav>
         <span th:if="${products.size()==0}">Products List is empty</span>
         <table th:if="${products.size()>0}" class="table">
@@ -46,8 +41,10 @@
                 <td th:text="${products.id}"></td>
                 <td th:text="${products.title}"></td>
                 <td th:text="${products.price}"></td>
-                <td sec:authorize="hasRole('ADMIN')"><a class="btn-group-lg" th:href="@{'/details/' + ${products.id}}">Details</a></td>
-                <td sec:authorize="hasRole('USER')"><a class="btn btn-success" th:href="@{'/cart/add/' + ${products.id}}">Add to cart</a></td>
+                <td sec:authorize="hasRole('ADMIN')"><a class="btn-group-lg" th:href="@{'/details/' + ${products.id}}">Details</a>
+                </td>
+                <td sec:authorize="hasRole('USER')"><a class="btn btn-success"
+                                                       th:href="@{'/cart/add/' + ${products.id}}">Add to cart</a></td>
                 <td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger"
                                                         th:href="@{'/products/delete/' + ${products.id}}">Delete</a>
                 </td>

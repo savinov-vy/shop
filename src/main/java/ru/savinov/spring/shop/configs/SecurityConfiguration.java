@@ -55,7 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .failureUrl("/shop")            // <- на какую страницу перенаправить при ошибке логина или пароля
                 .loginPage("/login")            // <- вместо базовой формы логина используем свою и прописываем путь к ней
                 .permitAll() // для логина мы используем форму логина для этого нужно постучаться на /login  для формы логина даем доступ всем .failureUrl("/index") - в случае ошибки ввода login пароля переход на эту страницу
-                .loginProcessingUrl("/authenticateTheUser"); // <- пост запрос из формы логина должен отправится по этому адрессу
+                .loginProcessingUrl("/authenticateTheUser"); // <- пост запрос из формы логина должен отправится по этому адресу
 
     }
 }

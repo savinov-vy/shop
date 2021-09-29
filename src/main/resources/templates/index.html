@@ -14,62 +14,54 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link th:href="@{/css/index.css}" rel="stylesheet"/>
     <script type="text/javascript" th:href="@{/js/JavaScript.js}"></script>
-
-
 </head>
 <body>
 <div class="container">
-    <div id="header">
-        <img id="headerLogo" width="70"
+    <div style="display: flex" class="header-logo">
+        <img id="headerLogo" class="col-md-1" style="margin: 0px; padding: 0px"
              th:src="@{/images/elephant.png}" alt="elephant">
-        <div id="headerSlogan">
-            <p> Покупайте наших слонов! </p></div>
+        <div id="headerSlogan" class="col-md-11" style="margin: 0px; padding: 0px;">
+            <span>Магазин весёлых слонов: Покупайте наших слонов!</span></div>
     </div>
     <nav>
-        <ul class="nav nav-tabs">
-            <li class="nav-item"><a class="nav-link active" th:href="@{/index}">Home Page</a></li>
-            <li class="nav-item" sec:authorize="isAnonymous()"><a th:href="@{/login}">Login</a></li>
-            <li class="nav-item" sec:authorize="isAnonymous()"><a th:href="@{/registration}">Registration</a></li>
-            <li class="nav-item"><a th:href="@{/shop}">Shop</a></li>
-            <li class="nav-item"><a th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
-            <li class="nav-item"><a th:href="@{/users_control}" sec:authorize="hasRole('ADMIN')">Users Control</a></li>
-            <li class="nav-item" sec:authorize="isAuthenticated()">
-                <form th:action="@{/logout}" method="post">
-                    <input type="submit" class="btn-danger" value="Logout"/>
-                </form>
-            </li>
-        </ul>
+        <a class="nav-item-active" th:href="@{/index}">Home Page</a>
+        <a class="nav-item" sec:authorize="isAnonymous()" th:href="@{/login}">Login</a></li>
+        <a class="nav-item" sec:authorize="isAnonymous()" th:href="@{/registration}">Registration</a></li>
+        <a class="nav-item" th:href="@{/shop}">Shop</a></li>
+        <a class="nav-item" th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
+        <a class="nav-item" th:href="@{/users_control}" sec:authorize="hasRole('ADMIN')">Users Control</a>
+        <form class="nav-item" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+            <input type="submit" class="nav-item-logout" value="Logout"/>
+        </form>
     </nav>
-    <div id="tableContainer">
-        <div id="tableRow">
-            <div id="storeReviews">
-                <h1>Отзывы клиентов</h1>
-                <p>Пока сюда мы добавим пару анекдотов!</p>
-                <article>Звонок в зоо магазин: — Здравствуйте, я недавно купил у вас морскую свинку и
-                    дома сразу пустил ее в аквариум с морской водой.
-                    Она немного поплавала и легла спать. — Так вот, когда она проснется, чем ее кормить?
-                </article>
+    <div id="home-page-body">
+        <section class="col">
+            <h2>Отзывы клиентов</h2>
+            <p>Пока сюда мы добавим пару анекдотов!</p>
+            <article>Звонок в зоо магазин: — Здравствуйте, я недавно купил у вас морскую свинку и
+                дома сразу пустил ее в аквариум с морской водой.
+                Она немного поплавала и легла спать. — Так вот, когда она проснется, чем ее кормить?
+            </article>
 
-                <article>Пошли с мамой за продуктами в магазин. Кассирша начинает пробивать творог, останавливается,
-                    задумывается и начинает искать срок годности. Нашла, посмотрела и с чистой совестью положила творог
-                    нам
-                    в пакет. Мама: — Ну что, жить будем? Кассирша (с невозмутимо серьёзным лицом): — До двадцать
-                    четвёртого!
-                </article>
+            <article>Пошли с мамой за продуктами в магазин. Кассирша начинает пробивать творог, останавливается,
+                задумывается и начинает искать срок годности. Нашла, посмотрела и с чистой совестью положила творог
+                нам
+                в пакет. Мама: — Ну что, жить будем? Кассирша (с невозмутимо серьёзным лицом): — До двадцать
+                четвёртого!
+            </article>
 
-            </div>
-            <div id="main">
-                <h1>О нашем магазине</h1>
-                <p>Здесь в магазин можно добавить какие нибудь товары,
-                    уж не знаю что сюда добавить, но чтото добавать нужно. </p>
-            </div>
-            <div id="sidebar">
-                <h1>Акции выходного дня</h1>
-                <p>Одна подруга говорит другой:<br>
-                    — Мы сегодня с мужем отмечаем день примирения и согласия. <br>
-                    — Это как? — Идем в магазин — я примеряю, он соглашается!</p>
-            </div>
-        </div>
+        </section>
+        <section class="col">
+            <h2>О нашем магазине</h2>
+            <p>Здесь в магазин можно добавить какие нибудь товары,
+                уж не знаю что сюда добавить, но чтото добавать нужно. </p>
+        </section>
+        <section class="col">
+            <h2>Акции выходного дня</h2>
+            <p>Одна подруга говорит другой:<br>
+                — Мы сегодня с мужем отмечаем день примирения и согласия. <br>
+                — Это как? — Идем в магазин — я примеряю, он соглашается!</p>
+        </section>
     </div>
 </div>
 </body>
