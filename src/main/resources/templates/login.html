@@ -5,71 +5,26 @@
 <head>
     <title>Login Page</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width-device-width, initial-scale-1, shrink-to-fit-no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <style type="text/css">
-        #loginbox {
-            width: 300px;
-            background-color: #b3e0d1;
-            margin-left: 70px;
-            margin-top: 70px;
-        }
-
-        .form-group controls {
-            background-color: #bb893d;
-            width: 210px;
-        }
-
-        .btn-info {
-            margin-left: 280px;
-        }
-    </style>
     <link th:href="@{/css/index.css}" rel="stylesheet"/>
 </head>
 <body>
-<div class="container">
-    <h1>Login Page</h1>
-    <nav>
-        <ul class="nav nav-tabs">
-            <li class="nav-item"><a th:href="@{/index}">Home Page</a></li>
-            <li class="nav-item" sec:authorize="isAnonymous()"><a class="nav-link active" th:href="@{/login}">Login</a>
-            </li>
-            <li class="nav-item" sec:authorize="isAnonymous()"><a th:href="@{/registration}">Registration</a></li>
-            <li class="nav-item"><a th:href="@{/shop}">Shop</a></li>
-            <li class="nav-item"><a th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
-            <li class="nav-item"><a th:href="@{/users_control}" sec:authorize="hasRole('ADMIN')">Users Control</a></li>
-        </ul>
-    </nav>
-    <div>
-        <div id="loginbox" class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <div class="panel-title">Sign In</div>
-                </div>
-                <div style="..." class="panel-body">
-                    <form th:action="@{/authenticateTheUser}" method="POST" class="form-">
-                        <div style="..." class="panel-group">
-                            <span class="input-group-addon"><i class="form-control-lg"></i></span>
-                            <input type="text" name="username" placeholder="username" class="form-control">
-                        </div>
-                        <div style="..." class="input-group">
-                            <span class="input-group-addon"><i class="form-control-range"></i></span>
-                            <input type="password" name="password" placeholder="password" class="form-control">
-                        </div>
-                        <div style="..." class="input-group">
-                            <input type="checkbox" name="remember-me">
-                        </div>
-                        <div class="col-sm-6 controls">
-                            <button type="submit" class="btn badge-success">Login</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <a class="btn-info" th:href="@{/shop}">Go to shop</a>
+<h1>Логин</h1>
+<form th:action="@{/authenticateTheUser}" method="POST">
+    <p >
+        <label for="user-login">Логин</label>
+        <input id="user-login" type="text" name="username" placeholder="Login">
+    </p>
+    <p>
+        <label for="user-password">Пароль</label>
+        <input id="user-password" type="password" name="password" placeholder="Password" class="form-control">
+    </p>
+    <p>
+        <label>
+        <input type="checkbox" name="remember-me">
+        </label>
+    </p>
+    <button type="submit">Come in</button>
+</form>
 </div>
 </body>
 </html>
