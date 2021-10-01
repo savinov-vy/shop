@@ -32,12 +32,11 @@ display: flex;
 .nav-item,
 .nav-item-active{
     padding: 0px;
-    width: 25%;
     background: blue;
     color: white;
     text-align: center;
     text-decoration: none;
-    border: none;
+    border: 1px solid cadetblue;
 }
 .nav-item-active {
     background:darkblue;

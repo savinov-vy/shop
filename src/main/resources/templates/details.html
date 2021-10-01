@@ -17,13 +17,13 @@
 <div class="container">
     <h1>Details</h1>
     <nav>
-        <a class="nav-item" th:href="@{/index}">Home Page</a>
-        <a class="nav-item" sec:authorize="isAnonymous()" th:href="@{/login}">Login</a></li>
-        <a class="nav-item" sec:authorize="isAnonymous()" th:href="@{/registration}">Registration</a></li>
-        <a class="nav-item" th:href="@{/shop}">Shop</a></li>
-        <a class="nav-item" th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
-        <a class="nav-item" th:href="@{/users_control}" sec:authorize="hasRole('ADMIN')">Users Control</a>
-        <form class="nav-item" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+        <a class="nav-item col" th:href="@{/index}">Home Page</a>
+        <a class="nav-item col" sec:authorize="isAnonymous()" th:href="@{/login}">Login</a></li>
+        <a class="nav-item col" sec:authorize="isAnonymous()" th:href="@{/registration}">Registration</a></li>
+        <a class="nav-item col" th:href="@{/shop}">Shop</a></li>
+        <a class="nav-item col" th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
+        <a class="nav-item col" th:href="@{/users_control}" sec:authorize="hasRole('ADMIN')">Users Control</a>
+        <form class="nav-item col" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
             <input type="submit" class="nav-item-logout" value="Logout"/>
         </form>
     </nav>
