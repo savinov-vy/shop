@@ -37,18 +37,14 @@ public class ShopController {
             currentPage = INITIAL_PAGE;
         }
         Specification<Product> spec = Specification.where(null);
-//        StringBuilder filters = new StringBuilder();
         if (word != null) {
             spec = spec.and(ProductsSpecs.titleContains(word));
-//            filters.append("&word=" + word);
         }
         if (minPrice != null) {
             spec = spec.and(ProductsSpecs.priceGreaterThanOrEq(minPrice));
-//            filters.append("&minPrice=" + minPrice);
         }
         if (maxPrice != null) {
             spec = spec.and(ProductsSpecs.priceLesserThanOrEq(maxPrice));
-//            filters.append("&maxPrice=" + maxPrice);
         }
         Page<Product> productsPages = productService.getProductsWithPagingAndFiltering(currentPage, PAGE_SIZE, spec);
         List<Product> allProducts = productsPages.getContent();
@@ -56,7 +52,6 @@ public class ShopController {
         model.addAttribute("products", productsPages.getContent());
         model.addAttribute("page", INITIAL_PAGE);
         model.addAttribute("totalPage", productsPages.getTotalElements());
-//        model.addAttribute("filters", filters.toString()); <- сделать для разбивки по страницам с фильтрами
         model.addAttribute("minPrice", minPrice);
         model.addAttribute("maxPrice", maxPrice);
         model.addAttribute("word", word);

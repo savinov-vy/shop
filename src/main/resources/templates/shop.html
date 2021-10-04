@@ -16,15 +16,22 @@
     <div>
         <h1>Shop</h1>
         <nav>
-            <a class="nav-item col" th:href="@{/index}">Home Page</a>
-            <a class="nav-item col" sec:authorize="isAnonymous()" th:href="@{/login}">Login</a>
-            <a class="nav-item col" sec:authorize="isAnonymous()" th:href="@{/registration}">Registration</a>
-            <a class="nav-item-active col" th:href="@{/shop}">Shop</a>
-            <a class="nav-item col" th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a>
-            <a class="nav-item col" th:href="@{/users_control}" sec:authorize="hasRole('ADMIN')">Users Control</a>
-            <form class="nav-item col" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
-                <input type="submit" class="nav-item-logout" value="Logout"/>
-            </form>
+            <ul class="nav-list">
+                <li class="nav-item col"><a class="nav-link" th:href="@{/index}">Home Page</a></li>
+                <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{/login}">Login</a></li>
+                <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{/registration}">Registration</a>
+                </li>
+                <li class="nav-item col"><a class="nav-link-active" th:href="@{/shop}">Shop</a></li>
+                <li class="nav-item col" sec:authorize="hasRole('USER')"><a class="nav-link" th:href="@{/cart}">Cart</a></li>
+                <li class="nav-item col" sec:authorize="hasRole('ADMIN')"><a class="nav-link" th:href="@{/users_control}">Users
+                    Control</a></li>
+                <li class="nav-item col" sec:authorize="isAuthenticated()"><a class="nav-link" style="width: 100%" href="javascript:document.logoutForm.submit()">Logout</a>
+                    <form name="logoutForm" th:action="@{/logout}" method="post"
+                          th:hidden="true">
+                        <input type="submit" value="Logout"/>
+                    </form>
+                </li>
+            </ul>
         </nav>
         <span th:if="${products.size()==0}">Products List is empty</span>
         <table th:if="${products.size()>0}" class="table">

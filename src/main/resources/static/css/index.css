@@ -4,13 +4,21 @@ h1 {
     border-bottom: 1px solid black;
     text-align: center;
 }
+
 body {
     background-color: #7ccbd2;
 }
-article{
+
+article {
     margin: 10px 5px;
 }
-div#headerSlogan{
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+div#headerSlogan {
     background: #62becd;
     color: white;
     text-align: center;
@@ -20,46 +28,52 @@ div#headerSlogan{
     width: 900px;
 }
 
-#home-page-body{
+#home-page-body {
     display: flex;
     width: 100%;
 }
 
-nav {
-display: flex;
-    margin-top: 1px;
-}
-.nav-item,
-.nav-item-active{
+.nav-list {
+    display: flex;
+    width: 100%;
     padding: 0px;
-    background: blue;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    border: 1px solid cadetblue;
-}
-.nav-item-active {
-    background:darkblue;
+    margin: 0px;
 }
 
-/*hover - наведение мышью, focus - с клавиатуры*/
-.nav-item:hover,
-.nav-item:focus,
-.nav-item-logout:hover,
-.nav-item-logout:focus
+.nav-link-active,
+.nav-link {
+    background: blue;
+    color: white;
+    text-decoration: none;
+    border: 1px solid cadetblue;
+    padding: 10px;
+    margin: 0px;
+    display: block;
+    text-align: center;
+}
+.nav-item {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.nav-link-active,
+.nav-link-active:hover{
+    background:darkblue;
+    text-decoration: none;
+}
+
+.nav-item:focus{
+    outline: none;
+}
+
+.nav-link:hover,
+.nav-link:focus
 {
     background: #00b7ff;
     text-decoration: none;
 }
-.nav-item:focus{
-    outline: none;
-}
-.nav-item-logout {
-    width: 100%;
-    background: blue;
-    border: none;
-    color: white;
-}
+
 .login-form {
     display: block;
 }

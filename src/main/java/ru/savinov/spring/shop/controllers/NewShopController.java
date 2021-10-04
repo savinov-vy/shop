@@ -6,19 +6,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.savinov.spring.shop.ObjectForForm.Cat;
+import ru.savinov.spring.shop.entities.Product;
+
+import java.util.Arrays;
 
 @Controller
-public class FormController {
-    @GetMapping("/addcat")
+public class NewShopController {
+    @GetMapping("/newShop")
     public String showAddCatForm(Model model) {
-        Cat cat = new Cat(1L, "Barsik", "White");
-        model.addAttribute("cat", cat);
-        return "catForm";
-    }
-
-    @PostMapping("addcat")
-    public String showAddCatForm(@ModelAttribute(value = "cat") Cat cat) {
-        System.out.println(cat.getId() + " "+cat.getName()+" "+ cat.getColor());
-        return "redirect:/index";
+        model.addAttribute("products", Arrays.asList(new Product(1L,"Product", 20),
+                                                        new Product(1L,"Product2", 20)));
+        return "newShop";
     }
 }

@@ -8,21 +8,32 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link th:href="@{/css/index.css}" rel="stylesheet"/>
-    <script src="js/users_control.js" ></script>
+    <script src="js/users_control.js"></script>
 </head>
 <body>
 <div class="container">
     <h1>Shop</h1>
     <nav>
-        <a class="nav-item col" th:href="@{/index}">Home Page</a>
-        <a class="nav-item col" sec:authorize="isAnonymous()" th:href="@{/login}">Login</a></li>
-        <a class="nav-item col" sec:authorize="isAnonymous()" th:href="@{/registration}">Registration</a></li>
-        <a class="nav-item col" th:href="@{/shop}">Shop</a></li>
-        <a class="nav-item col" th:href="@{/cart}" sec:authorize="hasRole('USER')">Cart</a></li>
-        <a class="nav-item-active col" th:href="@{/users_control}" sec:authorize="hasRole('ADMIN')">Users Control</a>
-        <form class="nav-item col" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
-            <input type="submit" class="nav-item-logout" value="Logout"/>
-        </form>
+        <ul class="nav-list">
+            <li class="nav-item col"><a class="nav-link" th:href="@{/index}">Home Page</a></li>
+            <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{/login}">Login</a>
+            </li>
+            <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{/registration}">Registration</a>
+            </li>
+            <li class="nav-item col"><a class="nav-link" th:href="@{/shop}">Shop</a></li>
+            <li class="nav-item col" sec:authorize="hasRole('USER')"><a class="nav-link" th:href="@{/cart}">Cart</a>
+            </li>
+            <li class="nav-item col" sec:authorize="hasRole('ADMIN')"><a class="nav-link-active"
+                                                                         th:href="@{/users_control}">Users
+                Control</a></li>
+            <li class="nav-item col" sec:authorize="isAuthenticated()"><a class="nav-link" style="width: 100%"
+                                                                          href="javascript:document.logoutForm.submit()">Logout</a>
+                <form name="logoutForm" th:action="@{/logout}" method="post"
+                      th:hidden="true">
+                    <input type="submit" value="Logout"/>
+                </form>
+            </li>
+        </ul>
     </nav>
     <div id="add_table">
         Тут должна быть таблица

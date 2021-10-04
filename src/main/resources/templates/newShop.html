@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<th:block th:each="product : ${products}">
+    <th:block th:insert="~{common/productForm :: productForm(${product})}"/>
+</th:block>
+
+</body>
+</html>
