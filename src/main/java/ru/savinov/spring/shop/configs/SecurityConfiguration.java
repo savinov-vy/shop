@@ -18,6 +18,9 @@ import ru.savinov.spring.shop.services.UserDetailsServiceImpl;
 @EnableGlobalMethodSecurity(prePostEnabled = true) // <- включить запрещающие аннотации на методы
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    private final Integer FIVE_MINUT = 300;
+    private final String KEY_WORD = "something";
+
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
@@ -56,6 +59,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")            // <- вместо базовой формы логина используем свою и прописываем путь к ней
                 .permitAll() // для логина мы используем форму логина для этого нужно постучаться на /login  для формы логина даем доступ всем .failureUrl("/index") - в случае ошибки ввода login пароля переход на эту страницу
                 .loginProcessingUrl("/authenticateTheUser") // <- пост запрос из формы логина должен отправится по этому адресу
-                .and().csrf().disable();
+                .and()
+                .rememberMe()
+                .key(KEY_WORD)
+                .tokenValiditySeconds(FIVE_MINUT);
     }
 }
