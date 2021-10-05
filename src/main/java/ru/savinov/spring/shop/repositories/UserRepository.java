@@ -12,6 +12,7 @@ import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+
     User findByUsername(String username);
 
     @Modifying
@@ -21,6 +22,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying
     @Query("update User p set p.enabled = ?2 where p.id = ?1")
     public void enableUserById(Long id, Boolean enabled);
-
 }
 

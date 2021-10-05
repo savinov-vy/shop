@@ -1,6 +1,6 @@
 package ru.savinov.spring.shop.configs;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -8,38 +8,33 @@ import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import ru.savinov.spring.shop.common.RoleType;
 import ru.savinov.spring.shop.services.UserDetailsServiceImpl;
 
 import javax.sql.DataSource;
 
+import static ru.savinov.spring.shop.common.PageName.LOGIN_PAGE_URL;
+import static ru.savinov.spring.shop.common.PageName.LOGIN_PROCESSING_URL;
+import static ru.savinov.spring.shop.common.PageName.SHOP_PAGE_URL;
+
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true) // <- включить запрещающие аннотации на методы
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+@AllArgsConstructor
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final Integer PERIOD_VALIDITY_TOKEN = 300;
     private final String KEY_WORD = "something";
 
-    @Autowired
+
     private UserDetailsServiceImpl userDetailsService;
 
-    @Autowired
     private DataSource dataSource;
 
-    @Override
-    public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/delete_user");// отключить фильтры
-        web.ignoring().antMatchers("/add_user");
-        web.ignoring().antMatchers("/desable_user");
-        web.ignoring().antMatchers("/enable_user");
-    }
-
-    @Autowired
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
@@ -57,15 +52,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/details/**").hasAnyRole("ADMIN") // но по ссылке детали и дальше по маске ** может ходить только пользователь имеющий роль АДМИН причем здесь нужно указать без префикса ROL_ как в базе данных.
-                .antMatchers("/users_control/**").hasAnyRole("ADMIN")
-                .anyRequest().permitAll()  // даём разрешение чтобы ходили все везде
+                .antMatchers("/details/**").hasAnyRole(RoleType.ADMIN.getLabel())
+                .antMatchers("/users_control/**").hasAnyRole(RoleType.ADMIN.getLabel())
+                .anyRequest().permitAll()
                 .and()
-                .formLogin()                // <- объявляем форму логина
-                .failureUrl("/shop")            // <- на какую страницу перенаправить при ошибке логина или пароля
-                .loginPage("/login")            // <- вместо базовой формы логина используем свою и прописываем путь к ней
-                .permitAll() // для логина мы используем форму логина для этого нужно постучаться на /login  для формы логина даем доступ всем .failureUrl("/index") - в случае ошибки ввода login пароля переход на эту страницу
-                .loginProcessingUrl("/authenticateTheUser") // <- пост запрос из формы логина должен отправится по этому адресу
+                .formLogin()
+                .failureUrl(SHOP_PAGE_URL)
+                .loginPage(LOGIN_PAGE_URL)
+                .permitAll()
+                .loginProcessingUrl(LOGIN_PROCESSING_URL)
                 .and()
                 .rememberMe().tokenRepository(persistentTokenRepository())
                 .key(KEY_WORD)

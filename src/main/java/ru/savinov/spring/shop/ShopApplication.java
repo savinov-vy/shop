@@ -9,7 +9,6 @@ public class ShopApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ShopApplication.class, args);
-
 	}
 }
 

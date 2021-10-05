@@ -36,9 +36,9 @@ class CartServiceTest {
         orange = new Product(2L, "orange", 20);
         banana = new Product(3L, "banana", 30);
         productsDTO = new ArrayList<>(Arrays.asList(
-                new ProductDTO(apple, 1),
-                new ProductDTO(orange, 2),
-                new ProductDTO(banana, 3)
+                ProductDTO.of(apple, 1),
+                ProductDTO.of(orange, 2),
+                ProductDTO.of(banana, 3)
         ));
         when(productService.getProductById(1L)).thenReturn(apple);
         when(productService.getProductById(2L)).thenReturn(orange);
@@ -65,7 +65,7 @@ class CartServiceTest {
         when(productService.getProductById(4L)).thenReturn(butter);
         subject.addProductById(4L);
         assertThat(subject.getProductsDTO()
-                .contains(new ProductDTO(butter, 4)));
+                .contains(ProductDTO.of(butter, 4)));
     }
 
     @Test
