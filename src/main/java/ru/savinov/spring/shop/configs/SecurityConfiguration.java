@@ -11,18 +11,25 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import ru.savinov.spring.shop.services.UserDetailsServiceImpl;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true) // <- включить запрещающие аннотации на методы
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final Integer FIVE_MINUT = 300;
+    private final Integer PERIOD_VALIDITY_TOKEN = 300;
     private final String KEY_WORD = "something";
 
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
+
+    @Autowired
+    private DataSource dataSource;
 
     @Override
     public void configure(WebSecurity web) {
@@ -60,8 +67,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll() // для логина мы используем форму логина для этого нужно постучаться на /login  для формы логина даем доступ всем .failureUrl("/index") - в случае ошибки ввода login пароля переход на эту страницу
                 .loginProcessingUrl("/authenticateTheUser") // <- пост запрос из формы логина должен отправится по этому адресу
                 .and()
-                .rememberMe()
+                .rememberMe().tokenRepository(persistentTokenRepository())
                 .key(KEY_WORD)
-                .tokenValiditySeconds(FIVE_MINUT);
+                .tokenValiditySeconds(PERIOD_VALIDITY_TOKEN);
+    }
+
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
+        tokenRepository.setDataSource(dataSource);
+        return tokenRepository;
     }
 }
