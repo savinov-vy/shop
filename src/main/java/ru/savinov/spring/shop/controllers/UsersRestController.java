@@ -1,7 +1,6 @@
 package ru.savinov.spring.shop.controllers;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.savinov.spring.shop.dto.UserWithRolesDTO;
 import ru.savinov.spring.shop.entities.User;

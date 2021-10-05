@@ -51,7 +51,6 @@ public class ProductService {
         product.setTitle(newTitle);
         product.setPrice(newPrice);
 
-      //  productRepository.updateById(idUpdate, newTitle, newPrice);
     }
 }
 

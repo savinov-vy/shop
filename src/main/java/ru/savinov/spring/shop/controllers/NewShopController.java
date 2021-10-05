@@ -3,9 +3,6 @@ package ru.savinov.spring.shop.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import ru.savinov.spring.shop.ObjectForForm.Cat;
 import ru.savinov.spring.shop.entities.Product;
 
 import java.util.Arrays;
