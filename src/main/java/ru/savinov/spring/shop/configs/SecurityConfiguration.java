@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
-import ru.savinov.spring.shop.common_dictionary.Role;
+import ru.savinov.spring.shop.common_dictionary.RoleType;
 import ru.savinov.spring.shop.services.UserDetailsServiceImpl;
 
 import javax.sql.DataSource;
@@ -52,8 +52,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/details/**").hasAnyRole(Role.ADMIN.getLabel())
-                .antMatchers("/users_control/**").hasAnyRole(Role.ADMIN.getLabel())
+                .antMatchers("/details/**").hasAnyRole(RoleType.ADMIN.getLabel())
+                .antMatchers("/users_control/**").hasAnyRole(RoleType.ADMIN.getLabel())
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()

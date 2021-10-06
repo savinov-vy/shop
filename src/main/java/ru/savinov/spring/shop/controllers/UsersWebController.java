@@ -3,12 +3,14 @@ package ru.savinov.spring.shop.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import static ru.savinov.spring.shop.common_dictionary.PageName.USERS_CONTROL_PAGE;
+
 @Controller
 public class UsersWebController {
 
     @GetMapping("/users_control")
     public String users() {
 
-        return "users_control";
+        return USERS_CONTROL_PAGE;
     }
 }

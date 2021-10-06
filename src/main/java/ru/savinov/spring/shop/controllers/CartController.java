@@ -12,14 +12,12 @@ import static ru.savinov.spring.shop.common_dictionary.PageName.CART_PAGE;
 import static ru.savinov.spring.shop.common_dictionary.PageName.CART_PAGE_URL;
 import static ru.savinov.spring.shop.common_dictionary.PageName.REDIRECT_CART_URL;
 import static ru.savinov.spring.shop.common_dictionary.PageName.REDIRECT_SHOP_URL;
+import static ru.savinov.spring.shop.controllers.constant.CartControllerConstant.*;
 
 @Controller
 @RequestMapping(CART_PAGE_URL)
 @AllArgsConstructor
 public class CartController {
-
-    private static final String PRODUCTS = "products";
-    private static final String TOTAL_PRICE = "totalPrice";
 
     private CartService cartService;
 

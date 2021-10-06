@@ -7,23 +7,23 @@ import java.util.Arrays;
 
 @Getter
 @AllArgsConstructor
-public enum Role {
+public enum RoleType {
     USER("ROLE_USER", "USER"),
     ADMIN("ROLE_ADMIN", "ADMIN");
 
     private String value;
     private String label;
 
-    public static Role findByValue(final String value) {
+    public static RoleType findByValue(final String value) {
         return Arrays.stream(values())
-                .filter(role -> role.getValue().equals(value))
+                .filter(roleType -> roleType.getValue().equals(value))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(String.format("Wrong detail value: %s", value)));
     }
 
-    public static Role findByLabel(String label) {
+    public static RoleType findByLabel(String label) {
         return Arrays.stream(values())
-                .filter(role -> role.getLabel().equalsIgnoreCase(label))
+                .filter(roleType -> roleType.getLabel().equalsIgnoreCase(label))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(String.format("Wrong NoteFilterType label: %s", label)));
     }

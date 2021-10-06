@@ -1,6 +1,6 @@
 package ru.savinov.spring.shop.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,56 +9,51 @@ import ru.savinov.spring.shop.dto.ShopControllerDto;
 import ru.savinov.spring.shop.entities.Product;
 import ru.savinov.spring.shop.services.ProductService;
 
-import java.util.List;
 
+import static ru.savinov.spring.shop.common_dictionary.PageName.REDIRECT_SHOP_URL;
 import static ru.savinov.spring.shop.common_dictionary.PageName.SHOP_PAGE;
 import static ru.savinov.spring.shop.common_dictionary.Constant.INITIAL_PAGE;
+import static ru.savinov.spring.shop.controllers.constant.ShopControllerConstant.*;
 
 @Controller
+@AllArgsConstructor
 public class ShopController {
+
     private ProductService productService;
-
-
-    @Autowired
-    public ShopController(ProductService productService) {
-        this.productService = productService;
-    }
 
     @GetMapping("/shop")
     public String shopPage(@ModelAttribute ShopControllerDto productFilter, Model model) {
         Page<Product> productsPages = productService.getProductByFilter(productFilter);
-        List<Product> allProducts = productsPages.getContent();
-        model.addAttribute("products", productsPages.getContent());
-        model.addAttribute("page", INITIAL_PAGE);
-        model.addAttribute("totalPage", productsPages.getTotalElements());
-        model.addAttribute("minPrice", productFilter.getMinPrice());
-        model.addAttribute("maxPrice", productFilter.getMaxPrice());
-        model.addAttribute("word", productFilter.getWord());
-        model.addAttribute("products", allProducts);
+        model.addAttribute(PRODUCTS, productsPages.getContent());
+        model.addAttribute(PAGE, INITIAL_PAGE);
+        model.addAttribute(TOTAL_PAGE, productsPages.getTotalElements());
+        model.addAttribute(MIN_PRICE, productFilter.getMinPrice());
+        model.addAttribute(MAX_PRICE, productFilter.getMaxPrice());
+        model.addAttribute(WORD, productFilter.getWord());
         return SHOP_PAGE;
     }
 
     @PostMapping("/products/add")
     public String shopPageAddProduct(@RequestParam String addProduct, @RequestParam Integer addPrice) {
         productService.addProduct(addProduct, addPrice);
-        return "redirect:/shop";
+        return REDIRECT_SHOP_URL;
     }
 
     @PostMapping("/products/update")
     public String shopPageUpdateTitle(@RequestParam Long idUpdate, @RequestParam String updateTitle, @RequestParam Integer updatePrice) {
         productService.updateTitleById(idUpdate, updateTitle, updatePrice);
-        return "redirect:/shop";
+        return REDIRECT_SHOP_URL;
     }
 
     @GetMapping("/products/delete/{id}")
     public String deleteProductById(@PathVariable("id") Long id) {
         productService.deleteProductById(id);
-        return "redirect:/shop";
+        return REDIRECT_SHOP_URL;
     }
 
     @GetMapping("/data")
     @ResponseBody
-    public String dataExample(@RequestParam(value = "serial", required = false) Long serial, @RequestParam("number") Long number) {  //equired = false - параметр не является обязательным
+    public String dataExample(@RequestParam(value = "serial", required = false) Long serial, @RequestParam("number") Long number) {
         return "S/N: " + serial + "/" + number;
     }
 }

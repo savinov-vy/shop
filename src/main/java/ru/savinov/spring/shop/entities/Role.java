@@ -1,11 +1,16 @@
 package ru.savinov.spring.shop.entities;
 
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Set;
 
+@Data
 @Entity
 @Table(name = "roles")
+@NoArgsConstructor
 public class Role {
 
     @Id
@@ -19,31 +24,5 @@ public class Role {
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 
-    public Role() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
 
 }
