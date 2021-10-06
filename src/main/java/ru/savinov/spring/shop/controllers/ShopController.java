@@ -2,23 +2,22 @@ package ru.savinov.spring.shop.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.savinov.spring.shop.dto.ShopControllerDto;
 import ru.savinov.spring.shop.entities.Product;
-import ru.savinov.spring.shop.repositories.specifications.ProductsSpecs;
 import ru.savinov.spring.shop.services.ProductService;
 
-import java.math.BigDecimal;
 import java.util.List;
+
+import static ru.savinov.spring.shop.common_dictionary.PageName.SHOP_PAGE;
+import static ru.savinov.spring.shop.common_dictionary.Constant.INITIAL_PAGE;
 
 @Controller
 public class ShopController {
     private ProductService productService;
-    private static final int PAGE_SIZE = 10;
-    private static final int INITIAL_PAGE = 0;
+
 
     @Autowired
     public ShopController(ProductService productService) {
@@ -26,37 +25,17 @@ public class ShopController {
     }
 
     @GetMapping("/shop")
-    public String shopPage(Model model,
-                           @RequestParam(value = "page", required = false) Integer currentPage,
-                           @RequestParam(value = "word", required = false) String word,
-                           @RequestParam(value = "minPrice", required = false) BigDecimal minPrice,
-                           @RequestParam(value = "maxPrice", required = false) BigDecimal maxPrice
-    ) {
-
-        if (currentPage == null) {
-            currentPage = INITIAL_PAGE;
-        }
-        Specification<Product> spec = Specification.where(null);
-        if (word != null) {
-            spec = spec.and(ProductsSpecs.titleContains(word));
-        }
-        if (minPrice != null) {
-            spec = spec.and(ProductsSpecs.priceGreaterThanOrEq(minPrice));
-        }
-        if (maxPrice != null) {
-            spec = spec.and(ProductsSpecs.priceLesserThanOrEq(maxPrice));
-        }
-        Page<Product> productsPages = productService.getProductsWithPagingAndFiltering(currentPage, PAGE_SIZE, spec);
+    public String shopPage(@ModelAttribute ShopControllerDto productFilter, Model model) {
+        Page<Product> productsPages = productService.getProductByFilter(productFilter);
         List<Product> allProducts = productsPages.getContent();
-
         model.addAttribute("products", productsPages.getContent());
         model.addAttribute("page", INITIAL_PAGE);
         model.addAttribute("totalPage", productsPages.getTotalElements());
-        model.addAttribute("minPrice", minPrice);
-        model.addAttribute("maxPrice", maxPrice);
-        model.addAttribute("word", word);
+        model.addAttribute("minPrice", productFilter.getMinPrice());
+        model.addAttribute("maxPrice", productFilter.getMaxPrice());
+        model.addAttribute("word", productFilter.getWord());
         model.addAttribute("products", allProducts);
-        return "shop";
+        return SHOP_PAGE;
     }
 
     @PostMapping("/products/add")

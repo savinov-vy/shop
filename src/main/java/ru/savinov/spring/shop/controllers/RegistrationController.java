@@ -1,6 +1,6 @@
 package ru.savinov.spring.shop.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,35 +11,36 @@ import ru.savinov.spring.shop.services.UserValidator;
 
 import javax.validation.Valid;
 
+import static ru.savinov.spring.shop.common_dictionary.PageName.REDIRECT_ROOT_APP;
+import static ru.savinov.spring.shop.common_dictionary.PageName.REGISTRATION_PAGE;
+
 @Controller
+@AllArgsConstructor
 public class RegistrationController {
 
     private UserService userService;
 
-    @Autowired
     private UserValidator userValidator;
 
-    @Autowired
-    public RegistrationController(UserService userService) {
-        this.userService = userService;
-    }
+    private static final String ERROR_DESCRIPTION = "errorDescribtion";
+    private static final String USER_FORM = "user";
 
     @GetMapping("/registration")
     public String registration(Model model) {
-        model.addAttribute("user", new User());
-        return "reg";
+        model.addAttribute(USER_FORM, new User());
+        return REGISTRATION_PAGE;
     }
 
     @PostMapping("/registration/form")
-    public String addUser(@ModelAttribute("user") @Valid User userForm, BindingResult bindingResult, Model model) {
+    public String addUser(@Valid User userForm, BindingResult bindingResult, Model model) {
         userValidator.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("errorDescribtion", userValidator.getErrorDescribtion());
-            return "reg";
+            model.addAttribute(ERROR_DESCRIPTION, userValidator.getErrorDescribtion());
+            return REGISTRATION_PAGE;
         }
 
         userService.save(userForm);
-        return "redirect:/";
+        return REDIRECT_ROOT_APP;
     }
 }
