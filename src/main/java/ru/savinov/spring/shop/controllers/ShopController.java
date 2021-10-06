@@ -9,7 +9,6 @@ import ru.savinov.spring.shop.dto.ShopControllerDto;
 import ru.savinov.spring.shop.entities.Product;
 import ru.savinov.spring.shop.services.ProductService;
 
-
 import static ru.savinov.spring.shop.common.PageName.REDIRECT_SHOP_URL;
 import static ru.savinov.spring.shop.common.PageName.SHOP_PAGE;
 import static ru.savinov.spring.shop.common.Constant.INITIAL_PAGE;
