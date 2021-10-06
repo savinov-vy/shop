@@ -3,7 +3,7 @@ package ru.savinov.spring.shop.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import static ru.savinov.spring.shop.common_dictionary.PageName.USERS_CONTROL_PAGE;
+import static ru.savinov.spring.shop.common.PageName.USERS_CONTROL_PAGE;
 
 @Controller
 public class UsersWebController {

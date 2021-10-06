@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.savinov.spring.shop.services.CartService;
 
-import static ru.savinov.spring.shop.common_dictionary.PageName.CART_PAGE;
-import static ru.savinov.spring.shop.common_dictionary.PageName.CART_PAGE_URL;
-import static ru.savinov.spring.shop.common_dictionary.PageName.REDIRECT_CART_URL;
-import static ru.savinov.spring.shop.common_dictionary.PageName.REDIRECT_SHOP_URL;
+import static ru.savinov.spring.shop.common.PageName.CART_PAGE;
+import static ru.savinov.spring.shop.common.PageName.CART_PAGE_URL;
+import static ru.savinov.spring.shop.common.PageName.REDIRECT_CART_URL;
+import static ru.savinov.spring.shop.common.PageName.REDIRECT_SHOP_URL;
 import static ru.savinov.spring.shop.controllers.constant.CartControllerConstant.*;
 
 @Controller

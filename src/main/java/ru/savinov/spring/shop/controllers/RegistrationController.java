@@ -11,8 +11,8 @@ import ru.savinov.spring.shop.services.UserValidator;
 
 import javax.validation.Valid;
 
-import static ru.savinov.spring.shop.common_dictionary.PageName.REDIRECT_ROOT_APP;
-import static ru.savinov.spring.shop.common_dictionary.PageName.REGISTRATION_PAGE;
+import static ru.savinov.spring.shop.common.PageName.REDIRECT_ROOT_APP;
+import static ru.savinov.spring.shop.common.PageName.REGISTRATION_PAGE;
 
 @Controller
 @AllArgsConstructor

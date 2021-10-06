@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.savinov.spring.shop.entities.Product;
 import ru.savinov.spring.shop.services.ProductService;
 
-import static ru.savinov.spring.shop.common_dictionary.PageName.DETAILS_PAGE;
+import static ru.savinov.spring.shop.common.PageName.DETAILS_PAGE;
 
 @Controller
 @AllArgsConstructor

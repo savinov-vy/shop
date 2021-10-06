@@ -14,8 +14,8 @@ import ru.savinov.spring.shop.repositories.specifications.ProductsSpecs;
 
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
-import static ru.savinov.spring.shop.common_dictionary.Constant.INITIAL_PAGE;
-import static ru.savinov.spring.shop.common_dictionary.Constant.PAGE_SIZE;
+import static ru.savinov.spring.shop.common.Constant.INITIAL_PAGE;
+import static ru.savinov.spring.shop.common.Constant.PAGE_SIZE;
 
 
 @Service

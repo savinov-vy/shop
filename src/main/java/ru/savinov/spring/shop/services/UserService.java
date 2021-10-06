@@ -1,6 +1,6 @@
 package ru.savinov.spring.shop.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.savinov.spring.shop.dto.UserWithRolesDTO;
 import ru.savinov.spring.shop.entities.Role;
@@ -14,16 +14,12 @@ import java.util.List;
 import java.util.Set;
 
 @Service
+@AllArgsConstructor
 public class UserService {
 
     private RoleRepository roleRepository;
     private UserRepository userRepository;
 
-    @Autowired
-    public UserService(RoleRepository roleRepository, UserRepository userRepository) {
-        this.roleRepository = roleRepository;
-        this.userRepository = userRepository;
-    }
 
     @Transactional
     public void save(User user) {

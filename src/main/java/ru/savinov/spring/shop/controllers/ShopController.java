@@ -10,9 +10,9 @@ import ru.savinov.spring.shop.entities.Product;
 import ru.savinov.spring.shop.services.ProductService;
 
 
-import static ru.savinov.spring.shop.common_dictionary.PageName.REDIRECT_SHOP_URL;
-import static ru.savinov.spring.shop.common_dictionary.PageName.SHOP_PAGE;
-import static ru.savinov.spring.shop.common_dictionary.Constant.INITIAL_PAGE;
+import static ru.savinov.spring.shop.common.PageName.REDIRECT_SHOP_URL;
+import static ru.savinov.spring.shop.common.PageName.SHOP_PAGE;
+import static ru.savinov.spring.shop.common.Constant.INITIAL_PAGE;
 import static ru.savinov.spring.shop.controllers.constant.ShopControllerConstant.*;
 
 @Controller

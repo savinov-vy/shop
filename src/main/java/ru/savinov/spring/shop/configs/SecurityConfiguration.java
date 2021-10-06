@@ -1,6 +1,6 @@
 package ru.savinov.spring.shop.configs;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,29 +12,29 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
-import ru.savinov.spring.shop.common_dictionary.RoleType;
+import ru.savinov.spring.shop.common.RoleType;
 import ru.savinov.spring.shop.services.UserDetailsServiceImpl;
 
 import javax.sql.DataSource;
 
-import static ru.savinov.spring.shop.common_dictionary.PageName.LOGIN_PAGE_URL;
-import static ru.savinov.spring.shop.common_dictionary.PageName.LOGIN_PROCESSING_URL;
+import static ru.savinov.spring.shop.common.PageName.LOGIN_PAGE_URL;
+import static ru.savinov.spring.shop.common.PageName.LOGIN_PROCESSING_URL;
+import static ru.savinov.spring.shop.common.PageName.SHOP_PAGE_URL;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@AllArgsConstructor
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final Integer PERIOD_VALIDITY_TOKEN = 300;
     private final String KEY_WORD = "something";
 
-    @Autowired
+
     private UserDetailsServiceImpl userDetailsService;
 
-    @Autowired
     private DataSource dataSource;
 
-    @Autowired
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
@@ -57,7 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
-                .failureUrl(LOGIN_PAGE_URL)
+                .failureUrl(SHOP_PAGE_URL)
                 .loginPage(LOGIN_PAGE_URL)
                 .permitAll()
                 .loginProcessingUrl(LOGIN_PROCESSING_URL)

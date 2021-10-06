@@ -1,4 +1,4 @@
-package ru.savinov.spring.shop.common_dictionary;
+package ru.savinov.spring.shop.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
