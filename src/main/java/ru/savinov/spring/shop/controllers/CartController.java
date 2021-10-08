@@ -36,7 +36,7 @@ public class CartController {
 
     @GetMapping("/remove/{IdBuy}")
     public String removeProductToCart(Model model, @PathVariable("IdBuy") Integer idBuy) {
-        cartService.removeProductByCount(idBuy -1);
+        cartService.removeProductByNumberOnCart(idBuy -1);
         return REDIRECT_CART_URL;
     }
 }

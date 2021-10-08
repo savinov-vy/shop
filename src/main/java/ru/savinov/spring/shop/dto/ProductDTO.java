@@ -13,10 +13,9 @@ public class ProductDTO {
 
         private Integer price;
 
-        private Integer numberOfProduct;
+        private Integer numberOnCart;
 
-
-        public static ProductDTO of(Product product, Integer numberOfProduct) {
-                return new ProductDTO(product.getId(), product.getTitle(), product.getPrice(), numberOfProduct);
+        public static ProductDTO of(Product product, Integer numberOnCart) {
+                return new ProductDTO(product.getId(), product.getTitle(), product.getPrice(), numberOnCart);
         }
 }
