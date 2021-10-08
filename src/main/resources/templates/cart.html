@@ -38,7 +38,7 @@
         <table class="table">
             <thead class="thead-dark">
             <tr>
-                <td>ID</td>
+                <td>#</td>
                 <td>Title</td>
                 <td></td>
                 <td>Price</td>
@@ -46,11 +46,11 @@
             </thead>
             <tbody>
             <tr th:each="prod:${products}">
-                <td th:text="${prod.numberOfProduct}"></td>
+                <td th:text="${prod.numberOnCart}"></td>
                 <td th:text="${prod.title}"></td>
                 <td></td>
                 <td th:text="${prod.price}"></td>
-                <td><a class="btn btn- danger" th:href="@{'/cart/remove/' + ${prod.numberOfProduct}}">delete</a></td>
+                <td><a class="btn btn-danger" th:href="@{'/cart/remove/' + ${prod.numberOnCart}}">delete</a></td>
 
             </tr>
 
