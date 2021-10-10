@@ -13,4 +13,11 @@ public class ProductDtoFactory {
               new ProductDTO(2L, "Bread", 20, 2),
               new ProductDTO(3L, "Butter", 30, 3));
    }
+
+   public static List<ProductDTO> ofUnsortedProductsDto() {
+      return Arrays.asList(
+              new ProductDTO(1L, "Milk", 10, 1),
+              new ProductDTO(5L, "Bread", 20, 5),
+              new ProductDTO(3L, "Butter", 30, 3));
+   }
 }

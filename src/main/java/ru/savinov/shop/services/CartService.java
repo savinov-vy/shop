@@ -46,11 +46,11 @@ public class CartService {
     public void removeProductByNumberOnCart(int numberOnCart) {
         ArrayList<ProductDTO> tmpList = new ArrayList<>(productsDTO);
         tmpList.remove(numberOnCart-1);
-        refreshCartList(tmpList);
+        reSortedNumberOnCart(tmpList);
         this.productsDTO = tmpList;
     }
 
-    private void refreshCartList(List<ProductDTO> productsDTO) {
+    private void reSortedNumberOnCart(List<ProductDTO> productsDTO) {
         List<ProductDTO> tempListProductDTO = new ArrayList<>();
         for (ProductDTO productDTO : productsDTO) {
             productDTO.setNumberOnCart(tempListProductDTO.size() + 1);

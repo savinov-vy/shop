@@ -12,6 +12,7 @@ import ru.savinov.shop.dto.ProductDTO;
 import ru.savinov.shop.test_helpers.factories.ProductDtoFactory;
 import ru.savinov.shop.test_helpers.factories.ProductFactory;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,6 +33,7 @@ public class CartServiceTest {
         subject = new CartService(productService);
         subject.setProductsDTO(ProductDtoFactory.ofProductsDto());
     }
+
     @Test
     void testGetSumPrice() {
         int expected = subject.getSumPrice();
@@ -61,5 +63,21 @@ public class CartServiceTest {
     public static Stream<Arguments> getArguments() {
         return ProductDtoFactory.ofProductsDto().stream()
                 .map(productDTO -> Arguments.of(productDTO.getNumberOnCart(), productDTO.getTitle()));
+    }
+
+    @ParameterizedTest
+    @MethodSource("getArguments")
+    void testRemoveProductByNumberOnCart_SortedNumberOnCartAfterDelete(int numberOnCart, String titleRemoved) {
+        subject.removeProductByNumberOnCart(numberOnCart);
+        List<ProductDTO> productsDTO = subject.getProductsDTO();
+        Integer beforeNumberOnCart = 0;
+        for (ProductDTO productDTO : productsDTO) {
+            Integer currentNumberOnCart = productDTO.getNumberOnCart();
+            if (currentNumberOnCart == 0) {
+                continue;
+            }
+            assertEquals(beforeNumberOnCart + 1, currentNumberOnCart);
+            beforeNumberOnCart = currentNumberOnCart;
+        }
     }
 }

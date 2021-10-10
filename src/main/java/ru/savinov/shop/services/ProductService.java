@@ -44,7 +44,6 @@ public class ProductService {
     @Secured(value = "ROLE_ADMIN")
     public void addProduct(String addTitle, Integer addPrice) {
         productRepository.save(new Product(addTitle, addPrice));
-
     }
 
     @Transactional
@@ -53,7 +52,6 @@ public class ProductService {
         Product product = getProductById(idUpdate);
         product.setTitle(newTitle);
         product.setPrice(newPrice);
-
     }
 
     public Page<Product> getProductByFilter(ShopControllerDto productFilter) {
