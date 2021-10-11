@@ -40,7 +40,7 @@ public class ShopController {
 
     @PostMapping("/products/update")
     public String shopPageUpdateTitle(@RequestParam Long idUpdate, @RequestParam String updateTitle, @RequestParam Integer updatePrice) {
-        productService.updateTitleById(idUpdate, updateTitle, updatePrice);
+        productService.updateProductById(idUpdate, updateTitle, updatePrice);
         return REDIRECT_SHOP_URL;
     }
 

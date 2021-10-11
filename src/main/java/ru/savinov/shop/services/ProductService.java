@@ -48,7 +48,7 @@ public class ProductService {
 
     @Transactional
     @Secured(value = "ROLE_ADMIN")
-    public void updateTitleById(Long idUpdate, String newTitle, Integer newPrice) {
+    public void updateProductById(Long idUpdate, String newTitle, Integer newPrice) {
         Product product = getProductById(idUpdate);
         product.setTitle(newTitle);
         product.setPrice(newPrice);
