@@ -13,8 +13,8 @@
             </not>
         </preConditions>
         <sql>
-            CREATE TABLE IF NOT EXISTS shop.product (
-            id bigint NOT NULL DEFAULT nextval('shop.product_id_seq'::regclass),
+            CREATE TABLE IF NOT EXISTS product (
+            id bigint NOT NULL DEFAULT nextval('product_id_seq'),
             price integer NOT NULL,
             title VARCHAR (255) NOT NULL,
             CONSTRAINT product_pkey PRIMARY KEY (id)

@@ -8,19 +8,19 @@
 
     <changeSet id="fill default values" author="savinov_vu">
         <sql>
-            INSERT INTO shop.roles (id, name)
+            INSERT INTO roles (id, name)
             VALUES (DEFAULT, 'ROLE_USER'),
             (DEFAULT, 'ROLE_ADMIN');
 
-            INSERT INTO shop.users (id, enabled, password, username)
+            INSERT INTO users (id, enabled, password, username)
             VALUES (DEFAULT, DEFAULT,'{noop}admin', 'admin'),
             (DEFAULT, DEFAULT,'{noop}user', 'user');
 
-            INSERT INTO shop.user_roles (user_id, role_id)
+            INSERT INTO user_roles (user_id, role_id)
             VALUES (1, 2),
             (2, 1);
 
-            INSERT INTO shop.product (id, price, title)
+            INSERT INTO product (id, price, title)
             VALUES (DEFAULT, 10, 'Product1'),
             (DEFAULT, 20, 'Product2'),
             (DEFAULT, 30, 'Product3');

@@ -1,19 +1,28 @@
 server:
-  port: 8189
+  port: 8200
   servlet:
-    context-path: /app
+    context-path: /shop
 
 spring:
   mandatory-file-encoding: utf-8
   jpa:
     show-sql: true
-    properties.hibernate.dialect: org.hibernate.dialect.PostgreSQL94Dialect
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQL94Dialect
+      hibernate.temp.use_jdbc_metadata_defaults: false
     generate-ddl: true
+    hibernate:
+      ddl-auto: create
+  profiles:
+    active: dev
+
 
   datasource:
-    url: jdbc:h2:mem:postgres;
+    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS shop
     username: sa
     password: ""
     driver-class-name: org.h2.Driver
 
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
 

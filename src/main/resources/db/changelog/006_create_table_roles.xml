@@ -13,8 +13,8 @@
             </not>
         </preConditions>
         <sql>
-            CREATE TABLE IF NOT EXISTS shop.roles (
-            id bigint NOT NULL DEFAULT nextval('shop.roles_id_seq'::regclass),
+            CREATE TABLE IF NOT EXISTS roles (
+            id bigint NOT NULL DEFAULT nextval('roles_id_seq'),
             name VARCHAR (255) NOT NULL,
             CONSTRAINT roles_pkey PRIMARY KEY (id)
             );
