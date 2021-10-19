@@ -15,7 +15,7 @@
         </preConditions>
 
         <sql>
-            CREATE SEQUENCE IF NOT EXISTS shop.product_id_seq START WITH 1 increment by 1;
+            CREATE SEQUENCE IF NOT EXISTS product_id_seq START WITH 1 increment by 1;
         </sql>
     </changeSet>
 

@@ -34,13 +34,13 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void testAddProduct() {
+    void testAddProduct() {
         subject.addProduct(PRODUCT_TITLE, PRODUCT_PRICE);
         verify(productRepository).save(new Product(PRODUCT_TITLE, PRODUCT_PRICE));
     }
 
     @Test
-    public void testUpdateProductById_changePrice() {
+    void testUpdateProductById_changePrice() {
         Optional<Product> optionalProduct = Optional.of(ProductFactory.ofProduct());
         Product product = optionalProduct.get();
         when(productRepository.findById(PRODUCT_ID)).thenReturn(optionalProduct);
@@ -49,7 +49,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void testUpdateProductById_changeTitle() {
+    void testUpdateProductById_changeTitle() {
         Optional<Product> optionalProduct = Optional.of(ProductFactory.ofProduct());
         Product product = optionalProduct.get();
         when(productRepository.findById(PRODUCT_ID)).thenReturn(optionalProduct);
