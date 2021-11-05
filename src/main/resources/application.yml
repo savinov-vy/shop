@@ -24,5 +24,21 @@ spring:
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.xml
 
+mail:
+  user:
+    login: vy.savinov@yandex.ru
+    password: {MAIL_USER_PASSWORD}
+  host: imap.yandex.ru
+  inbox:
+    protocol: imaps
+
+  smtp:
+    host: smtp.yandex.ru
+    ssl:
+      enable: true
+      port: 465
+      auth: true
+
+
 
 
