@@ -27,7 +27,7 @@ spring:
 mail:
   user:
     login: vy.savinov@yandex.ru
-    password: {MAIL_USER_PASSWORD}
+    password: ${MAIL_USER_PASSWORD:defaultValue}
   host: imap.yandex.ru
   inbox:
     protocol: imaps
