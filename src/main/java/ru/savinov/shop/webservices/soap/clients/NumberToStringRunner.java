@@ -9,6 +9,10 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 
+/**
+ *  wsimport -keep -p ru.savinov.shop.webservices.soap.clients.numberToString https://www.dataaccess.com/webservicesserver/NumberConversion.wso?WSDL
+ */
+
 public class NumberToStringRunner {
     public static void main(String[] args) throws MalformedURLException {
 
