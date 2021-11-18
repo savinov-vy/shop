@@ -51,7 +51,7 @@ public class UserService {
 
     public List<UserWithRolesDTO> getAllUsersWithRoles() {
         List<UserWithRolesDTO> userWithRolesDTOList = new ArrayList<>();
-        List<User> userList = new ArrayList<>();
+        List<User> userList;
         userList = userRepository.findAll();
         for (User user : userList) {
             UserWithRolesDTO userWithRolesDTO = new UserWithRolesDTO();
