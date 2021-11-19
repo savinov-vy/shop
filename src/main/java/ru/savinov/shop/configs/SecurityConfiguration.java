@@ -3,6 +3,11 @@ package ru.savinov.shop.configs;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.AccessDecisionManager;
+import org.springframework.security.access.AccessDecisionVoter;
+import org.springframework.security.access.vote.AuthenticatedVoter;
+import org.springframework.security.access.vote.RoleVoter;
+import org.springframework.security.access.vote.UnanimousBased;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -10,12 +15,17 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.access.expression.WebExpressionVoter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import ru.savinov.shop.common.RoleType;
 import ru.savinov.shop.services.UserDetailsServiceImpl;
+import ru.savinov.shop.utils.security.CustomAccessByTimeDecisionVoter;
 
 import javax.sql.DataSource;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static ru.savinov.shop.common.PageName.LOGIN_PAGE_URL;
 import static ru.savinov.shop.common.PageName.LOGIN_PROCESSING_URL;
@@ -51,10 +61,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.csrf().disable().authorizeRequests()
                 .antMatchers("/details/**").hasAnyRole(RoleType.ADMIN.getLabel())
                 .antMatchers("/users_control/**").hasAnyRole(RoleType.ADMIN.getLabel())
-                .anyRequest().permitAll()
+                .anyRequest().permitAll().accessDecisionManager(accessDecisionManager())
+                .and()
+                .exceptionHandling().accessDeniedPage(SHOP_PAGE_URL)
                 .and()
                 .formLogin()
                 .failureUrl(SHOP_PAGE_URL)
@@ -65,6 +77,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .rememberMe().tokenRepository(persistentTokenRepository())
                 .key(KEY_WORD)
                 .tokenValiditySeconds(PERIOD_VALIDITY_TOKEN);
+    }
+
+    @Bean
+    public AccessDecisionManager accessDecisionManager() {
+        List<AccessDecisionVoter<?>> decisionVoters
+                = Arrays.asList(
+                new AuthenticatedVoter(),
+                new RoleVoter(),
+                new WebExpressionVoter(),
+                new CustomAccessByTimeDecisionVoter() {
+                }
+        );
+        return new UnanimousBased(decisionVoters);
     }
 
     @Bean
