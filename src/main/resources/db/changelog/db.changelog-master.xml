@@ -14,4 +14,6 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
     <include file="007_create_table_user_roles.xml" relativeToChangelogFile="true"/>
     <include file="008_fill_default_values.xml" relativeToChangelogFile="true"/>
     <include file="009_create_table__persistent_logins.xml" relativeToChangelogFile="true"/>
+    <include file="010_create_sequence_invoices_id_seq.xml" relativeToChangelogFile="true"/>
+    <include file="011_create_table__invoices.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

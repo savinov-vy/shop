@@ -1,7 +1,5 @@
 server:
   port: 8200
-  servlet:
-    context-path: /shop
 
 spring:
   jpa:
@@ -9,16 +7,12 @@ spring:
     properties.hibernate.dialect: org.hibernate.dialect.PostgreSQL94Dialect
     generate-ddl: true
     hibernate:
-      ddl-auto: none
-  thymeleaf:
-    prefix: file:///${user.dir}/src/main/resources/templates/
-    cache: false
-    mode: HTML
+      ddl-auto: validate
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://${POSTGRES_URL:localhost:5432}/shop?currentSchema=shop
-    username: postgres
+    url: jdbc:postgresql://${POSTGRES_URL:localhost:5432}/shop_db
+    username: shop_adm
     password: ${POSTGRES_PASSWORD:root}
 
   liquibase:

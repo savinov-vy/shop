@@ -10,9 +10,9 @@
     </parent>
 
     <groupId>ru.savinov.spring</groupId>
-    <artifactId>study_shop</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>study_shop</name>
+    <artifactId>shop</artifactId>
+    <version>1.0</version>
+    <name>shop</name>
     <description>Spring Boot Project</description>
 
     <properties>
@@ -52,13 +52,11 @@
             <version>3.0.4.RELEASE</version>
         </dependency>
 
-
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
             <version>4.4.3</version>
         </dependency>
-
 
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -80,7 +78,6 @@
             <version>2.5.5</version>
             <scope>test</scope>
         </dependency>
-
 
         <dependency>
             <groupId>org.springframework.security</groupId>

@@ -45,13 +45,18 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="prod:${products}">
-                <td th:text="${prod.numberOnCart}"></td>
+            <tr th:each="prod, iterator:${products}">
+                <td th:text="${iterator.index + 1}"></td>
                 <td th:text="${prod.title}"></td>
                 <td></td>
                 <td th:text="${prod.price}"></td>
                 <td><a class="btn btn-danger" th:href="@{'/cart/remove/' + ${prod.numberOnCart}}">delete</a></td>
-
+                <td>
+                    <form method="get" th:action="@{/responsible/delete/{id}(id=${r.id})}">
+                        <button type="button" class="btn btn-danger btn_delete_responsible">
+                            <i class="fas fa-user-times ml-2"></i></button>
+                    </form>
+                </td>
             </tr>
 
             <tr>

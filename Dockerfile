@@ -15,5 +15,6 @@ RUN mvn install -Dmaven.test.skip=true
 FROM openjdk:8
 
 RUN mkdir -p /home/service
-COPY --from=build-container /home/service/target/study_shop-0.0.1-SNAPSHOT.jar /home/service
+
+COPY --from=build-container /home/service/target/shop-1.0.jar /home/service
 

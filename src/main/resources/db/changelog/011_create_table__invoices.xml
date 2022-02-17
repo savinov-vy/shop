@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="create table invoices" author="savinov_vu">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="invoices"/>
+            </not>
+        </preConditions>
+        <sql>
+            CREATE TABLE IF NOT EXISTS invoices (
+            id bigint NOT NULL DEFAULT nextval('invoices_id_seq'),
+            invoice_number VARCHAR (25) NOT NULL,
+            user_id bigint NOT NULL,
+            product_id bigint NOT NULL,
+            price DECIMAL(8,2) NOT NULL,
+            buy_at TIMESTAMP NOT NULL,
+            CONSTRAINT invoice_pkey PRIMARY KEY (id),
+            FOREIGN KEY (user_id) REFERENCES users (id),
+            FOREIGN KEY (product_id) REFERENCES product (id)
+            );
+        </sql>
+    </changeSet>
+</databaseChangeLog>
