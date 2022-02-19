@@ -1,5 +1,7 @@
 server:
   port: 8200
+  servlet:
+    context-path: /shop
 
 spring:
   jpa:
@@ -12,7 +14,7 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://${POSTGRES_URL:localhost:5432}/shop_db
-    username: shop_adm
+    username: ${POSTGRES_USER:shop_adm}
     password: ${POSTGRES_PASSWORD:root}
 
   liquibase:

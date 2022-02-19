@@ -12,6 +12,8 @@ services:
       - shop_db
     environment:
       - POSTGRES_URL=shop_db:5432
+      - POSTGRES_USER=shop_adm
+      - POSTGRES_PASSWORD=root
 
   shop_db:
     image: postgres:12-alpine
