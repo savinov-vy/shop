@@ -1,4 +1,4 @@
-FROM maven:3.6.3-jdk-8 as build-container
+FROM maven:3.8.4-jdk-11-slim as build-container
 
 USER root
 
@@ -12,7 +12,7 @@ RUN mvn install -Dmaven.test.skip=true
 
 
 
-FROM openjdk:8
+FROM openjdk:11.0.4-jre-slim
 
 RUN mkdir -p /home/service
 
