@@ -17,7 +17,7 @@
         <h1>Shop</h1>
         <nav>
             <ul class="nav-list">
-                <li class="nav-item col"><a class="nav-link" th:href="@{/index}">Home Page</a></li>
+                <li class="nav-item col"><a class="nav-link" th:href="@{/home}">Home Page</a></li>
                 <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{/login}">Login</a></li>
                 <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{/registration}">Registration</a>
                 </li>

@@ -9,7 +9,7 @@ import static ru.savinov.shop.common.PageName.INDEX_PAGE;
 @Controller
 public class IndexController {
 
-    @GetMapping("/index")
+    @GetMapping("/home")
     public ModelAndView homePage() {
         ModelAndView mav = new ModelAndView(INDEX_PAGE);
         return mav;
