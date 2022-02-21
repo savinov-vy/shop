@@ -9,7 +9,7 @@ import static ru.savinov.shop.common.PageName.LOGIN_PAGE;
 @Controller
 public class LoginController {
 
-    @GetMapping("/login")
+    @GetMapping("/sign")
     public ModelAndView login() {
         ModelAndView mav = new ModelAndView(LOGIN_PAGE);
         return mav;
