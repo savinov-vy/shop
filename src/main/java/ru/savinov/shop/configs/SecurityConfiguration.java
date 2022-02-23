@@ -63,7 +63,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/details/**").hasAnyRole(RoleType.ADMIN.getLabel())
-                .antMatchers("/users_control/**").hasAnyRole(RoleType.ADMIN.getLabel())
+                .antMatchers("/users-control/**").hasAnyRole(RoleType.ADMIN.getLabel())
                 .anyRequest().permitAll().accessDecisionManager(accessDecisionManager())
                 .and()
                 .exceptionHandling().accessDeniedPage(SHOP_PAGE_URL)

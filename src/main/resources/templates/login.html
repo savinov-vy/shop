@@ -21,7 +21,7 @@
             </li>
             <li class="nav-item col"><a class="nav-link" th:href="@{/shop}">Shop</a></li>
             <li class="nav-item col" sec:authorize="hasRole('USER')"><a class="nav-link" th:href="@{/cart}">Cart</a></li>
-            <li class="nav-item col" sec:authorize="hasRole('ADMIN')"><a class="nav-link" th:href="@{/users_control}">Users
+            <li class="nav-item col" sec:authorize="hasRole('ADMIN')"><a class="nav-link" th:href="@{/users-control}">Users
                 Control</a></li>
             <li class="nav-item col" sec:authorize="isAuthenticated()"><a class="nav-link" style="width: 100%" href="javascript:document.logoutForm.submit()">Logout</a>
                 <form name="logoutForm" th:action="@{/logout}" method="post"
