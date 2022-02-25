@@ -1,4 +1,4 @@
-package ru.savinov.shop.controllers.constant;
+package ru.savinov.shop.common;
 
 public class CartControllerConstant {
 

@@ -1,4 +1,4 @@
-package ru.savinov.shop.services;
+package ru.savinov.services;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,7 +8,9 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ru.savinov.shop.dto.ProductDTO;
+import ru.savinov.shop.controllers.dto.ProductDTO;
+import ru.savinov.shop.services.CartService;
+import ru.savinov.shop.services.ProductService;
 import ru.savinov.shop.test_helpers.factories.ProductDtoFactory;
 import ru.savinov.shop.test_helpers.factories.ProductFactory;
 

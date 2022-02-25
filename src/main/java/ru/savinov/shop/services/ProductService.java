@@ -7,15 +7,15 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.savinov.shop.dto.ShopControllerDto;
+import ru.savinov.shop.controllers.dto.ShopControllerDto;
 import ru.savinov.shop.entities.Product;
 import ru.savinov.shop.repositories.ProductRepository;
 import ru.savinov.shop.repositories.specifications.ProductsSpecs;
 
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
-import static ru.savinov.shop.common.Constant.INITIAL_PAGE;
-import static ru.savinov.shop.common.Constant.PAGE_SIZE;
+import static ru.savinov.shop.common.ConstantProperties.INITIAL_PAGE;
+import static ru.savinov.shop.common.ConstantProperties.PAGE_SIZE;
 
 
 @Service

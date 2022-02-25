@@ -1,4 +1,4 @@
-package ru.savinov.shop.services;
+package ru.savinov.services;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,6 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.savinov.shop.entities.Product;
 import ru.savinov.shop.repositories.ProductRepository;
+import ru.savinov.shop.services.ProductService;
 import ru.savinov.shop.test_helpers.factories.ProductFactory;
 
 import java.util.Optional;

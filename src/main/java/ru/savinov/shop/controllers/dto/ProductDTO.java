@@ -1,4 +1,4 @@
-package ru.savinov.shop.dto;
+package ru.savinov.shop.controllers.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

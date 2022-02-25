@@ -8,7 +8,7 @@ import org.springframework.security.core.Authentication;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
-import static ru.savinov.shop.common.Constant.ANONYMOUS_USER;
+import static ru.savinov.shop.common.ConstantProperties.ANONYMOUS_USER;
 
 @ToString
 public class CustomAccessByTimeDecisionVoter implements AccessDecisionVoter<Object> {

@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
-import ru.savinov.shop.dto.ProductDTO;
+import ru.savinov.shop.controllers.dto.ProductDTO;
 import ru.savinov.shop.entities.Product;
 
 import java.util.*;

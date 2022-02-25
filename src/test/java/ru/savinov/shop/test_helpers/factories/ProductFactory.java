@@ -6,13 +6,21 @@ import java.util.*;
 
 public class ProductFactory {
     public static List<Product> ofProducts() {
-        return java.util.Arrays.asList(
-                new Product(1L, "Milk", 10),
-                new Product(2L, "Bread", 20),
-                new Product(3L, "Butter", 30));
+        return Arrays.asList(
+                of(1L, "Milk", 10),
+                of(2L, "Bread", 20),
+                of(3L, "Butter", 30));
+    }
+
+    public static Product of(Long id, String title, Integer price) {
+        return Product.builder()
+                .id(id)
+                .title(title)
+                .price(price)
+                .build();
     }
 
     public static Product ofProduct() {
-        return  new Product(4L, "Product", 50);
+        return of(4L, "TestingProduct", 40);
     }
 }

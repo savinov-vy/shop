@@ -5,14 +5,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.savinov.shop.dto.ShopControllerDto;
+import ru.savinov.shop.controllers.dto.ShopControllerDto;
 import ru.savinov.shop.entities.Product;
 import ru.savinov.shop.services.ProductService;
 
 import static ru.savinov.shop.common.PageName.REDIRECT_SHOP_URL;
 import static ru.savinov.shop.common.PageName.SHOP_PAGE;
-import static ru.savinov.shop.common.Constant.INITIAL_PAGE;
-import static ru.savinov.shop.controllers.constant.ShopControllerConstant.*;
+import static ru.savinov.shop.common.ConstantProperties.INITIAL_PAGE;
+import static ru.savinov.shop.common.ShopControllerConstant.*;
 
 @Controller
 @AllArgsConstructor

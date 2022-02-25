@@ -1,9 +1,11 @@
 package ru.savinov.shop.common;
 
-public class Constant {
+public class ConstantProperties {
 
     public static final int PAGE_SIZE = 10;
     public static final int INITIAL_PAGE = 0;
     public static final String ANONYMOUS_USER = "anonymousUser";
+    public static final String STATUS_OK = "OK";
+
 
 }
