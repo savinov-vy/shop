@@ -2,7 +2,8 @@ package ru.savinov.shop.test_helpers.factories;
 
 import ru.savinov.shop.entities.Product;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class ProductFactory {
 

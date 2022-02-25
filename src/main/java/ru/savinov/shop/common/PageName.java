@@ -3,7 +3,7 @@ package ru.savinov.shop.common;
 public class PageName {
 
     public static final String REGISTRATION_PAGE = "registration";
-    public static final String REDIRECT_ROOT_APP = "redirect:/";
+    public static final String REDIRECT_LOGIN_PAGE = "redirect:/sign";
 
     public static final String INDEX_PAGE = "index";
 

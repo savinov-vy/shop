@@ -11,7 +11,7 @@ import ru.savinov.shop.services.UserValidator;
 
 import javax.validation.Valid;
 
-import static ru.savinov.shop.common.PageName.REDIRECT_ROOT_APP;
+import static ru.savinov.shop.common.PageName.REDIRECT_LOGIN_PAGE;
 import static ru.savinov.shop.common.PageName.REGISTRATION_PAGE;
 import static ru.savinov.shop.common.RegistrationControllerConstant.ERROR_DESCRIPTION;
 import static ru.savinov.shop.common.RegistrationControllerConstant.USER_FORM;
@@ -40,6 +40,6 @@ public class RegistrationController {
         }
 
         userService.save(userForm);
-        return REDIRECT_ROOT_APP;
+        return REDIRECT_LOGIN_PAGE;
     }
 }

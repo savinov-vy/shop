@@ -19,8 +19,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username")
-    private String username;
+    @Column(name = "login")
+    private String login;
 
     @Column(name = "password")
     private String password;
@@ -34,21 +34,21 @@ public class User {
     private Set<Role> roles;
 
 
-    public User(String username, String password, Boolean enabled, Set<Role> roles) {
-        this.username = username;
+    public User(String login, String password, Boolean enabled, Set<Role> roles) {
+        this.login = login;
         this.password = password;
         this.enabled = enabled;
         this.roles = roles;
     }
 
-    public User(Long id, String username, String password) {
+    public User(Long id, String login, String password) {
         this.id = id;
-        this.username = username;
+        this.login = login;
         this.password = password;
     }
 
-    public User(String username, String password, Boolean enabled) {
-        this.username = username;
+    public User(String login, String password, Boolean enabled) {
+        this.login = login;
         this.password = password;
         this.enabled = enabled;
     }

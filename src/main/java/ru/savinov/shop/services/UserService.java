@@ -23,7 +23,7 @@ public class UserService {
 
     @Transactional
     public void save(User user) {
-        user.setUsername(user.getUsername());
+        user.setLogin(user.getLogin());
         user.setPassword("{noop}" + user.getPassword());
         user.setEnabled(true);
         Set<Role> roles = new HashSet<>();
@@ -33,19 +33,19 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public User findByLogin(String login) {
+        return userRepository.findByLogin(login);
     }
 
     @Transactional
     public void createNewUser(User user) {
-        String username = user.getUsername();
+        String login = user.getLogin();
         String password = "{noop}" + user.getPassword();
         Boolean enabled = user.getEnabled();
         Set<Role> roles = new HashSet<>();
         roles.add(roleRepository.getOne(1L));
         userRepository.save(new User(
-                username, password, enabled, roles
+                login, password, enabled, roles
         ));
     }
 
@@ -58,7 +58,7 @@ public class UserService {
             userWithRolesDTO.setEnabled(user.getEnabled());
             userWithRolesDTO.setId(user.getId());
             userWithRolesDTO.setPassword(user.getPassword());
-            userWithRolesDTO.setUsername(user.getUsername());
+            userWithRolesDTO.setUsername(user.getLogin());
             Set<Role> setRoleUser = user.getRoles();
             String strAllRoleUser = "";
             for (Role role : setRoleUser) {

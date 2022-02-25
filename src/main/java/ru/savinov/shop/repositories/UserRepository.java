@@ -10,7 +10,7 @@ import ru.savinov.shop.entities.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    User findByUsername(String username);
+    User findByLogin(String login);
 
     @Modifying
     @Query("update User p set p.enabled = ?2 where p.id = ?1")

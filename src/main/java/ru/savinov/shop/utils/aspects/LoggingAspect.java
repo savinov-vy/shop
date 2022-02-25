@@ -36,7 +36,7 @@ public class LoggingAspect {
         for (Object obj : arguments) {
             if (obj instanceof User) {
                 User user = (User) obj;
-                System.out.println("User name: " + user.getUsername());
+                System.out.println("User login: " + user.getLogin());
                 System.out.println("User id: " + user.getId());
                 System.out.println("User password: " + user.getPassword());
                 System.out.println("User enabled " + user.getEnabled());

@@ -50,13 +50,7 @@
                 <td th:text="${prod.title}"></td>
                 <td></td>
                 <td th:text="${prod.price}"></td>
-                <td><a class="btn btn-danger" th:href="@{'/cart/remove/' + ${prod.numberOnCart}}">delete</a></td>
-                <td>
-                    <form method="get" th:action="@{/responsible/delete/{id}(id=${r.id})}">
-                        <button type="button" class="btn btn-danger btn_delete_responsible">
-                            <i class="fas fa-user-times ml-2"></i></button>
-                    </form>
-                </td>
+                <td><a class="btn btn-danger" th:href="@{'/cart/remove/' + ${prod.id}}">delete</a></td>
             </tr>
 
             <tr>
@@ -66,7 +60,6 @@
                 <td th:text="${totalPrice}"></td>
                 <td><a class="btn-info" th:href="@{/shop}">Go to shop</a></td>
             </tr>
-
             </tbody>
         </table>
     </div>
