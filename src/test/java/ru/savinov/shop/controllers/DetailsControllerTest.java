@@ -11,6 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import ru.savinov.shop.config.AbstractWebMvcSpringBootTest;
 import ru.savinov.shop.services.ProductService;
@@ -19,13 +20,11 @@ import ru.savinov.shop.test_helpers.factories.ProductFactory;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static ru.savinov.shop.common.DetailsControllerConstant.SELECT_PRODUCT;
 
 
 @ExtendWith(SpringExtension.class)
 class DetailsControllerTest extends AbstractWebMvcSpringBootTest {
-
-    @Autowired
-    private ObjectMapper objectMapper;
 
     @Mock
     private ProductService productService;
@@ -45,11 +44,11 @@ class DetailsControllerTest extends AbstractWebMvcSpringBootTest {
     void testDetailsPage() throws Exception {
         ResultActions result = mvc.perform(
                 MockMvcRequestBuilders.get("/details/{id}", 4L)
-                        .content(objectMapper.writeValueAsString(ProductFactory.ofProduct()))
                         .contentType(MediaType.APPLICATION_JSON)
         );
         result
               .andExpect(status().isOk())
-              .andExpect(view().name("details"));
+              .andExpect(view().name("details"))
+              .andExpect(MockMvcResultMatchers.model().attribute(SELECT_PRODUCT, ProductFactory.ofProduct()));
     }
 }
