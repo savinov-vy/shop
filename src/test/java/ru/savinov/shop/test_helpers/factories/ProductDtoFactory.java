@@ -1,6 +1,6 @@
 package ru.savinov.shop.test_helpers.factories;
 
-import ru.savinov.shop.dto.ProductDTO;
+import ru.savinov.shop.controllers.dto.ProductDTO;
 
 import java.util.Arrays;
 import java.util.List;

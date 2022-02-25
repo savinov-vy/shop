@@ -2,7 +2,7 @@ package ru.savinov.shop.services;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.savinov.shop.dto.UserWithRolesDTO;
+import ru.savinov.shop.controllers.dto.UserWithRolesDTO;
 import ru.savinov.shop.entities.Role;
 import ru.savinov.shop.entities.User;
 import ru.savinov.shop.repositories.RoleRepository;

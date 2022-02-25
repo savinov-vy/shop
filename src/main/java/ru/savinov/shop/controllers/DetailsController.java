@@ -10,15 +10,13 @@ import ru.savinov.shop.entities.Product;
 import ru.savinov.shop.services.ProductService;
 
 import static ru.savinov.shop.common.PageName.DETAILS_PAGE;
+import static ru.savinov.shop.common.DetailsControllerConstant.*;
 
 @Controller
 @AllArgsConstructor
 public class DetailsController {
 
     private ProductService productService;
-
-    private static final String SELECT_PRODUCT = "selectProduct";
-
 
     @GetMapping("/details/{id}")
     public ModelAndView detailsPage(Model model, @PathVariable("id") Long id) {

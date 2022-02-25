@@ -13,8 +13,6 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: create
-  profiles:
-    active: dev
 
 
   datasource:

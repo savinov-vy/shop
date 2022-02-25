@@ -2,7 +2,7 @@ package ru.savinov.shop.controllers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ru.savinov.shop.dto.UserWithRolesDTO;
+import ru.savinov.shop.controllers.dto.UserWithRolesDTO;
 import ru.savinov.shop.entities.User;
 import ru.savinov.shop.services.UserService;
 import java.util.List;
