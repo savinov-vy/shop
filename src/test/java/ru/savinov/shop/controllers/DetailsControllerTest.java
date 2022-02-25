@@ -19,6 +19,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static ru.savinov.shop.common.DetailsControllerConstant.SELECT_PRODUCT;
+import static ru.savinov.shop.common.PageName.DETAILS_PAGE;
 
 
 @ExtendWith(SpringExtension.class)
@@ -46,7 +47,7 @@ class DetailsControllerTest extends AbstractWebMvcSpringBootTest {
         );
         result
               .andExpect(status().isOk())
-              .andExpect(view().name("details"))
+              .andExpect(view().name(DETAILS_PAGE))
               .andExpect(MockMvcResultMatchers.model().attribute(SELECT_PRODUCT, ProductFactory.ofProduct()))
               .andExpect(MockMvcResultMatchers.model().size(1));
     }

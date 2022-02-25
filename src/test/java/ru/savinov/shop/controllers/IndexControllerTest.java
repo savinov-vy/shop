@@ -8,6 +8,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static ru.savinov.shop.common.PageName.INDEX_PAGE;
 
 class IndexControllerTest {
 
@@ -24,6 +25,6 @@ class IndexControllerTest {
     void testIndex() throws Exception {
         mvc.perform(get("/home"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("index"));
+                .andExpect(view().name(INDEX_PAGE));
     }
 }

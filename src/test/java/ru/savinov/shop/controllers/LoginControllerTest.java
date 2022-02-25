@@ -8,6 +8,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static ru.savinov.shop.common.PageName.LOGIN_PAGE;
 
 class LoginControllerTest {
 
@@ -24,6 +25,6 @@ class LoginControllerTest {
     void testIndex() throws Exception {
         mvc.perform(get("/sign"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("login"));
+                .andExpect(view().name(LOGIN_PAGE));
     }
 }
