@@ -5,6 +5,7 @@ import ru.savinov.shop.entities.Product;
 import java.util.*;
 
 public class ProductFactory {
+
     public static List<Product> ofProducts() {
         return Arrays.asList(
                 of(1L, "Milk", 10),

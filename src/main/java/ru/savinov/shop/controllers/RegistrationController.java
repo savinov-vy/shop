@@ -13,6 +13,8 @@ import javax.validation.Valid;
 
 import static ru.savinov.shop.common.PageName.REDIRECT_ROOT_APP;
 import static ru.savinov.shop.common.PageName.REGISTRATION_PAGE;
+import static ru.savinov.shop.common.RegistrationControllerConstant.ERROR_DESCRIPTION;
+import static ru.savinov.shop.common.RegistrationControllerConstant.USER_FORM;
 
 @Controller
 @AllArgsConstructor
@@ -22,16 +24,13 @@ public class RegistrationController {
 
     private UserValidator userValidator;
 
-    private static final String ERROR_DESCRIPTION = "errorDescribtion";
-    private static final String USER_FORM = "user";
-
-    @GetMapping("/registration")
+    @GetMapping("/reg")
     public String registration(Model model) {
         model.addAttribute(USER_FORM, new User());
         return REGISTRATION_PAGE;
     }
 
-    @PostMapping("/registration/form")
+    @PostMapping("/reg/form")
     public String addUser(@Valid User userForm, BindingResult bindingResult, Model model) {
         userValidator.validate(userForm, bindingResult);
 

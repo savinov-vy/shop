@@ -11,14 +11,14 @@
 </head>
 <body>
 <div class="container">
-    <form class="ui-icon-circle-zoomin" id="create-form" th:action="@{/registration/form}" th:object="${user}" th:method="post"
+    <form class="ui-icon-circle-zoomin" id="create-form" th:action="@{/reg/form}" th:object="${user}" th:method="post"
           accept-charset="UTF-8">
         <h1> Registration </h1>
         <nav>
             <ul class="nav-list">
                 <li class="nav-item col"><a class="nav-link" th:href="@{/home}">Home Page</a></li>
                 <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{/sign}">Login</a></li>
-                <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link-active" th:href="@{/registration}">Registration</a>
+                <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link-active" th:href="@{/reg}">Registration</a>
                 </li>
                 <li class="nav-item col"><a class="nav-link" th:href="@{/shop}">Shop</a></li>
                 <li class="nav-item col" sec:authorize="hasRole('USER')"><a class="nav-link" th:href="@{/cart}">Cart</a></li>

@@ -29,7 +29,7 @@
                 <li class="nav-item col"><a class="nav-link-active" th:href="@{/home}">Home Page</a></li>
                 <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{/sign}">Login</a>
                 </li>
-                <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{/registration}">Registration</a>
+                <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{/reg}">Registration</a>
                 </li>
                 <li class="nav-item col"><a class="nav-link" th:href="@{/shop}">Shop</a></li>
                 <li class="nav-item col" sec:authorize="hasRole('USER')"><a class="nav-link" th:href="@{/cart}">Cart</a>
