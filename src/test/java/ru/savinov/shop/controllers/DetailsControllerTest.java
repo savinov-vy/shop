@@ -1,11 +1,9 @@
 package ru.savinov.shop.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -49,6 +47,7 @@ class DetailsControllerTest extends AbstractWebMvcSpringBootTest {
         result
               .andExpect(status().isOk())
               .andExpect(view().name("details"))
-              .andExpect(MockMvcResultMatchers.model().attribute(SELECT_PRODUCT, ProductFactory.ofProduct()));
+              .andExpect(MockMvcResultMatchers.model().attribute(SELECT_PRODUCT, ProductFactory.ofProduct()))
+              .andExpect(MockMvcResultMatchers.model().size(1));
     }
 }
