@@ -32,7 +32,7 @@ public class CartService {
         products.remove(productService.getProductById(id));
     }
 
-    public int getSumPrice(List<Product> products) {
+    public static int getSumPrice(List<Product> products) {
         return products.stream()
                 .mapToInt(product -> product.getPrice())
                 .sum();

@@ -22,7 +22,7 @@
             <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{/reg}">Registration</a>
             </li>
             <li class="nav-item col"><a class="nav-link" th:href="@{/shop}">Shop</a></li>
-            <li class="nav-item col" sec:authorize="hasRole('USER')"><a class="nav-link-active" th:href="@{/cart}">Cart</a></li>
+            <li class="nav-item col" sec:authorize="hasRole('USER')"><a class="nav-link-active" th:href="@{/my-basket}">Cart</a></li>
             <li class="nav-item col" sec:authorize="hasRole('ADMIN')"><a class="nav-link" th:href="@{/users-control}">Users
                 Control</a></li>
             <li class="nav-item col" sec:authorize="isAuthenticated()"><a class="nav-link" style="width: 100%" href="javascript:document.logoutForm.submit()">Logout</a>
@@ -50,7 +50,7 @@
                 <td th:text="${prod.title}"></td>
                 <td></td>
                 <td th:text="${prod.price}"></td>
-                <td><a class="btn btn-danger" th:href="@{'/cart/remove/' + ${prod.id}}">delete</a></td>
+                <td><a class="btn btn-danger" th:href="@{'/my-basket/remove/' + ${prod.id}}">delete</a></td>
             </tr>
 
             <tr>

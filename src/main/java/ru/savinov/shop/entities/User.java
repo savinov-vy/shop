@@ -10,8 +10,8 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "users")
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(staticName = "of")
+@AllArgsConstructor(staticName = "of")
 public class User {
 
     @Id
@@ -35,22 +35,7 @@ public class User {
 
 
     public User(String login, String password, Boolean enabled, Set<Role> roles) {
-        this.login = login;
-        this.password = password;
-        this.enabled = enabled;
-        this.roles = roles;
-    }
-
-    public User(Long id, String login, String password) {
-        this.id = id;
-        this.login = login;
-        this.password = password;
-    }
-
-    public User(String login, String password, Boolean enabled) {
-        this.login = login;
-        this.password = password;
-        this.enabled = enabled;
+        of(null, login, password, enabled, roles);
     }
 
 }

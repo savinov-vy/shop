@@ -10,8 +10,8 @@ public class PageName {
     public static final String DETAILS_PAGE = "details";
 
     public static final String CART_PAGE = "cart";
-    public static final String CART_PAGE_URL = "/cart";
-    public static final String REDIRECT_CART_URL = "redirect:/cart";
+    public static final String CART_PAGE_URL = "/my-basket";
+    public static final String REDIRECT_CART_URL = "redirect:/my-basket";
 
     public static final String SHOP_PAGE = "shop";
     public static final String SHOP_PAGE_URL = "/shop";

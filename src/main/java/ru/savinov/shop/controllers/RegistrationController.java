@@ -26,7 +26,7 @@ public class RegistrationController {
 
     @GetMapping("/reg")
     public String registration(Model model) {
-        model.addAttribute(USER_FORM, new User());
+        model.addAttribute(USER_FORM, User.of());
         return REGISTRATION_PAGE;
     }
 

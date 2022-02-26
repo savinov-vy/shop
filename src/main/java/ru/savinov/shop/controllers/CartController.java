@@ -13,10 +13,12 @@ import ru.savinov.shop.entities.User;
 import ru.savinov.shop.services.CartService;
 import ru.savinov.shop.utils.security.SecurityUtils;
 
+import static ru.savinov.shop.common.CartControllerConstant.TOTAL_PRICE;
 import static ru.savinov.shop.common.PageName.CART_PAGE;
 import static ru.savinov.shop.common.PageName.CART_PAGE_URL;
 import static ru.savinov.shop.common.PageName.REDIRECT_CART_URL;
 import static ru.savinov.shop.common.PageName.REDIRECT_SHOP_URL;
+import static ru.savinov.shop.common.ShopControllerConstant.PRODUCTS;
 
 @Slf4j
 @Controller
@@ -31,8 +33,8 @@ public class CartController {
     public String showCart(Model model) {
         User currentUser =securityUtils.getCurrentUser();
         log.info("Show card for user, Login = {}", currentUser.getLogin());
-        model.addAttribute(CartControllerConstant.PRODUCTS, ProductDTO.of(cartService.getProducts()));
-        model.addAttribute(CartControllerConstant.TOTAL_PRICE, cartService.getSumPrice(cartService.getProducts()));
+        model.addAttribute(PRODUCTS, ProductDTO.of(cartService.getProducts()));
+        model.addAttribute(TOTAL_PRICE, CartService.getSumPrice(cartService.getProducts()));
         return CART_PAGE;
     }
 
