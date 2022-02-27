@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.savinov.shop.common.CartControllerConstant;
 import ru.savinov.shop.controllers.dto.ProductDTO;
 import ru.savinov.shop.entities.User;
 import ru.savinov.shop.services.CartService;
@@ -45,7 +44,7 @@ public class CartController {
     }
 
     @GetMapping("/remove/{id}")
-    public String removeProductToCart(@PathVariable("id") Long id) {
+    public String removeByIdFromCart(@PathVariable("id") Long id) {
         cartService.removeProductById(id);
         return REDIRECT_CART_URL;
     }
