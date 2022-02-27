@@ -4,19 +4,18 @@ $(document).ready(function () {
     showUsers();
 });
 
-/**********************Отобразить всех пользователей страницы**********************/
+/********************** Отобразить всех пользователей **********************/
 
 function showUsers() {
     $.get('/shop/user', function (data) {
         console.log(data);
-
         let table = "<table border='1' class=\"table\"><tr><th>ИД</th><th>Cтатус</th><th>Логин</th><th>Пароль</th><th>Роли</th><th>Удалить/забанить</th></tr>";
 
         for (var i = 0; i < data.length; i++) {
             table = table + "<tr>" +
                 "<td>" + data[i].id + "</td>" +
                 "<td>" + data[i].enabled + "</td>" +
-                "<td>" + data[i].username + "</td>" +
+                "<td>" + data[i].login + "</td>" +
                 "<td>" + data[i].password + "</td>" +
                 "<td>" + data[i].roleName + "</td>" +
                 "<td>" + "<button onclick='deleteUser(" + data[i].id + ");' class='btn btn-sm btn-danger'>Delete<br>user</button>" +
@@ -28,7 +27,7 @@ function showUsers() {
 }
 
 
-/***********Функция триггер включеного-отключенного положения пользователя***********/
+/*********** Функция триггер включеного-отключенного положения пользователя ***********/
 function onClick(idUser) {
     if (this.secondT^=1) {
         desableUser(idUser);
@@ -36,7 +35,7 @@ function onClick(idUser) {
         enableUser(idUser);
     }
 }
-/**********************Добавить нового польователя**********************/
+/********************** Добавить нового польователя **********************/
 
 function send_user() {
     $.ajax({
@@ -47,7 +46,7 @@ function send_user() {
         contentType: 'application/json',
         data: JSON.stringify({
             enabled: $("#user_status").val(),
-            username: $("#user_name").val(),
+            login: $("#user_name").val(),
             password: $("#user_password").val()
         }),
         error: function (xhr, status) {

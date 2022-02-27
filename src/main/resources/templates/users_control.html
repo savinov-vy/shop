@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -18,10 +19,12 @@
             <li class="nav-item col"><a class="nav-link" th:href="@{/home}">Home Page</a></li>
             <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{/sign}">Login</a>
             </li>
-            <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{/reg}">Registration</a>
+            <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link"
+                                                                      th:href="@{/reg}">Registration</a>
             </li>
             <li class="nav-item col"><a class="nav-link" th:href="@{/shop}">Shop</a></li>
-            <li class="nav-item col" sec:authorize="hasRole('USER')"><a class="nav-link" th:href="@{/cart}">Cart</a>
+            <li class="nav-item col" sec:authorize="hasRole('USER')"><a class="nav-link"
+                                                                        th:href="@{/my-basket}">Cart</a>
             </li>
             <li class="nav-item col" sec:authorize="hasRole('ADMIN')"><a class="nav-link-active"
                                                                          th:href="@{/users-control}">Users
@@ -39,9 +42,12 @@
         Тут должна быть таблица
     </div>
     <form>
-        <input type="text" id="user_status" placeholder="Статус"/> <br/>
-        <input type="text" id="user_name" placeholder="Логин"/> <br/>
-        <input type="text" id="user_password" placeholder="Пароль"/> <br/>
+        <div style="display: flex; justify-content: space-between; width: 100px" >
+            <input type="checkbox" value="true" checked name="enabled" id="user_status"/> <br/>
+            <label for="user_status">User active</label>
+        </div>
+        <input type="text" name="login" id="user_name" placeholder="Логин"/> <br/>
+        <input type="text" name="password" id="user_password" placeholder="Пароль"/> <br/>
         <input type="button" onclick="send_user()" value="Сохранить"/> <br/>
     </form>
 </div>

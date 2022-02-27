@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.*;
 import ru.savinov.shop.controllers.dto.UserWithRolesDTO;
 import ru.savinov.shop.entities.User;
 import ru.savinov.shop.services.UserService;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -15,32 +18,33 @@ public class UsersRestController {
     private UserService userService;
 
     @GetMapping("/user")
-    public List<UserWithRolesDTO> getUser() {
-        return userService.getAllUsersWithRoles();
+    public List<UserWithRolesDTO> getUsers() {
+        List<UserWithRolesDTO> allUsersWithRoles = userService.getAllUsersWithRoles();
+        return allUsersWithRoles;
     }
 
     @PostMapping("/delete_user")
-    public @ResponseBody User deleteUser(@RequestBody User user) {
+    public User deleteUser(@RequestBody User user) {
         Long id = user.getId();
         userService.deleteUserById(id);
         return user;
     }
 
     @PostMapping("/add_user")
-    public @ResponseBody User addUser(@RequestBody User user) {
+    public void addUser(@RequestBody User user, HttpServletResponse response) throws IOException {
         userService.createNewUser(user);
-        return user;
+        response.sendRedirect("/shop/user");
     }
 
     @PostMapping("desable_user")
-    public @ResponseBody User desableUser(@RequestBody User user) {
+    public User offUser(@RequestBody User user) {
         Long id = user.getId();
         userService.desableUser(id);
         return user;
     }
 
     @PostMapping("enable_user")
-    public @ResponseBody User enableUser(@RequestBody User user) {
+    public User onUser(@RequestBody User user) {
         Long id = user.getId();
         userService.enableUserById(id);
         return user;

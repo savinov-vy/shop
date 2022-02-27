@@ -10,7 +10,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "users")
-@NoArgsConstructor(staticName = "of")
+@NoArgsConstructor()
 @AllArgsConstructor(staticName = "of")
 public class User {
 
@@ -34,8 +34,12 @@ public class User {
     private Set<Role> roles;
 
 
-    public User(String login, String password, Boolean enabled, Set<Role> roles) {
-        of(null, login, password, enabled, roles);
+    public static User of(String login, String password, Boolean enabled, Set<Role> roles) {
+        return of(null, login, password, enabled, roles);
+    }
+
+    public static User of() {
+        return new User();
     }
 
 }

@@ -38,13 +38,13 @@ public class UserService {
     }
 
     @Transactional
-    public void createNewUser(User user) {
+    public User createNewUser(User user) {
         String login = user.getLogin();
         String password = "{noop}" + user.getPassword();
         Boolean enabled = user.getEnabled();
         Set<Role> roles = new HashSet<>();
         roles.add(roleRepository.getOne(1L));
-        userRepository.save(new User(
+        return userRepository.save(User.of(
                 login, password, enabled, roles
         ));
     }
@@ -54,19 +54,21 @@ public class UserService {
         List<User> userList;
         userList = userRepository.findAll();
         for (User user : userList) {
-            UserWithRolesDTO userWithRolesDTO = new UserWithRolesDTO();
-            userWithRolesDTO.setEnabled(user.getEnabled());
-            userWithRolesDTO.setId(user.getId());
-            userWithRolesDTO.setPassword(user.getPassword());
-            userWithRolesDTO.setUsername(user.getLogin());
             Set<Role> setRoleUser = user.getRoles();
             String strAllRoleUser = "";
             for (Role role : setRoleUser) {
                 strAllRoleUser += role.getName();
             }
-            userWithRolesDTO.setRoleName(strAllRoleUser);
 
-            userWithRolesDTOList.add(userWithRolesDTO);
+            UserWithRolesDTO userDto = UserWithRolesDTO.builder()
+                    .id(user.getId())
+                    .login(user.getLogin())
+                    .password(user.getPassword())
+                    .enabled(user.getEnabled())
+                    .roleName(strAllRoleUser)
+                    .build();
+
+            userWithRolesDTOList.add(userDto);
         }
         return userWithRolesDTOList;
     }
