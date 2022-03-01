@@ -5,8 +5,13 @@ import ru.savinov.shop.entities.User;
 public class UserFactory {
 
     public static User of() {
-        User user = User.of();
-        user.setLogin("testLogin");
-        return user;
+        return User.of();
+    }
+
+    public static User ofReg() {
+        return User.builder()
+                .login("testLogin")
+                .password("testPassword")
+                .build();
     }
 }
