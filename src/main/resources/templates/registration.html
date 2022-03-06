@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="container">
-    <form class="ui-icon-circle-zoomin" id="create-form" th:action="@{/reg/form}" th:object="${user}" th:method="post"
+    <form class="ui-icon-circle-zoomin" id="create-form" th:action="@{/reg/form}" th:method="post"
           accept-charset="UTF-8">
         <h1> Registration </h1>
         <nav>
@@ -45,7 +45,7 @@
                 <input type="password" name="password" class="form-control" id="password" th:value="${user.password}"
                        placeholder="password">
                 <input type="password" name="confirmPassword" class="form-control" id="confirmPassword"
-                       th:value="${user.password}" placeholder="confirm password">
+                       th:value="${user.confirmPassword}" placeholder="confirm password">
             </div>
             <div id="messageShow"></div>
         </div>

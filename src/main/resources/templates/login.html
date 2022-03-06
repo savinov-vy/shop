@@ -40,11 +40,16 @@
                    type="text"
                    name="username"
                    placeholder="Login"
+                   th:value="${user?.login}"
                    title="user, admin or your login">
         </div>
         <div style="display: flex; justify-content: space-between; align-items: center">
             <label for="user-password" class="col-md-2">Пароль</label>
-            <input style="display: block" id="user-password" type="password" name="password" placeholder="Password"
+            <input style="display: block" id="user-password"
+                   type="password"
+                   name="password"
+                   placeholder="Password"
+                   th:value="${user?.password}"
                    class="form-control col-md-8" title="user, admin or your password">
         </div>
         <div style="display: flex; justify-content: space-between; align-items: center">

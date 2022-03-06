@@ -13,6 +13,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static java.util.Objects.nonNull;
+
 @Service
 @AllArgsConstructor
 public class UserService {

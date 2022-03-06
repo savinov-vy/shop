@@ -3,12 +3,16 @@ package ru.savinov.shop.entities;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import ru.savinov.shop.controllers.dto.UserDto;
 
 import javax.persistence.*;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Builder
 @Table(name = "users")
@@ -38,6 +42,16 @@ public class User {
 
     public static User of(String login, String password, Boolean enabled, Set<Role> roles) {
         return of(null, login, password, enabled, roles);
+    }
+
+    public static User of(UserDto userDto) {
+        return User.builder()
+                .login(userDto.getLogin())
+                .password(userDto.getPassword())
+                .enabled(userDto.getEnabled())
+                .build();
+
+
     }
 
     public static User of() {

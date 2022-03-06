@@ -47,9 +47,6 @@ class RegistrationControllerTest extends AbstractWebMvcSpringBootTest {
     @MockBean
     private UserValidator userValidator;
 
-    @MockBean
-    private BindingResult bindingResult;
-
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -74,6 +71,16 @@ class RegistrationControllerTest extends AbstractWebMvcSpringBootTest {
                 .andExpect(view().name(REGISTRATION_PAGE))
                 .andExpect(MockMvcResultMatchers.model().attribute(USER_FORM, UserFactory.of()))
                 .andExpect(MockMvcResultMatchers.model().size(1));
+    }
+
+    @Test
+    void testAddUser__redirect() throws Exception {
+        ResultActions result = mvc.perform(
+                MockMvcRequestBuilders.post("/reg/form")
+                        .contentType(MediaType.APPLICATION_JSON)
+        );
+        result
+                .andExpect(status().isFound());
     }
 
     @Test
