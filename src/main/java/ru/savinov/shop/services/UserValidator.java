@@ -17,10 +17,6 @@ public class UserValidator implements Validator {
 
     private String errorDescribtion;
 
-    public String getErrorDescribtion() {
-        return errorDescribtion;
-    }
-
     @Autowired
     private UserService userService;
 
@@ -40,21 +36,21 @@ public class UserValidator implements Validator {
         if (!isValidLogin) {
             errors.rejectValue("login", "Size.userForm.username");
             errorDescribtion = "Логин должен быть не меньше 3 символов";
-        }
-
-        if (!userDto.getPassword().equals(userDto.getConfirmPassword())) {
-            errors.rejectValue("password", "DontEquals.userForm.confirmPassword");
-            errorDescribtion = "Пароль и подтверждение пароля не совпадают";
+        } else if (nonNull(userService.findByLogin(userDto.getLogin()))) {
+            errors.rejectValue("login", "Duplicate.userForm.username");
+            errorDescribtion = "Пользователь с таким именем уже зарегистрирован";
         }
 
         if (!isNotBlank(userDto.getPassword())) {
             errors.rejectValue("password", "Size.userForm.password");
             errorDescribtion = "Пароль должен быть задан";
+        } else if (!userDto.getPassword().equals(userDto.getConfirmPassword())) {
+            errors.rejectValue("password", "DontEquals.userForm.confirmPassword");
+            errorDescribtion = "Пароль и подтверждение пароля не совпадают";
         }
+    }
 
-        if (nonNull(userService.findByLogin(userDto.getLogin()))) {
-            errors.rejectValue("login", "Duplicate.userForm.username");
-            errorDescribtion = "Пользователь с таким именем уже зарегистрирован";
-        }
+    public String getErrorDescribtion() {
+        return errorDescribtion;
     }
 }

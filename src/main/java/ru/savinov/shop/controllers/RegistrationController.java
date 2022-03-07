@@ -1,7 +1,6 @@
 package ru.savinov.shop.controllers;
 
 import lombok.AllArgsConstructor;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,8 +33,8 @@ public class RegistrationController {
         return REGISTRATION_PAGE;
     }
 
-    @PostMapping("/reg/form")
-    public String addUser(@Valid UserDto userForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttrs) {
+    @PostMapping(value = "/reg/form")
+    public String addUser(@Valid @ModelAttribute("user") UserDto userForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttrs) {
         userValidator.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
