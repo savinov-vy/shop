@@ -3,6 +3,9 @@ package ru.savinov.shop.controllers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -21,6 +24,8 @@ import ru.savinov.shop.controllers.dto.UserDto;
 import ru.savinov.shop.services.UserService;
 import ru.savinov.shop.services.UserValidator;
 import ru.savinov.shop.test_helpers.factories.UserDtoFactory;
+
+import java.util.stream.Stream;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -61,7 +66,7 @@ class RegistrationControllerTest extends AbstractWebMvcSpringBootTest {
 
 
     @Test
-    void testRegistration() throws Exception {
+    void registration__getForm() throws Exception {
         ResultActions result = mvc.perform(
                 MockMvcRequestBuilders.get("/reg")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -74,43 +79,7 @@ class RegistrationControllerTest extends AbstractWebMvcSpringBootTest {
     }
 
     @Test
-    void testAddUser__emptyForm__returnRegistryForm() throws Exception {
-        ResultActions result = mvc.perform(post("/reg/form")
-                .contentType(MediaType.APPLICATION_JSON)
-        );
-        result
-                .andExpect(status().isOk())
-                .andExpect(view().name(REGISTRATION_PAGE));
-    }
-
-    @Test
-    void testAddUser__lessLengthLogin__returnRegistryForm() throws Exception {
-        UserDto userDto = UserDtoFactory.ofReg();
-        userDto.setLogin("sa");
-        ResultActions result = mvc.perform(post("/reg/form")
-                .contentType(MediaType.APPLICATION_JSON)
-                .flashAttr("user", userDto)
-        );
-        result
-                .andExpect(status().isOk())
-                .andExpect(view().name(REGISTRATION_PAGE));
-    }
-
-    @Test
-    void testAddUser__BlankPassword__returnRegistryForm() throws Exception {
-        UserDto userDto = UserDtoFactory.ofReg();
-        userDto.setPassword("");
-        ResultActions result = mvc.perform(post("/reg/form")
-                .contentType(MediaType.APPLICATION_JSON)
-                .flashAttr("user", userDto)
-        );
-        result
-                .andExpect(status().isOk())
-                .andExpect(view().name(REGISTRATION_PAGE));
-    }
-
-    @Test
-    void testAddUser_save() throws Exception {
+    void addUser_save() throws Exception {
         ResultActions result = mvc.perform(post("/reg/form")
                 .contentType(MediaType.APPLICATION_JSON)
                 .flashAttr("user", UserDtoFactory.ofReg()));
@@ -118,5 +87,28 @@ class RegistrationControllerTest extends AbstractWebMvcSpringBootTest {
                 .andExpect(model().errorCount(0))
                 .andExpect(status().isFound())
                 .andExpect(MockMvcResultMatchers.redirectedUrl(LOGIN_PAGE_URL));
+    }
+
+    @ParameterizedTest
+    @MethodSource("getArguments")
+    void addUser__returnRegistryForm(Integer errorCount, UserDto userDto) throws Exception {
+        ResultActions result = mvc.perform(post("/reg/form")
+                .contentType(MediaType.APPLICATION_JSON)
+                .flashAttr("user", userDto)
+        );
+        result
+                .andExpect(model().errorCount(errorCount))
+                .andExpect(status().isOk())
+                .andExpect(view().name(REGISTRATION_PAGE));
+    }
+
+    public static Stream<Arguments> getArguments() {
+        return Stream.of(
+                Arguments.of(3, UserDtoFactory.emptyLogin()),
+                Arguments.of(1,  UserDtoFactory.notConfirmPassword()),
+                Arguments.of(2, UserDtoFactory.shortLogin()),
+                Arguments.of(2, UserDtoFactory.emptyPassword()),
+                Arguments.of(6, UserDtoFactory.of())
+        );
     }
 }
