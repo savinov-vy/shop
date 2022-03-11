@@ -11,7 +11,6 @@ import ru.savinov.shop.entities.User;
 import ru.savinov.shop.services.UserService;
 import ru.savinov.shop.services.UserValidator;
 
-
 import javax.validation.Valid;
 
 import static ru.savinov.shop.common.PageName.REDIRECT_LOGIN_PAGE;

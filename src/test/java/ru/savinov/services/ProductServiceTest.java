@@ -42,7 +42,7 @@ public class ProductServiceTest {
 
     @Test
     void testUpdateProductById_changePrice() {
-        Optional<Product> optionalProduct = Optional.of(ProductFactory.ofProduct());
+        Optional<Product> optionalProduct = Optional.of(ProductFactory.ofOne());
         Product product = optionalProduct.get();
         when(productRepository.findById(PRODUCT_ID)).thenReturn(optionalProduct);
         subject.updateProductById(PRODUCT_ID, NEW_PRODUCT_TITLE, NEW_PRODUCT_PRICE);
@@ -51,7 +51,7 @@ public class ProductServiceTest {
 
     @Test
     void testUpdateProductById_changeTitle() {
-        Optional<Product> optionalProduct = Optional.of(ProductFactory.ofProduct());
+        Optional<Product> optionalProduct = Optional.of(ProductFactory.ofOne());
         Product product = optionalProduct.get();
         when(productRepository.findById(PRODUCT_ID)).thenReturn(optionalProduct);
         subject.updateProductById(PRODUCT_ID, NEW_PRODUCT_TITLE, NEW_PRODUCT_PRICE);

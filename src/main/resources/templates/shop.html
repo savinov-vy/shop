@@ -18,14 +18,18 @@
         <nav>
             <ul class="nav-list">
                 <li class="nav-item col"><a class="nav-link" th:href="@{/home}">Home Page</a></li>
-                <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{/sign}">Login</a></li>
+                <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{/sign}">Login</a>
+                </li>
                 <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{/reg}">Registration</a>
                 </li>
-                <li class="nav-item col"><a class="nav-link-active" th:href="@{/shop}">Shop</a></li>
-                <li class="nav-item col" sec:authorize="hasRole('USER')"><a class="nav-link" th:href="@{/my-basket}">Cart</a></li>
-                <li class="nav-item col" sec:authorize="hasRole('ADMIN')"><a class="nav-link" th:href="@{/users-control}">Users
+                <li class="nav-item col"><a class="nav-link-active" th:href="@{/showcase}">Shop</a></li>
+                <li class="nav-item col" sec:authorize="hasRole('USER')"><a class="nav-link" th:href="@{/my-basket}">Cart</a>
+                </li>
+                <li class="nav-item col" sec:authorize="hasRole('ADMIN')"><a class="nav-link"
+                                                                             th:href="@{/users-control}">Users
                     Control</a></li>
-                <li class="nav-item col" sec:authorize="isAuthenticated()"><a class="nav-link" style="width: 100%" href="javascript:document.logoutForm.submit()">Logout</a>
+                <li class="nav-item col" sec:authorize="isAuthenticated()"><a class="nav-link" style="width: 100%"
+                                                                              href="javascript:document.logoutForm.submit()">Logout</a>
                     <form name="logoutForm" th:action="@{/logout}" method="post"
                           th:hidden="true">
                         <input type="submit" value="Logout"/>
@@ -51,7 +55,8 @@
                 <td sec:authorize="hasRole('ADMIN')"><a class="btn-group-lg" th:href="@{'/details/' + ${products.id}}">Details</a>
                 </td>
                 <td sec:authorize="hasRole('USER')"><a class="btn btn-success"
-                                                       th:href="@{'/my-basket/add/' + ${products.id}}">Add to cart</a></td>
+                                                       th:href="@{'/my-basket/add/' + ${products.id}}">Add to cart</a>
+                </td>
                 <td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger"
                                                         th:href="@{'/products/delete/' + ${products.id}}">Delete</a>
                 </td>
@@ -66,20 +71,23 @@
             </tbody>
         </table>
     </div>
-    <form th:action="@{/shop}" method="get" class="form-horizontal">
+    <form th:action="@{/showcase}" method="get" class="form-horizontal" style="width: 350px">
         <div style="..." class="input-group">
             <span class="input-group-append"><i class="list-group-horizontal"></i></span>
-            <input th:value="${word != null ? word : ''}" name="word" placeholder="Отфильтровать по названию продукта"
+            <input th:value="${productFilter.title ne null ? productFilter.title : ''}" name="title"
+                   placeholder="Отфильтровать по названию продукта"
                    class="form-control"/>
         </div>
         <div style="..." class="input-group">
             <span class="input-group-append"><i class="list-group-horizontal"></i></span>
-            <input th:value="${minPrice != null ? minPrice : ''}" name="minPrice" placeholder="цена от"
+            <input th:value="${productFilter.minPrice ne null ? productFilter.minPrice : ''}" name="minPrice"
+                   placeholder="цена от"
                    class="form-control"/>
         </div>
         <div style="..." class="input-group">
             <span class="input-group-append"><i class="list-group-horizontal"></i></span>
-            <input th:value="${maxPrice != null ? maxPrice : ''}" name="maxPrice" placeholder="цена до"
+            <input th:value="${productFilter.maxPrice ne null ? productFilter.maxPrice : ''}" name="maxPrice"
+                   placeholder="цена до"
                    class="form-control"/>
         </div>
         <div style="..." class="form-group">

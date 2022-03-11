@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Builder
 @Table(name = "product")
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor(staticName = "of")
 public class Product {
 
     @Id

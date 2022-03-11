@@ -50,7 +50,7 @@ class CartControllerTest {
 
     @Test
     void testShowCart() throws Exception {
-        when(cartService.getProducts()).thenReturn(ProductFactory.ofProducts());
+        when(cartService.getProducts()).thenReturn(ProductFactory.ofFullList());
         when(securityUtils.getCurrentUser()).thenReturn(UserFactory.of());
 
         ResultActions result = mvc.perform(
@@ -60,8 +60,8 @@ class CartControllerTest {
         result
                 .andExpect(status().isOk())
                 .andExpect(view().name(CART_PAGE))
-                .andExpect(MockMvcResultMatchers.model().attribute(PRODUCTS, ProductDTO.of(ProductFactory.ofProducts())))
-                .andExpect(MockMvcResultMatchers.model().attribute(TOTAL_PRICE, CartService.getSumPrice(ProductFactory.ofProducts())))
+                .andExpect(MockMvcResultMatchers.model().attribute(PRODUCTS, ProductDTO.of(ProductFactory.ofFullList())))
+                .andExpect(MockMvcResultMatchers.model().attribute(TOTAL_PRICE, CartService.getSumPrice(ProductFactory.ofFullList())))
                 .andExpect(MockMvcResultMatchers.model().size(2));
     }
 

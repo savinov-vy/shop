@@ -19,7 +19,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import ru.savinov.shop.config.AbstractWebMvcSpringBootTest;
+
 import ru.savinov.shop.controllers.dto.UserDto;
 import ru.savinov.shop.services.UserService;
 import ru.savinov.shop.services.UserValidator;
@@ -47,7 +47,7 @@ import static ru.savinov.shop.test_helpers.TestConstant.REGISTRATION_PAGE;
                         value = RegistrationController.class
                 )
         })
-class RegistrationControllerTest extends AbstractWebMvcSpringBootTest {
+class RegistrationControllerTest {
 
     @MockBean
     private UserService userService;

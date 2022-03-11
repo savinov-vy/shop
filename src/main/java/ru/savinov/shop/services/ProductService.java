@@ -7,14 +7,16 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.savinov.shop.controllers.dto.ShopControllerDto;
+import ru.savinov.shop.controllers.dto.ShopFilterDto;
 import ru.savinov.shop.entities.Product;
 import ru.savinov.shop.repositories.ProductRepository;
-import ru.savinov.shop.repositories.specifications.ProductsSpecs;
+import ru.savinov.shop.repositories.specifications.CriteriaApi;
+
+import java.util.List;
 
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
-import static ru.savinov.shop.common.ConstantProperties.INITIAL_PAGE;
+import static ru.savinov.shop.common.ConstantProperties.DEFAULT_PAGE_NUMBER;
 import static ru.savinov.shop.common.ConstantProperties.PAGE_SIZE;
 
 
@@ -24,8 +26,8 @@ public class ProductService {
 
     private ProductRepository productRepository;
 
-    @Transactional (readOnly = true)
-    public Page<Product> getProductsWithPagingAndFiltering(int pageNumber, int pageSize, Specification<Product> productsSpecs) {
+    @Transactional(readOnly = true)
+    public Page<Product> getProductsByFilter(int pageNumber, int pageSize, Specification<Product> productsSpecs) {
         return productRepository.findAll(productsSpecs, PageRequest.of(pageNumber, pageSize));
     }
 
@@ -54,23 +56,37 @@ public class ProductService {
         product.setPrice(newPrice);
     }
 
-    public Page<Product> getProductByFilter(ShopControllerDto productFilter) {
-        if (isNull(productFilter.getCurrentPage())) {
-            productFilter.setCurrentPage(INITIAL_PAGE);
-        }
+    public List<Product> getProducts(ShopFilterDto productFilter) {
         Specification<Product> spec = Specification.where(null);
-        if (nonNull(productFilter.getWord())) {
-            spec = spec.and(ProductsSpecs.titleContains(productFilter.getWord()));
+        applyPaginationFilter(productFilter);
+        spec = applyTitleFilter(productFilter, spec);
+        spec = applyPriceFilter(productFilter, spec);
+        return getProductsByFilter(productFilter.getCurrentPage(), PAGE_SIZE, spec).getContent();
+    }
+
+    private void applyPaginationFilter(ShopFilterDto productFilter) {
+        if (isNull(productFilter.getCurrentPage())) {
+            productFilter.setCurrentPage(DEFAULT_PAGE_NUMBER);
         }
+    }
+
+    private Specification<Product> applyTitleFilter(ShopFilterDto productFilter, Specification<Product> spec) {
+        if (nonNull(productFilter.getTitle())) {
+            spec = spec.and(CriteriaApi.titleContains(productFilter.getTitle()));
+        }
+        return spec;
+    }
+    
+    private Specification<Product> applyPriceFilter(ShopFilterDto productFilter, Specification<Product> spec) {
         if (nonNull(productFilter.getMinPrice())) {
-            spec = spec.and(ProductsSpecs.priceGreaterThanOrEq(productFilter.getMinPrice()));
+            spec = spec.and(CriteriaApi.priceGreaterThanOrEq(productFilter.getMinPrice()));
         }
         if (nonNull(productFilter.getMaxPrice())) {
-            spec = spec.and(ProductsSpecs.priceLesserThanOrEq(productFilter.getMaxPrice()));
+            spec = spec.and(CriteriaApi.priceLesserThanOrEq(productFilter.getMaxPrice()));
         }
-        Page<Product> productsPages = getProductsWithPagingAndFiltering(productFilter.getCurrentPage(), PAGE_SIZE, spec);
-        return productsPages;
+        return spec;
     }
+
 }
 
 

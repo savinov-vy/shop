@@ -14,8 +14,8 @@ public class PageName {
     public static final String REDIRECT_CART_URL = "redirect:/my-basket";
 
     public static final String SHOP_PAGE = "shop";
-    public static final String SHOP_PAGE_URL = "/shop";
-    public static final String REDIRECT_SHOP_URL = "redirect:/shop";
+    public static final String SHOP_PAGE_URL = "/showcase";
+    public static final String REDIRECT_SHOP_URL = "redirect:/showcase";
 
     public static final String LOGIN_PAGE = "login";
     public static final String LOGIN_PAGE_URL = "/sign";

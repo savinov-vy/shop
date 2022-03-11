@@ -1,17 +1,18 @@
 package ru.savinov.shop.controllers;
 
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.savinov.shop.controllers.dto.ShopControllerDto;
+import ru.savinov.shop.controllers.dto.ShopFilterDto;
 import ru.savinov.shop.entities.Product;
 import ru.savinov.shop.services.ProductService;
 
+import java.util.List;
+
 import static ru.savinov.shop.common.PageName.REDIRECT_SHOP_URL;
 import static ru.savinov.shop.common.PageName.SHOP_PAGE;
-import static ru.savinov.shop.common.ConstantProperties.INITIAL_PAGE;
+import static ru.savinov.shop.common.ConstantProperties.DEFAULT_PAGE_NUMBER;
 import static ru.savinov.shop.common.ShopControllerConstant.*;
 
 @Controller
@@ -20,15 +21,13 @@ public class ShopController {
 
     private ProductService productService;
 
-    @GetMapping("/shop")
-    public String shopPage(@ModelAttribute ShopControllerDto productFilter, Model model) {
-        Page<Product> productsPages = productService.getProductByFilter(productFilter);
-        model.addAttribute(PRODUCTS, productsPages.getContent());
-        model.addAttribute(PAGE, INITIAL_PAGE);
-        model.addAttribute(TOTAL_PAGE, productsPages.getTotalElements());
-        model.addAttribute(MIN_PRICE, productFilter.getMinPrice());
-        model.addAttribute(MAX_PRICE, productFilter.getMaxPrice());
-        model.addAttribute(WORD, productFilter.getWord());
+    @GetMapping("/showcase")
+    public String shopPage(@ModelAttribute ShopFilterDto productFilter, Model model) {
+        List<Product> products = productService.getProducts(productFilter);
+        model.addAttribute(PAGE, DEFAULT_PAGE_NUMBER);
+        model.addAttribute(PRODUCT_FILTER, productFilter);
+        model.addAttribute(PRODUCTS, products);
+        model.addAttribute(TOTAL_PAGE, products.size());
         return SHOP_PAGE;
     }
 

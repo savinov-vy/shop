@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ProductFactory {
 
-    public static List<Product> ofProducts() {
+    public static List<Product> ofFullList() {
         return Arrays.asList(
                 of(1L, "Milk", 10),
                 of(2L, "Bread", 20),
@@ -22,7 +22,7 @@ public class ProductFactory {
                 .build();
     }
 
-    public static Product ofProduct() {
+    public static Product ofOne() {
         return of(4L, "TestingProduct", 40);
     }
 }

@@ -11,7 +11,6 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import ru.savinov.shop.config.AbstractWebMvcSpringBootTest;
 import ru.savinov.shop.services.ProductService;
 import ru.savinov.shop.test_helpers.factories.ProductFactory;
 
@@ -23,7 +22,7 @@ import static ru.savinov.shop.common.PageName.DETAILS_PAGE;
 
 
 @ExtendWith(SpringExtension.class)
-class DetailsControllerTest extends AbstractWebMvcSpringBootTest {
+class DetailsControllerTest {
 
     @Mock
     private ProductService productService;
@@ -34,7 +33,7 @@ class DetailsControllerTest extends AbstractWebMvcSpringBootTest {
     @BeforeEach
     public void setUp() {
         subject = new DetailsController(productService);
-        when(productService.getProductById(4L)).thenReturn(ProductFactory.ofProduct());
+        when(productService.getProductById(4L)).thenReturn(ProductFactory.ofOne());
         mvc = MockMvcBuilders.standaloneSetup(subject).build();
     }
 
@@ -48,7 +47,7 @@ class DetailsControllerTest extends AbstractWebMvcSpringBootTest {
         result
               .andExpect(status().isOk())
               .andExpect(view().name(DETAILS_PAGE))
-              .andExpect(MockMvcResultMatchers.model().attribute(SELECT_PRODUCT, ProductFactory.ofProduct()))
+              .andExpect(MockMvcResultMatchers.model().attribute(SELECT_PRODUCT, ProductFactory.ofOne()))
               .andExpect(MockMvcResultMatchers.model().size(1));
     }
 }
