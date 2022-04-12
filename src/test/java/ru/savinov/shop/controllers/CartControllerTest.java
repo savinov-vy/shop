@@ -47,7 +47,6 @@ class CartControllerTest {
         mvc = MockMvcBuilders.standaloneSetup(subject).build();
     }
 
-
     @Test
     void testShowCart() throws Exception {
         when(cartService.getProducts()).thenReturn(ProductFactory.ofFullList());

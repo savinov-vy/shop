@@ -13,15 +13,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static java.util.Objects.nonNull;
-
 @Service
 @AllArgsConstructor
 public class UserService {
 
     private RoleRepository roleRepository;
     private UserRepository userRepository;
-
 
     @Transactional
     public void save(User user) {
@@ -77,7 +74,6 @@ public class UserService {
 
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
-
     }
 
     @Transactional

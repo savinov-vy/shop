@@ -1,0 +1,9 @@
+version: '3.7'
+
+services:
+  maildev:
+    container_name: covidinfo-maildev
+    image: maildev/maildev
+    ports:
+      - "2080:80"
+      - "25:25"
