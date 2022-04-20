@@ -22,3 +22,10 @@ services:
       - POSTGRES_USER=shop_adm
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=shop_db
+
+  maildev:
+    container_name: shop-maildev
+    image: maildev/maildev
+    ports:
+      - "2080:80"
+      - "25:25"
