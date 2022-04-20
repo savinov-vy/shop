@@ -29,3 +29,20 @@ services:
     ports:
       - "2080:80"
       - "25:25"
+
+  kafka:
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CREATE_TOPICS: notifications:1:1
+      KAFKA_LISTENERS: PLAINTEXT://kafka:9092
+
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+

@@ -9,7 +9,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import ru.savinov.shop.config.AbstractWebMvcSpringBootTest;
 import ru.savinov.shop.services.ProductService;
 import ru.savinov.shop.test_helpers.factories.ProductFactory;
 import ru.savinov.shop.test_helpers.factories.ShopFilterDtoFactory;
