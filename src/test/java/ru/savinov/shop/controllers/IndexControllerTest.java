@@ -2,22 +2,29 @@ package ru.savinov.shop.controllers;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import ru.savinov.shop.services.KafkaProducerService;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static ru.savinov.shop.common.PageName.INDEX_PAGE;
 
+@ExtendWith(SpringExtension.class)
 class IndexControllerTest {
 
     private IndexController subject;
     private MockMvc mvc;
+    @Mock
+    private KafkaProducerService kafkaProducerService;
 
     @BeforeEach
     void setUp() {
-        subject = new IndexController();
+        subject = new IndexController(kafkaProducerService);
         mvc = MockMvcBuilders.standaloneSetup(subject).build();
     }
 

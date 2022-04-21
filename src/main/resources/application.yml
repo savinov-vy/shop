@@ -20,6 +20,12 @@ spring:
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.xml
 
+  kafka:
+    producer:
+      bootstrap-servers: 127.0.0.1:29092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
 mail:
   user:
     login: vy.savinov@yandex.ru
