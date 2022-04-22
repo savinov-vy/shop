@@ -17,6 +17,6 @@ public class KafkaProducerService {
 
     public void send(BasketBuyDto toHandle) {
         log.info("Send basket products to handle");
-        kafkaTemplate.send("cart", gson.toJson(toHandle));
+        kafkaTemplate.send("basket", gson.toJson(toHandle));
     }
 }

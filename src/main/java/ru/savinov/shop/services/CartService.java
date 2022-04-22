@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 import ru.savinov.shop.entities.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -30,6 +31,10 @@ public class CartService {
 
     public void removeProductById(Long id) {
         products.remove(productService.getProductById(id));
+    }
+
+    public void clearCart() {
+        products = new ArrayList<>();
     }
 
     public static int getSumPrice(List<Product> products) {

@@ -1,6 +1,7 @@
 package ru.savinov.shop.utils.security;
 
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.core.Authentication;
@@ -11,6 +12,7 @@ import java.util.Collection;
 import static ru.savinov.shop.common.ConstantProperties.ANONYMOUS_USER;
 
 @ToString
+@Slf4j
 public class CustomAccessByTimeDecisionVoter implements AccessDecisionVoter<Object> {
 
     private String permitTimeFrom = "00:00";
@@ -30,8 +32,10 @@ public class CustomAccessByTimeDecisionVoter implements AccessDecisionVoter<Obje
     public int vote(Authentication authentication, Object o, Collection<ConfigAttribute> collection) {
 
         if (nowIsPermitTime(permitTimeFrom, permitTimeTo) || ANONYMOUS_USER.equals(authentication.getPrincipal())) {
+            log.info("ACCESS BY TIME PERMIT");
             return ACCESS_GRANTED;
         }
+        log.info("ACCESS BY TIME DENIED");
         return ACCESS_DENIED;
     }
 

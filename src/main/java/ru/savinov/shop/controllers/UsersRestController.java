@@ -19,8 +19,7 @@ public class UsersRestController {
 
     @GetMapping("/user")
     public List<UserWithRolesDTO> getUsers() {
-        List<UserWithRolesDTO> allUsersWithRoles = userService.getAllUsersWithRoles();
-        return allUsersWithRoles;
+        return userService.getAllUsersWithRoles();
     }
 
     @PostMapping("/delete_user")

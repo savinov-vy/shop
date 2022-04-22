@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:form="http://www.w3.org/1999/html"
       lang="en">
 
 <head>
@@ -14,18 +15,21 @@
 
 <body>
 <div class="container">
-<h1>Shopping Cart</h1>
+    <h1>Shopping Cart</h1>
     <nav>
         <ul class="nav-list">
             <li class="nav-item col"><a class="nav-link" th:href="@{/home}">Home Page</a></li>
             <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{/sign}">Login</a></li>
-            <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{/reg}">Registration</a>
+            <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link"
+                                                                      th:href="@{/reg}">Registration</a>
             </li>
             <li class="nav-item col"><a class="nav-link" th:href="@{/showcase}">Shop</a></li>
-            <li class="nav-item col" sec:authorize="hasRole('USER')"><a class="nav-link-active" th:href="@{/my-basket}">Cart</a></li>
+            <li class="nav-item col" sec:authorize="hasRole('USER')"><a class="nav-link-active" th:href="@{/my-basket}">Cart</a>
+            </li>
             <li class="nav-item col" sec:authorize="hasRole('ADMIN')"><a class="nav-link" th:href="@{/users-control}">Users
                 Control</a></li>
-            <li class="nav-item col" sec:authorize="isAuthenticated()"><a class="nav-link" style="width: 100%" href="javascript:document.logoutForm.submit()">Logout</a>
+            <li class="nav-item col" sec:authorize="isAuthenticated()"><a class="nav-link" style="width: 100%"
+                                                                          href="javascript:document.logoutForm.submit()">Logout</a>
                 <form name="logoutForm" th:action="@{/logout}" method="post"
                       th:hidden="true">
                     <input type="submit" value="Logout"/>
@@ -33,7 +37,7 @@
             </li>
         </ul>
     </nav>
-<div class="container" sec:authorize="hasRole('USER')">
+    <div class="container" sec:authorize="hasRole('USER')">
 
         <table class="table">
             <thead class="thead-dark">
@@ -44,7 +48,7 @@
                 <td>Price</td>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="table_cart_products">
             <tr th:each="prod, iterator:${products}">
                 <td th:text="${iterator.index + 1}"></td>
                 <td th:text="${prod.title}"></td>
@@ -58,11 +62,50 @@
                 <td></td>
                 <td></td>
                 <td th:text="${totalPrice}"></td>
-                <td><a class="btn-info" th:href="@{/showcase}">Go to shop</a></td>
+                <td style="display: flex">
+                    <a class="btn btn-info" th:href="@{/showcase}">Go to shop</a>
+                    <form th:value="${products}" method="post" name="products" th:action="@{/my-basket/buy}">
+                        <a class="btn btn-success btn_buy_now">Buy Now!</a>
+                    </form>
+                </td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
+
+<script type="text/javascript" th:inline="javascript">
+    let buy_button = document.querySelectorAll('.btn_buy_now');
+    for (let i = 0; i<buy_button.length; i++){
+        buy_button[i].addEventListener('click', function confirmDialog() {
+            let result = confirm("Хотите купить сейчас?");
+            if (result) {
+                send();
+            }
+        });
+    }
+
+    function send() {
+        /*<![CDATA[*/
+        let products = /*[[${products}]]*/ 'default';
+        console.log(products);
+        send_product_basket(products);
+        /*]]>*/
+
+        alert("Покупка совершена!")
+        window.location.replace('/shop/showcase');
+    }
+
+    function send_product_basket(products) {
+        $.ajax({
+            url: '/shop/my-basket/buy',
+            dataType: 'json',
+            type: 'POST',
+            cache: false,
+            contentType: 'application/json',
+            data: JSON.stringify(products)
+        })
+    }
+</script>
 </body>
 </html>

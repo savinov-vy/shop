@@ -1,9 +1,9 @@
 $(document).ready(function () {
     $("#btnChekIn").click(function () {
-        var name = $("#name").val();
-        var password = $("#password").val();
-        var confirmPassword = $("#confirmPassword").val();
-        var fail ="";
+        let name = $("#name").val();
+        let password = $("#password").val();
+        let confirmPassword = $("#confirmPassword").val();
+        let fail ="";
 
         if (name.length < 3) fail = "Имя должно содержать не менее 3 символов";
         else if (password !== confirmPassword) fail = "Пароли не совпадают";
