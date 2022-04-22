@@ -13,8 +13,8 @@ import static ru.savinov.shop.common.ConstantProperties.ANONYMOUS_USER;
 @ToString
 public class CustomAccessByTimeDecisionVoter implements AccessDecisionVoter<Object> {
 
-    private String permitTimeFrom = "08:15";
-    private String permitTimeTo = "23:40";
+    private String permitTimeFrom = "00:00";
+    private String permitTimeTo = "23:59";
 
     @Override
     public boolean supports(ConfigAttribute configAttribute) {
@@ -49,7 +49,6 @@ public class CustomAccessByTimeDecisionVoter implements AccessDecisionVoter<Obje
         int minute = Integer.parseInt(timeBorder.substring(3));
         return LocalDateTime.now().withDayOfYear(1).withHour(hour).withMinute(minute);
     }
-
 }
 
 

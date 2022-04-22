@@ -16,13 +16,12 @@ import static ru.savinov.shop.common.DetailsControllerConstant.*;
 @AllArgsConstructor
 public class DetailsController {
 
-    private ProductService productService;
+    private final ProductService productService;
 
     @GetMapping("/details/{id}")
     public ModelAndView detailsPage(Model model, @PathVariable("id") Long id) {
         Product selectedProducts = productService.getProductById(id);
         model.addAttribute(SELECT_PRODUCT, selectedProducts);
-        ModelAndView mav = new ModelAndView(DETAILS_PAGE);
-        return mav;
+        return new ModelAndView(DETAILS_PAGE);
     }
 }

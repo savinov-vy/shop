@@ -127,6 +127,5 @@ public class EmaiService {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
-
     }
 }

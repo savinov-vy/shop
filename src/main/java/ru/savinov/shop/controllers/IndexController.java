@@ -9,20 +9,10 @@ import ru.savinov.shop.services.KafkaProducerService;
 import static ru.savinov.shop.common.PageName.INDEX_PAGE;
 
 @Controller
-@AllArgsConstructor
 public class IndexController {
-private KafkaProducerService kafkaProducerService;
 
     @GetMapping("/home")
     public ModelAndView homePage() {
-        ModelAndView mav = new ModelAndView(INDEX_PAGE);
-        return mav;
-    }
-
-    @GetMapping("/kafka")
-    public ModelAndView kafkaPage() {
-        ModelAndView mav = new ModelAndView(INDEX_PAGE);
-        kafkaProducerService.sendMessage();
-        return mav;
+        return new ModelAndView(INDEX_PAGE);
     }
 }

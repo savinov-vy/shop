@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class UsersRestController {
 
-    private UserService userService;
+    private final UserService userService;
 
     @GetMapping("/user")
     public List<UserWithRolesDTO> getUsers() {
@@ -39,7 +39,7 @@ public class UsersRestController {
     @PostMapping("desable_user")
     public User offUser(@RequestBody User user) {
         Long id = user.getId();
-        userService.desableUser(id);
+        userService.disableUser(id);
         return user;
     }
 

@@ -12,10 +12,9 @@ import java.util.stream.Collectors;
 @Builder
 @AllArgsConstructor
 public class ProductDTO {
+
     private Long id;
-
     private String title;
-
     private Integer price;
 
     public static ProductDTO of(Product product) {

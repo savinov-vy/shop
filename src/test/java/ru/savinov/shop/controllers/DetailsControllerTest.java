@@ -24,11 +24,11 @@ import static ru.savinov.shop.common.PageName.DETAILS_PAGE;
 @ExtendWith(SpringExtension.class)
 class DetailsControllerTest {
 
-    @Mock
-    private ProductService productService;
-
     DetailsController subject;
     private MockMvc mvc;
+
+    @Mock
+    private ProductService productService;
 
     @BeforeEach
     public void setUp() {
@@ -36,7 +36,6 @@ class DetailsControllerTest {
         when(productService.getProductById(4L)).thenReturn(ProductFactory.ofOne());
         mvc = MockMvcBuilders.standaloneSetup(subject).build();
     }
-
 
     @Test
     void testDetailsPage() throws Exception {

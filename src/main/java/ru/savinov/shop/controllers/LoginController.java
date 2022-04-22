@@ -11,7 +11,6 @@ public class LoginController {
 
     @GetMapping("/sign")
     public ModelAndView login() {
-        ModelAndView mav = new ModelAndView(LOGIN_PAGE);
-        return mav;
+        return new ModelAndView(LOGIN_PAGE);
     }
 }

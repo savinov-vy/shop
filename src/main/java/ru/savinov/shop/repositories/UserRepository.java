@@ -14,10 +14,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Modifying
     @Query("update User p set p.enabled = ?2 where p.id = ?1")
-    public void desableUserById(Long id, Boolean enabled);
+    void desableUserById(Long id, Boolean enabled);
 
     @Modifying
     @Query("update User p set p.enabled = ?2 where p.id = ?1")
-    public void enableUserById(Long id, Boolean enabled);
+    void enableUserById(Long id, Boolean enabled);
 }
 

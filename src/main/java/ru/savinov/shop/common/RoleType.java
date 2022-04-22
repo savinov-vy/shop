@@ -8,6 +8,7 @@ import java.util.Arrays;
 @Getter
 @AllArgsConstructor
 public enum RoleType {
+
     USER("ROLE_USER", "USER"),
     ADMIN("ROLE_ADMIN", "ADMIN");
 

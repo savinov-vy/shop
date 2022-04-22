@@ -19,7 +19,7 @@ import static ru.savinov.shop.common.ShopControllerConstant.*;
 @AllArgsConstructor
 public class ShopController {
 
-    private ProductService productService;
+    private final ProductService productService;
 
     @GetMapping("/showcase")
     public String shopPage(@ModelAttribute ShopFilterDto productFilter, Model model) {

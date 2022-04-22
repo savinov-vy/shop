@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import ru.savinov.shop.controllers.dto.ProductDTO;
 import ru.savinov.shop.services.CartService;
+import ru.savinov.shop.services.KafkaProducerService;
 import ru.savinov.shop.test_helpers.factories.ProductFactory;
 import ru.savinov.shop.test_helpers.factories.UserFactory;
 import ru.savinov.shop.utils.security.SecurityUtils;
@@ -34,16 +35,17 @@ class CartControllerTest {
 
     @Mock
     private CartService cartService;
-
     @Mock
     private SecurityUtils securityUtils;
+    @Mock
+    private KafkaProducerService kafkaProducerService;
 
     CartController subject;
     private MockMvc mvc;
 
     @BeforeEach
     public void setUp() {
-        subject = new CartController(cartService, securityUtils);
+        subject = new CartController(cartService, securityUtils, kafkaProducerService);
         mvc = MockMvcBuilders.standaloneSetup(subject).build();
     }
 

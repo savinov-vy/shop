@@ -49,14 +49,14 @@ import static ru.savinov.shop.test_helpers.TestConstant.REGISTRATION_PAGE;
         })
 class RegistrationControllerTest {
 
+    RegistrationController subject;
+    private MockMvc mvc;
+
     @MockBean
     private UserService userService;
 
     @Autowired
     private UserValidator userValidator;
-
-    RegistrationController subject;
-    private MockMvc mvc;
 
     @BeforeEach
     public void setUp() {

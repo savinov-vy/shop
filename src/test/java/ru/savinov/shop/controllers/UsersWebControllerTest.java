@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static ru.savinov.shop.common.PageName.USERS_CONTROL_PAGE;
 
 class UsersWebControllerTest {
+
     private UsersWebController subject;
     private MockMvc mvc;
 

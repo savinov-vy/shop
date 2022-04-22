@@ -34,7 +34,7 @@ public class CartService {
 
     public static int getSumPrice(List<Product> products) {
         return products.stream()
-                .mapToInt(product -> product.getPrice())
+                .mapToInt(Product::getPrice)
                 .sum();
     }
 }

@@ -22,9 +22,9 @@ import static ru.savinov.shop.common.RegistrationControllerConstant.USER_FORM;
 @AllArgsConstructor
 public class RegistrationController {
 
-    private UserService userService;
+    private final UserService userService;
 
-    private UserValidator userValidator;
+    private final UserValidator userValidator;
 
     @GetMapping("/reg")
     public String registration(Model model) {

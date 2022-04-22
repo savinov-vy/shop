@@ -50,12 +50,9 @@ public class User {
                 .password(userDto.getPassword())
                 .enabled(userDto.getEnabled())
                 .build();
-
-
     }
 
     public static User of() {
         return new User();
     }
-
 }

@@ -27,12 +27,11 @@ import static ru.savinov.shop.common.ShopControllerConstant.TOTAL_PAGE;
 @ExtendWith(SpringExtension.class)
 class ShopControllerTest {
 
-    @Mock
-    private ProductService productService;
-
     ShopController subject;
     private MockMvc mvc;
 
+    @Mock
+    private ProductService productService;
 
     @BeforeEach
     public void setUp() {

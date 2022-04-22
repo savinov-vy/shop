@@ -1,7 +1,6 @@
 package ru.savinov.shop.common;
 
 public class PageName {
-
     public static final String REGISTRATION_PAGE = "registration";
     public static final String REDIRECT_LOGIN_PAGE = "redirect:/sign";
 
@@ -23,5 +22,4 @@ public class PageName {
     public static final String LOGIN_PROCESSING_URL = "/authenticateTheUser";
 
     public static final String USERS_CONTROL_PAGE = "users_control";
-
 }

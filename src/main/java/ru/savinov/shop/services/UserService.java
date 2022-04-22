@@ -9,9 +9,11 @@ import ru.savinov.shop.repositories.RoleRepository;
 import ru.savinov.shop.repositories.UserRepository;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -50,9 +52,10 @@ public class UserService {
 
     public List<UserWithRolesDTO> getAllUsersWithRoles() {
         List<UserWithRolesDTO> userWithRolesDTOList = new ArrayList<>();
-        List<User> userList;
-        userList = userRepository.findAll();
-        for (User user : userList) {
+        List<User> users = userRepository.findAll().stream()
+                .sorted(Comparator.comparingLong(User::getId))
+                .collect(Collectors.toList());
+        for (User user : users) {
             Set<Role> setRoleUser = user.getRoles();
             String strAllRoleUser = "";
             for (Role role : setRoleUser) {
@@ -77,7 +80,7 @@ public class UserService {
     }
 
     @Transactional
-    public void desableUser(Long id) {
+    public void disableUser(Long id) {
         userRepository.desableUserById(id, false);
     }
 
