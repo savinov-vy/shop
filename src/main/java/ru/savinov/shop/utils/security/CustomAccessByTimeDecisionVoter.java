@@ -32,7 +32,6 @@ public class CustomAccessByTimeDecisionVoter implements AccessDecisionVoter<Obje
     public int vote(Authentication authentication, Object o, Collection<ConfigAttribute> collection) {
 
         if (nowIsPermitTime(permitTimeFrom, permitTimeTo) || ANONYMOUS_USER.equals(authentication.getPrincipal())) {
-            log.info("ACCESS BY TIME PERMIT");
             return ACCESS_GRANTED;
         }
         log.info("ACCESS BY TIME DENIED");
