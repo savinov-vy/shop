@@ -7,11 +7,7 @@ run:
 build:
 	docker-compose build
 
-.PHONY: clean-all
-clean-all:
-	docker-compose down
+.PHONY: clear-all
+clear-all:
 	docker image prune
 	docker image rm shop_shop:latest
-	docker image rm postgres:12-alpine
-	docker image rm openjdk:8
-	docker image rm maven:3.6.3-jdk-8
