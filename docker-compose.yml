@@ -20,8 +20,6 @@ services:
   shop_db:
     image: postgres:12-alpine
     container_name: shop_db
-    volumes:
-      - /home/naglezh/postgres-data-shop:/var/lib/postgresql/data
     networks:
       - shopNetwork
     environment:
