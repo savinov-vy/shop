@@ -8,6 +8,8 @@ services:
     restart: unless-stopped
     ports:
       - "8200:8200"
+    networks:
+      - shopNetwork
     depends_on:
       - shop_db
     environment:
@@ -18,6 +20,8 @@ services:
   shop_db:
     image: postgres:12-alpine
     container_name: shop_db
+    networks:
+      - shopNetwork
     environment:
       - POSTGRES_USER=shop_adm
       - POSTGRES_PASSWORD=root
@@ -29,6 +33,9 @@ services:
     ports:
       - "2080:80"
       - "25:25"
+    networks:
+      - shopNetwork
+
   kafka:
     image: confluentinc/cp-kafka:latest
     container_name: kafka
@@ -37,6 +44,8 @@ services:
       - zookeeper
     ports:
       - "29092:29092"
+    networks:
+      - shopNetwork
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -52,6 +61,12 @@ services:
     restart: unless-stopped
     ports:
       - "22181:2181"
+    networks:
+      - shopNetwork
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+
+networks:
+  shopNetwork:
+    driver: bridge
