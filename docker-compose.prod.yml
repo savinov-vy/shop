@@ -1,0 +1,5 @@
+version: '3.7'
+services:
+  shop_db:
+    volumes:
+      - /home/naglezh/postgres-data-shop:/var/lib/postgresql/data
