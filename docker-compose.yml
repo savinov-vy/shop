@@ -28,8 +28,8 @@ services:
       - POSTGRES_DB=shop_db
 
   maildev:
-    container_name: shop-maildev
     image: maildev/maildev
+    container_name: shop-maildev
     ports:
       - "2080:80"
       - "25:25"
