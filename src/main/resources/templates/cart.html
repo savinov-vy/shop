@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      xmlns:form="http://www.w3.org/1999/html"
-      lang="en">
+      lang="ru">
 
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link th:href="@{/css/index.css}" rel="stylesheet"/>
+    <link th:href="@{/css/cart.css}" rel="stylesheet"/>
 </head>
 
 <body>
@@ -65,7 +64,7 @@
                 <td style="display: flex">
                     <a class="btn btn-info" th:href="@{/showcase}">Go to shop</a>
                     <form th:value="${products}" method="post" name="products" th:action="@{/my-basket/buy}">
-                        <a class="btn btn-success btn_buy_now">Buy Now!</a>
+                        <a class="btn btn-buy btn-success">Buy Now!</a>
                     </form>
                 </td>
             </tr>
@@ -74,26 +73,53 @@
     </div>
 </div>
 
+<div data-confirm class="modal">
+    <div class="modal__dialog">
+        <div class="modal__content">
+            <form action="#">
+                <div data-close class="modal__close">&times;</div>
+                <div class="modal__title">Хотите купить прямо сейчас?</div>
+                <button class="btn btn-success btn_buy_now">Купить прямо сейчас</button>
+            </form>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript" th:inline="javascript">
-    let buy_button = document.querySelectorAll('.btn_buy_now');
-    for (let i = 0; i<buy_button.length; i++){
-        buy_button[i].addEventListener('click', function confirmDialog() {
-            let result = confirm("Хотите купить сейчас?");
-            if (result) {
-                send();
-            }
-        });
+    const modalTrigger = document.querySelector('.btn-buy'),
+          modalConfirm = document.querySelector('[data-confirm]'),
+          modalCloseBtn = document.querySelector('[data-close]'),
+          buy_button = document.querySelector('.btn_buy_now');
+
+    modalCloseBtn.addEventListener('click', closeConfirm);
+
+    modalConfirm.addEventListener('click', (event) => {
+        if (event.target === modalConfirm) {
+            closeConfirm();
+        }
+    });
+
+    modalTrigger.addEventListener('click', showConfirm);
+    buy_button.addEventListener('click', send);
+
+    function closeConfirm() {
+        modalConfirm.classList.add('hide');
+        modalConfirm.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+
+    function showConfirm() {
+        modalConfirm.classList.add('show');
+        modalConfirm.classList.remove('hide');
+        document.body.style.overflow = 'hidden';
     }
 
     function send() {
+        closeConfirm();
         /*<![CDATA[*/
         let products = /*[[${products}]]*/ 'default';
-        console.log(products);
         send_product_basket(products);
         /*]]>*/
-
-        alert("Покупка совершена!")
-        window.location.replace('/shop/showcase');
     }
 
     function send_product_basket(products) {
@@ -101,10 +127,10 @@
             url: '/shop/my-basket/buy',
             dataType: 'json',
             type: 'POST',
-            cache: false,
+            async: false,
             contentType: 'application/json',
             data: JSON.stringify(products)
-        })
+        });
     }
 </script>
 </body>
