@@ -15,8 +15,15 @@ public class KafkaProducerService {
     private KafkaTemplate<String, String> kafkaTemplate;
     private Gson gson;
 
-    public void send(BasketBuyDto toHandle) {
-        log.info("Send basket products to handle");
-        kafkaTemplate.send("basket", gson.toJson(toHandle));
+    public boolean send(BasketBuyDto toHandle) {
+        try {
+            String basketToHandle = gson.toJson(toHandle);
+            kafkaTemplate.send("basket", basketToHandle);
+            log.info("Send basket products to handle, basket to handle: {}", basketToHandle);
+            return true;
+        } catch (Exception e) {
+            log.info("Basket not sent, with error: {}", e.getMessage());
+            return false;
+        }
     }
 }

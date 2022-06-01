@@ -63,8 +63,8 @@
                 <td th:text="${totalPrice}"></td>
                 <td style="display: flex">
                     <a class="btn btn-info" th:href="@{/showcase}">Go to shop</a>
-                    <form th:value="${products}" method="post" name="products" th:action="@{/my-basket/buy}">
-                        <a class="btn btn-buy btn-success">Buy Now!</a>
+                    <form action="#">
+                        <button data-confirm class="btn btn-buy btn-success">Buy Now!</button>
                     </form>
                 </td>
             </tr>
@@ -73,49 +73,63 @@
     </div>
 </div>
 
-<div data-confirm class="modal">
+<script type="text/javascript" th:inline="javascript">
+    const modalConfirm = document.querySelector('[data-confirm]'),
+        message = {
+            success: 'Спасибо! Скоро мы с вами свяжемся',
+            dont_sent: 'Ошибка отправки, очередь обработки заказов не работает',
+            confirm: 'хотите купить прямо сейчас?',
+            not_connect: 'Нет соединения, проверьте сеть',
+            buy_now: 'купить сейчас',
+            failure: 'Что-то пошло не так...'
+        };
+
+    modalConfirm.addEventListener('click', (event) => {
+        if (event.target === modalConfirm) {
+            event.preventDefault();
+            showDialog(message.confirm, message.buy_now);
+        }
+    });
+
+    function showDialog(message, buttonTitle) {
+        const modal = document.createElement('div');
+        modal.classList.add('modal', 'show');
+        modal.innerHTML = `
     <div class="modal__dialog">
         <div class="modal__content">
             <form action="#">
                 <div data-close class="modal__close">&times;</div>
-                <div class="modal__title">Хотите купить прямо сейчас?</div>
-                <button class="btn btn-success btn_buy_now">Купить прямо сейчас</button>
+                <div class="modal__title">${message}</div>
+                <button class="btn btn-success btn_buy_now">${buttonTitle}</button>
             </form>
         </div>
     </div>
-</div>
-
-<script type="text/javascript" th:inline="javascript">
-    const modalTrigger = document.querySelector('.btn-buy'),
-          modalConfirm = document.querySelector('[data-confirm]'),
-          modalCloseBtn = document.querySelector('[data-close]'),
-          buy_button = document.querySelector('.btn_buy_now');
-
-    modalCloseBtn.addEventListener('click', closeConfirm);
-
-    modalConfirm.addEventListener('click', (event) => {
-        if (event.target === modalConfirm) {
-            closeConfirm();
+        `;
+        modal.querySelector('[data-close]').addEventListener('click', closeDialog);
+        const form = modal.querySelector('form');
+        const button = modal.querySelector('button');
+        if (buttonTitle) {
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+                send();
+            });
+        } else {
+            button.remove();
         }
-    });
-
-    modalTrigger.addEventListener('click', showConfirm);
-    buy_button.addEventListener('click', send);
-
-    function closeConfirm() {
-        modalConfirm.classList.add('hide');
-        modalConfirm.classList.remove('show');
-        document.body.style.overflow = '';
+        document.body.append(modal);
+        document.body.style.overflow = 'hidden';
+        console.log(modal);
     }
 
-    function showConfirm() {
-        modalConfirm.classList.add('show');
-        modalConfirm.classList.remove('hide');
-        document.body.style.overflow = 'hidden';
+    function closeDialog() {
+        const modal = document.querySelector('.modal');
+        if (modal) {
+            modal.remove();
+            document.body.style.overflow = '';
+        }
     }
 
     function send() {
-        closeConfirm();
         /*<![CDATA[*/
         let products = /*[[${products}]]*/ 'default';
         send_product_basket(products);
@@ -123,11 +137,27 @@
     }
 
     function send_product_basket(products) {
+        closeDialog();
+
         $.ajax({
             url: '/shop/my-basket/buy',
             dataType: 'json',
             type: 'POST',
-            async: false,
+            success: function () {
+                showDialog(message.success);
+                console.log('successful sent');
+            },
+            error: function (jqXHR) {
+                if (jqXHR.status === 0) {
+                    showDialog(message.not_connect);
+                } else if (jqXHR.status === 405) {
+                    showDialog(message.dont_sent);
+                } else if (jqXHR.status === 200) {
+                    this.success();
+                } else {
+                    showDialog(message.failure)
+                }
+            },
             contentType: 'application/json',
             data: JSON.stringify(products)
         });
