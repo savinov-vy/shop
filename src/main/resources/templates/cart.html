@@ -48,7 +48,7 @@
             </tr>
             </thead>
             <tbody id="table_cart_products">
-            <tr th:each="prod, iterator:${products}">
+            <tr class="product_row" th:each="prod, iterator:${products}">
                 <td th:text="${iterator.index + 1}"></td>
                 <td th:text="${prod.title}"></td>
                 <td></td>
@@ -60,7 +60,7 @@
                 <td>Total:</td>
                 <td></td>
                 <td></td>
-                <td th:text="${totalPrice}"></td>
+                <td data-totalPrice th:text="${totalPrice}"></td>
                 <td style="display: flex">
                     <a class="btn btn-info" th:href="@{/showcase}">Go to shop</a>
                     <form action="#">
@@ -75,15 +75,14 @@
 
 <script type="text/javascript" th:inline="javascript">
     const modalConfirm = document.querySelector('[data-confirm]'),
-          message = {
-              success: 'Спасибо! Скоро мы с вами свяжемся',
-              dont_sent: 'Ошибка отправки, очередь обработки заказов не работает',
-              confirm: 'хотите купить прямо сейчас?',
-              not_connect: 'Нет соединения, проверьте сеть',
-              buy_now: 'купить сейчас',
-              failure: 'Что-то пошло не так...',
-              basket_empty: 'Корзина пуста, вернитесь в магазин'
-          };
+        message = {
+            success: 'Спасибо! Скоро мы с вами свяжемся',
+            dont_sent: 'Ошибка отправки, очередь обработки заказов не работает',
+            confirm: 'хотите купить прямо сейчас?',
+            buy_now: 'купить сейчас',
+            failure: 'Что-то пошло не так...',
+            basket_empty: 'Корзина пуста, вернитесь в магазин'
+        };
 
     modalConfirm.addEventListener('click', (event) => {
         if (event.target === modalConfirm) {
@@ -139,36 +138,39 @@
         send_product_basket(getProducts());
     }
 
-    function getProducts(){
+    function getProducts() {
         /*<![CDATA[*/
         return /*[[${products}]]*/ 'default';
         /*]]>*/
     }
 
+    function clearTable() {
+        const products = document.querySelectorAll('.product_row');
+        products.forEach(row => row.innerHTML = '');
+        document.querySelector('[data-totalPrice]').textContent = '0';
+        modalConfirm.remove();
+    }
+
     function send_product_basket(products) {
         closeDialog();
 
-        $.ajax({
-            url: '/shop/my-basket/buy',
-            dataType: 'json',
-            type: 'POST',
-            success: function () {
+        fetch('/shop/my-basket/buy', {
+            method: "POST",
+            body: JSON.stringify(products),
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }).then(response => {
+            const status = response.status;
+            if (status === 405) {
+                showDialog(message.dont_sent);
+            } else if (status === 200) {
                 showDialog(message.success);
-                console.log('successful sent');
-            },
-            error: function (jqXHR) {
-                if (jqXHR.status === 0) {
-                    showDialog(message.not_connect);
-                } else if (jqXHR.status === 405) {
-                    showDialog(message.dont_sent);
-                } else if (jqXHR.status === 200) {
-                    this.success();
-                } else {
-                    showDialog(message.failure)
-                }
-            },
-            contentType: 'application/json',
-            data: JSON.stringify(products)
+            }
+        }).catch(() => {
+            showDialog(message.failure)
+        }).finally(() => {
+            clearTable();
         });
     }
 </script>
