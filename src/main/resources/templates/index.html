@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-<!--подключаем NameSpace шаблонизатора Thymeleaf-->
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <!--    description - описание страницы - эти строки появятся в поисковике без открытия страницы-->
     <meta name="description" content="Уроки HTML и Spring">
-    <!--    keywords - ключевые слова - то на что будет дополнительно опираться поисковик-->
     <meta name="keywords" content="html, spring, Lessons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -25,26 +22,7 @@
                 <span>Магазин весёлых слонов: Покупайте наших слонов!</span></div>
         </div>
         <nav>
-            <ul class="nav-list">
-                <li class="nav-item col"><a class="nav-link-active" th:href="@{/home}">Home Page</a></li>
-                <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{/sign}">Login</a>
-                </li>
-                <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{/reg}">Registration</a>
-                </li>
-                <li class="nav-item col"><a class="nav-link" th:href="@{/showcase}">Shop</a></li>
-                <li class="nav-item col" sec:authorize="hasRole('USER')"><a class="nav-link" th:href="@{/my-basket}">Cart</a>
-                </li>
-                <li class="nav-item col" sec:authorize="hasRole('ADMIN')"><a class="nav-link"
-                                                                             th:href="@{/users-control}">Users
-                    Control</a></li>
-                <li class="nav-item col" sec:authorize="isAuthenticated()"><a class="nav-link" style="width: 100%"
-                                                                              href="javascript:document.logoutForm.submit()">Logout</a>
-                    <form name="logoutForm" th:action="@{/logout}" method="post"
-                          th:hidden="true">
-                        <input type="submit" value="Logout"/>
-                    </form>
-                </li>
-            </ul>
+            <th:block th:insert="~{block/navigation :: navigation('home')}"/>
         </nav>
     </header>
     <div id="home-page-body">

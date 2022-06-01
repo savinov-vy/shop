@@ -1,0 +1,35 @@
+<th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:fragment="navigation(title)">
+<div th:data-nav="${title}" class="nav-block">
+    <ul class="nav-list">
+        <li class="nav-item col"><a id="home" class="nav-link" th:href="@{/home}">Home Page</a></li>
+        <li class="nav-item col" sec:authorize="isAnonymous()"><a id="login" class="nav-link" th:href="@{/sign}">Login</a>
+        </li>
+        <li class="nav-item col" sec:authorize="isAnonymous()"><a id="registration" class="nav-link"
+                                                                  th:href="@{/reg}">Registration</a>
+        </li>
+        <li class="nav-item col"><a id="shop" class="nav-link" th:href="@{/showcase}">Shop</a></li>
+        <li class="nav-item col" sec:authorize="hasRole('USER')"><a id="basket" class="nav-link"
+                                                                    th:href="@{/my-basket}">Cart</a>
+        </li>
+        <li class="nav-item col" sec:authorize="hasRole('ADMIN')"><a id="users" class="nav-link"
+                                                                     th:href="@{/users-control}">Users
+            Control</a></li>
+        <li class="nav-item col" sec:authorize="isAuthenticated()"><a id="logout" class="nav-link" style="width: 100%"
+                                                                      href="javascript:document.logoutForm.submit()">Logout</a>
+            <form name="logoutForm" th:action="@{/logout}" method="post"
+                  th:hidden="true">
+                <input type="submit" value="Logout"/>
+            </form>
+        </li>
+    </ul>
+</div>
+    <script type="text/javascript" th:inline="javascript">
+        const div_block = document.querySelector('[data-nav]');
+        const attribute = div_block.getAttribute('data-nav');
+        console.log(attribute);
+        const element = document.getElementById(attribute);
+        console.log(element);
+        element.classList.remove('nav-link');
+        element.classList.add('nav-link-active');
+    </script>
+</th:block>

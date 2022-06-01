@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -11,25 +11,10 @@
 </head>
 <body>
 <div class="container">
-        <h1> Registration </h1>
-        <nav>
-            <ul class="nav-list">
-                <li class="nav-item col"><a class="nav-link" th:href="@{/home}">Home Page</a></li>
-                <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{/sign}">Login</a></li>
-                <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link-active" th:href="@{/reg}">Registration</a>
-                </li>
-                <li class="nav-item col"><a class="nav-link" th:href="@{/showcase}">Shop</a></li>
-                <li class="nav-item col" sec:authorize="hasRole('USER')"><a class="nav-link" th:href="@{/my-basket}">Cart</a></li>
-                <li class="nav-item col" sec:authorize="hasRole('ADMIN')"><a class="nav-link" th:href="@{/users-control}">Users
-                    Control</a></li>
-                <li class="nav-item col" sec:authorize="isAuthenticated()"><a class="nav-link" style="width: 100%" href="javascript:document.logoutForm.submit()">Logout</a>
-                    <form name="logoutForm" th:action="@{/logout}" method="post"
-                          th:hidden="true">
-                        <input type="submit" value="Logout"/>
-                    </form>
-                </li>
-            </ul>
-        </nav>
+    <h1> Registration </h1>
+    <nav>
+        <th:block th:insert="~{block/navigation :: navigation('registration')}"/>
+    </nav>
     <form class="ui-icon-circle-zoomin"
           id="create-form"
           th:object="${user}"
@@ -67,7 +52,9 @@
             <div id="messageShow"></div>
         </div>
         <div th:text="${errorDescribtion}" class="col-sm-6 controls"></div>
-        <button class="btn btn-primary" type="submit" id="btnChekIn" style="margin-left: 30px; margin-top: 20px">Check In</button>
+        <button class="btn btn-primary" type="submit" id="btnChekIn" style="margin-left: 30px; margin-top: 20px">Check
+            In
+        </button>
     </form>
 </div>
 </body>

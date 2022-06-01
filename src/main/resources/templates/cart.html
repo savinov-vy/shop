@@ -16,25 +16,7 @@
 <div class="container">
     <h1>Shopping Cart</h1>
     <nav>
-        <ul class="nav-list">
-            <li class="nav-item col"><a class="nav-link" th:href="@{/home}">Home Page</a></li>
-            <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{/sign}">Login</a></li>
-            <li class="nav-item col" sec:authorize="isAnonymous()"><a class="nav-link"
-                                                                      th:href="@{/reg}">Registration</a>
-            </li>
-            <li class="nav-item col"><a class="nav-link" th:href="@{/showcase}">Shop</a></li>
-            <li class="nav-item col" sec:authorize="hasRole('USER')"><a class="nav-link-active" th:href="@{/my-basket}">Cart</a>
-            </li>
-            <li class="nav-item col" sec:authorize="hasRole('ADMIN')"><a class="nav-link" th:href="@{/users-control}">Users
-                Control</a></li>
-            <li class="nav-item col" sec:authorize="isAuthenticated()"><a class="nav-link" style="width: 100%"
-                                                                          href="javascript:document.logoutForm.submit()">Logout</a>
-                <form name="logoutForm" th:action="@{/logout}" method="post"
-                      th:hidden="true">
-                    <input type="submit" value="Logout"/>
-                </form>
-            </li>
-        </ul>
+        <th:block th:insert="~{block/navigation :: navigation('basket')}"/>
     </nav>
     <div class="container" sec:authorize="hasRole('USER')">
 
