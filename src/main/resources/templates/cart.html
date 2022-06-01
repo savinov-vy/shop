@@ -75,19 +75,25 @@
 
 <script type="text/javascript" th:inline="javascript">
     const modalConfirm = document.querySelector('[data-confirm]'),
-        message = {
-            success: 'Спасибо! Скоро мы с вами свяжемся',
-            dont_sent: 'Ошибка отправки, очередь обработки заказов не работает',
-            confirm: 'хотите купить прямо сейчас?',
-            not_connect: 'Нет соединения, проверьте сеть',
-            buy_now: 'купить сейчас',
-            failure: 'Что-то пошло не так...'
-        };
+          message = {
+              success: 'Спасибо! Скоро мы с вами свяжемся',
+              dont_sent: 'Ошибка отправки, очередь обработки заказов не работает',
+              confirm: 'хотите купить прямо сейчас?',
+              not_connect: 'Нет соединения, проверьте сеть',
+              buy_now: 'купить сейчас',
+              failure: 'Что-то пошло не так...',
+              basket_empty: 'Корзина пуста, вернитесь в магазин'
+          };
 
     modalConfirm.addEventListener('click', (event) => {
         if (event.target === modalConfirm) {
             event.preventDefault();
-            showDialog(message.confirm, message.buy_now);
+            const products = getProducts();
+            if (products.length === 0) {
+                showDialog(message.basket_empty);
+            } else {
+                showDialog(message.confirm, message.buy_now);
+            }
         }
     });
 
@@ -130,9 +136,12 @@
     }
 
     function send() {
+        send_product_basket(getProducts());
+    }
+
+    function getProducts(){
         /*<![CDATA[*/
-        let products = /*[[${products}]]*/ 'default';
-        send_product_basket(products);
+        return /*[[${products}]]*/ 'default';
         /*]]>*/
     }
 
