@@ -67,8 +67,8 @@ public class CartController {
         User currentUser = securityUtils.getCurrentUser();
         BasketBuyDto toHandle = BasketBuyDto.of(currentUser.getLogin(), productDtoList);
         boolean successfulSend = kafkaProducerService.send(toHandle);
+        cartService.clearCart();
         if (successfulSend) {
-            cartService.clearCart();
             return new ResponseEntity<>("Basket successful sent", HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Basket not sent", HttpStatus.METHOD_NOT_ALLOWED);

@@ -105,7 +105,6 @@
         }
         document.body.append(modal);
         document.body.style.overflow = 'hidden';
-        console.log(modal);
     }
 
     function closeDialog() {
@@ -133,24 +132,39 @@
         modalConfirm.remove();
     }
 
-    function send_product_basket(products) {
-        closeDialog();
 
-        fetch('/shop/my-basket/buy', {
+    const postData = async (url, data) => { // async там где начинается асинхронный код
+        const res = await fetch(url, { //код выполняется асинхронно!!! это важно!! РЕШЕНИЕ - await ждёт ответа
             method: "POST",
-            body: JSON.stringify(products),
             headers: {
                 'Content-type': 'application/json'
-            }
-        }).then(response => {
-            const status = response.status;
-            if (status === 405) {
-                showDialog(message.dont_sent);
-            } else if (status === 200) {
+            },
+            body: data
+        });
+        console.log("res");
+        console.log(res);
+        if (!res.ok) {
+            console.log("res!!!");
+            console.log(res);
+            throw new Error(`Could not post ${url}, status ${res.status}`);
+
+        }
+        return res;
+    };
+
+    function send_product_basket(products) {
+        closeDialog();
+        postData('/shop/my-basket/buy', JSON.stringify(products))
+            .then(data => {
+                console.log(data);
                 showDialog(message.success);
+            }).catch((response) => {
+
+            if (`${response}`.includes('405')) {
+                showDialog(message.dont_sent);
+            } else {
+                showDialog(message.failure);
             }
-        }).catch(() => {
-            showDialog(message.failure)
         }).finally(() => {
             clearTable();
         });
