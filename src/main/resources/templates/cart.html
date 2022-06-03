@@ -141,13 +141,9 @@
             },
             body: data
         });
-        console.log("res");
-        console.log(res);
-        if (!res.ok) {
-            console.log("res!!!");
-            console.log(res);
-            throw new Error(`Could not post ${url}, status ${res.status}`);
 
+        if (!res.ok) {
+            throw new Error(`Could not post ${url}, status ${res.status}`);
         }
         return res;
     };
