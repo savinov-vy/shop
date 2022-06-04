@@ -40,3 +40,7 @@ mail:
       enable: true
       port: 465
       auth: true
+
+app:
+  file:
+    upload-dir: ./uploads/files
