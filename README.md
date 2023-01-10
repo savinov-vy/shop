@@ -1,4 +1,7 @@
-for starting app:
-1. Downloading and install docker and docker-compose
-2. Execute command in your terminal "docker-compose up" (in root directory)
-3. Go to link "http://localhost:8200/shop"
+- установить: docker, docker-compose, git
+- сделать clone проекта
+- открыть в терминале корневую папку проекта (в этой папке находится файл docker-compose.yml);
+- выполнить команду: $ docker-compose up
+- приложение развернётся, БД наполнится первоначальными данными;
+- перейти по ссылке http://localhost:8200/shop
+- login/password: user/user или admin/admin

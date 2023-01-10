@@ -13,47 +13,26 @@
     <script type="text/javascript" th:href="@{/js/JavaScript.js}"></script>
 </head>
 <body>
-<div class="container">
-    <header class="main-header">
-        <div style="display: flex; align-items: center; background: #62becd;" class="header-logo">
-            <img id="headerLogo" class="col-md-1" style="margin: 0px; padding: 0px"
-                 th:src="@{/images/elephant.png}" alt="elephant" th:title="elephant">
-            <div id="headerSlogan" class="col-md-11" style="margin: 0px; padding: 0px;">
-                <span>Магазин весёлых слонов: Покупайте наших слонов!</span></div>
-        </div>
-        <nav>
-            <th:block th:insert="~{block/navigation :: navigation('home')}"/>
-        </nav>
-    </header>
-    <div id="home-page-body">
-        <section class="col">
-            <h2>Отзывы клиентов</h2>
-            <p>Пока сюда мы добавим пару анекдотов!</p>
-            <article>Звонок в зоо магазин: — Здравствуйте, я недавно купил у вас морскую свинку и
-                дома сразу пустил ее в аквариум с морской водой.
-                Она немного поплавала и легла спать. — Так вот, когда она проснется, чем ее кормить?
-            </article>
+<div>
+    <h4>Отчёт о загрузке</h4>
+    <div>Успешно загружено %s подразделений</div>
+    <table>
+        <thead>
+        <tr>Существуют дубликаты подразделений</tr>
+        </thead>
+        <tbody>
+        <tr>Подразделение 1</tr>
+        </tbody>
+    </table>
 
-            <article>Пошли с мамой за продуктами в магазин. Кассирша начинает пробивать творог, останавливается,
-                задумывается и начинает искать срок годности. Нашла, посмотрела и с чистой совестью положила творог
-                нам
-                в пакет. Мама: — Ну что, жить будем? Кассирша (с невозмутимо серьёзным лицом): — До двадцать
-                четвёртого!
-            </article>
-
-        </section>
-        <section class="col">
-            <h2>О нашем магазине</h2>
-            <p>Здесь в магазин можно добавить какие нибудь товары,
-                уж не знаю что сюда добавить, но чтото добавать нужно. </p>
-        </section>
-        <section class="col">
-            <h2>Акции выходного дня</h2>
-            <p>Одна подруга говорит другой:<br>
-                — Мы сегодня с мужем отмечаем день примирения и согласия. <br>
-                — Это как? — Идем в магазин — я примеряю, он соглашается!</p>
-        </section>
-    </div>
+    <table>
+        <thead>
+        <tr>Организация для поздразделений не существует</tr>
+        </thead>
+        <tbody>
+        <tr>Подразделение 2</tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

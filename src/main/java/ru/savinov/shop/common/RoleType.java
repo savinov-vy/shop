@@ -12,8 +12,8 @@ public enum RoleType {
     USER("ROLE_USER", "USER"),
     ADMIN("ROLE_ADMIN", "ADMIN");
 
-    private String value;
-    private String label;
+    private final String value;
+    private final String label;
 
     public static RoleType findByValue(final String value) {
         return Arrays.stream(values())
