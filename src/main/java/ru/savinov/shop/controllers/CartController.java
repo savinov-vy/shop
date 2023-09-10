@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,8 +21,11 @@ import ru.savinov.shop.utils.security.SecurityUtils;
 
 import java.util.List;
 
+import static ru.savinov.shop.common.CartControllerConstant.TOTAL_PRICE;
+import static ru.savinov.shop.common.PageName.CART_PAGE;
 import static ru.savinov.shop.common.PageName.CART_PAGE_URL;
 import static ru.savinov.shop.common.PageName.REDIRECT_CART_URL;
+import static ru.savinov.shop.common.ShopControllerConstant.PRODUCTS;
 
 @Slf4j
 @Controller
@@ -37,6 +41,15 @@ public class CartController {
     public String removeByIdFromCart(@PathVariable("id") Long id) {
         cartService.removeProductById(id);
         return REDIRECT_CART_URL;
+    }
+
+    @GetMapping("")
+    public String showCart(Model model) {
+        User currentUser = securityUtils.getCurrentUser();
+        log.info("Show card for user, Login = {}", currentUser.getLogin());
+        model.addAttribute(PRODUCTS, ProductDTO.of(cartService.getProducts()));
+        model.addAttribute(TOTAL_PRICE, CartService.getSumPrice(cartService.getProducts()));
+        return CART_PAGE;
     }
 
     /**

@@ -33,7 +33,8 @@ public class RegistrationController {
     }
 
     @PostMapping(value = "/reg/form")
-    public String addUser(@Valid @ModelAttribute("user") UserDto userForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttrs) {
+    public String addUser(@Valid @ModelAttribute("user") UserDto userForm, BindingResult bindingResult, Model model,
+                          RedirectAttributes redirectAttrs) {
         userValidator.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {

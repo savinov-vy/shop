@@ -9,6 +9,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import ru.savinov.shop.services.CartService;
 import ru.savinov.shop.services.ProductService;
 import ru.savinov.shop.test_helpers.factories.ProductFactory;
 import ru.savinov.shop.test_helpers.factories.ShopFilterDtoFactory;
@@ -32,10 +33,12 @@ class ShopControllerTest {
 
     @Mock
     private ProductService productService;
+    @Mock
+    private CartService cartService;
 
     @BeforeEach
     public void setUp() {
-        subject = new ShopController(productService);
+        subject = new ShopController(productService, cartService);
         mvc = MockMvcBuilders.standaloneSetup(subject).build();
     }
 

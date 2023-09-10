@@ -108,7 +108,6 @@ class RegistrationControllerTest {
                 Arguments.of(1,  UserDtoFactory.notConfirmPassword()),
                 Arguments.of(2, UserDtoFactory.shortLogin()),
                 Arguments.of(2, UserDtoFactory.emptyPassword()),
-                Arguments.of(6, UserDtoFactory.of())
-        );
+                Arguments.of(9, UserDtoFactory.of()));
     }
 }

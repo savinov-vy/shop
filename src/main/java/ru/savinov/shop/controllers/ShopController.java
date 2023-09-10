@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.savinov.shop.controllers.dto.ShopFilterDto;
 import ru.savinov.shop.entities.Product;
+import ru.savinov.shop.services.CartService;
 import ru.savinov.shop.services.ProductService;
 
 import java.util.List;
@@ -20,6 +21,7 @@ import static ru.savinov.shop.common.ShopControllerConstant.*;
 public class ShopController {
 
     private final ProductService productService;
+    private final CartService cartService;
 
     @GetMapping("/showcase")
     public String shopPage(@ModelAttribute ShopFilterDto productFilter, Model model) {
@@ -34,6 +36,12 @@ public class ShopController {
     @PostMapping("/products/add")
     public String shopPageAddProduct(@RequestParam String addProduct, @RequestParam Integer addPrice) {
         productService.addProduct(addProduct, addPrice);
+        return REDIRECT_SHOP_URL;
+    }
+
+    @GetMapping("/my-basket/add/{id}")
+    public String shopPageAddProduct(@PathVariable("id") Long id) {
+        cartService.addProduct(id);
         return REDIRECT_SHOP_URL;
     }
 
