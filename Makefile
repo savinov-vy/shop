@@ -23,3 +23,7 @@ prod-down:
 .PHONY: prod-up-build
 prod-up-build:
 	docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build
+
+.PHONY: test
+test:
+	 ./mvnw test
