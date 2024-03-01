@@ -14,7 +14,18 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import ru.savinov.shop.services.CartService;
 import ru.savinov.shop.services.KafkaProducerService;
 import ru.savinov.shop.utils.security.SecurityUtils;
+import scala.Int;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+import java.util.stream.IntStream;
+
+import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.savinov.shop.test_helpers.TestConstant.CART_PAGE_URL;
