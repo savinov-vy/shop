@@ -2,10 +2,10 @@ package ru.savinov.shop.entities;
 
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -14,6 +14,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "roles")
+@ToString(exclude = "users")
 @NoArgsConstructor
 @AllArgsConstructor(staticName = "of")
 public class Role {

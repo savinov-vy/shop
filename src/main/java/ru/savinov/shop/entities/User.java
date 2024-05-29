@@ -2,10 +2,10 @@ package ru.savinov.shop.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import ru.savinov.shop.controllers.dto.UserDto;
 
 import javax.persistence.*;
@@ -16,6 +16,7 @@ import java.util.Set;
 @Entity
 @Builder
 @Table(name = "users")
+@ToString
 @NoArgsConstructor()
 @AllArgsConstructor(staticName = "of")
 public class User {

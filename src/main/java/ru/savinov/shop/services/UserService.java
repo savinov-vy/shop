@@ -1,6 +1,7 @@
 package ru.savinov.shop.services;
 
 import lombok.AllArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import ru.savinov.shop.controllers.dto.UserWithRolesDTO;
 import ru.savinov.shop.entities.Role;
@@ -8,6 +9,7 @@ import ru.savinov.shop.entities.User;
 import ru.savinov.shop.repositories.RoleRepository;
 import ru.savinov.shop.repositories.UserRepository;
 import org.springframework.transaction.annotation.Transactional;
+import ru.savinov.shop.services.listener.TransactionalEvent;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -21,6 +23,7 @@ public class UserService {
 
     private RoleRepository roleRepository;
     private UserRepository userRepository;
+    private ApplicationEventPublisher applicationEventPublisher;
 
     @Transactional
     public void save(User user) {
@@ -45,12 +48,14 @@ public class UserService {
         Boolean enabled = user.getEnabled();
         Set<Role> roles = new HashSet<>();
         roles.add(roleRepository.getOne(1L));
-        return userRepository.save(User.of(
-                login, password, enabled, roles
-        ));
+        User saved = userRepository.save(User.of(login, password, enabled, roles));
+        applicationEventPublisher.publishEvent(TransactionalEvent.create(saved));
+        return saved;
     }
 
+    @Transactional(readOnly = true)
     public List<UserWithRolesDTO> getAllUsersWithRoles() {
+        applicationEventPublisher.publishEvent(TransactionalEvent.read());
         List<UserWithRolesDTO> userWithRolesDTOList = new ArrayList<>();
         List<User> users = userRepository.findAll().stream()
                 .sorted(Comparator.comparingLong(User::getId))
